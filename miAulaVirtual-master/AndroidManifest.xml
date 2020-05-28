@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jp.miaulavirtual"
+    android:versionCode="7"
+    android:versionName="2.1.1" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="17" />
+
+    <!-- SDCARD Write Permissions -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <!-- Network Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <!-- Network State Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.actionbar" >
+        <activity
+            android:name="com.jp.miaulavirtual.MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.DisplayMessageActivity"
+            android:label="@string/mydocs"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.jp.miaulavirtual.TabsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jp.miaulavirtual.TabsActivity" />
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.SettingsActivity"
+            android:label="@string/menu_settings"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.FileManager"
+            android:label="@string/title_activity_file_manager"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.jp.miaulavirtual.TabsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jp.miaulavirtual.TabsActivity" />
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.TabsActivity"
+            android:label="@string/title_activity_tabs"
+            android:parentActivityName="com.jp.miaulavirtual.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jp.miaulavirtual.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.TaskManager"
+            android:label="@string/title_activity_task_manager"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.jp.miaulavirtual.TabsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jp.miaulavirtual.TabsActivity" />
+        </activity>
+        <activity
+            android:name="com.jp.miaulavirtual.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:launchMode="singleTop" >
+        </activity>
+    </application>
+
+</manifest>
