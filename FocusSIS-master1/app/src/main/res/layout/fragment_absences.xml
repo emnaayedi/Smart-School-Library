@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollview_absences"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_absences_summary"
+                style="@style/primaryBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:id="@+id/text_absent_header"
+                style="@style/primaryBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="absent" />
+
+                <TextView
+                    android:id="@+id/text_absent"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="excused" />
+
+                <TextView
+                    android:id="@+id/text_excused_absences"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_other_marks_header"
+                style="@style/primaryBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="late" />
+
+                <TextView
+                    android:id="@+id/text_late"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="tardy" />
+
+                <TextView
+                    android:id="@+id/text_tardy"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="misc" />
+
+                <TextView
+                    android:id="@+id/text_misc_activity"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:orientation="horizontal">
+
+                <com.slensky.focussis.views.AbsenceLabelView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:status="offsite" />
+
+                <TextView
+                    android:id="@+id/text_offsite"
+                    style="@style/primaryBodyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/primaryHeadingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="24dp"
+                android:text="@string/absences_table_header" />
+
+            <TableLayout
+                android:id="@+id/table_absences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="8dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

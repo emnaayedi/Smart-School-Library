@@ -1,0 +1,49 @@
+{
+  "referrals": [
+    {
+      "creationDate": "2018-11-05T00:00:00.000-05:00",
+      "display": true,
+      "entryDate": "2018-11-05T00:00:00.000-05:00",
+      "grade": 6,
+      "id": "3122",
+      "lastUpdated": "2018-11-05T00:00:00.000-05:00",
+      "name": "Debug",
+      "notificationSent": true,
+      "otherViolation": "Playing video games on laptop",
+      "processed": true,
+      "school": "Academy for Science and Design - 6",
+      "schoolYear": 2018,
+      "teacher": "Teacher 4",
+      "violation": "Computer misuse"
+    }
+  ],
+  "currentMarkingPeriod": {
+    "id": "462",
+    "name": "Sem1GradeBook",
+    "selected": true,
+    "year": 2018
+  },
+  "markingPeriodYears": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "markingPeriods": [
+    {
+      "id": "462",
+      "name": "Sem1GradeBook",
+      "selected": true,
+      "year": 2018
+    },
+    {
+      "id": "461",
+      "name": "Sem2GradeBook",
+      "selected": false,
+      "year": 2018
+    }
+  ]
+}

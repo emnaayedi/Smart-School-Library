@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_course_name"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_name_header" />
+
+    <TextView
+        android:id="@+id/text_course_period"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_period_header" />
+
+    <TextView
+        android:id="@+id/text_course_teacher"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_teacher_header" />
+
+    <TextView
+        android:id="@+id/text_course_days"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_days_header" />
+
+    <TextView
+        android:id="@+id/text_course_room"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_room_header" />
+
+    <TextView
+        android:id="@+id/text_course_term"
+        style="@style/primaryBoldBodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/course_term_header" />
+
+</TableRow>

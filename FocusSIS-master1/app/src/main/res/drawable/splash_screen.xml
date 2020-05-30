@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <!-- The background color, preferably the same as your normal theme -->
+    <item android:drawable="@color/colorPrimaryDark" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_focus_owl_white_scaled" />
+    </item>
+</layer-list>

@@ -1,0 +1,153 @@
+{
+  "alerts": [
+    {
+      "message": "2 unpaid fee(s).",
+      "url": "Modules.php?modname=Billing\/Billing.php"
+    },
+    {
+      "message": "You are not set to receive email notifications.",
+      "url": "Modules.php?modname=Users\/Preferences.php&system_tab=&tab=notifications"
+    }
+  ],
+  "courses": [
+    {
+      "assignments": [
+      ],
+      "id": "11736",
+      "name": "Course 1",
+      "percentGrade": -1,
+      "period": "1",
+      "teacher": "Teacher 1",
+      "teacherEmail": "teacher1@asdnh.org"
+    },
+    {
+      "assignments": [
+        {
+          "courseName": "Course 2",
+          "coursePeriod": "1",
+          "courseTeacher": "Teacher 2",
+          "courseTeacherEmail": "teacher2@asdnh.org",
+          "customAssignment": false,
+          "descriptionSet": false,
+          "due": "2019-01-07T00:00:00.000-05:00",
+          "isAdvisory": false,
+          "name": "Assignment 1"
+        }
+      ],
+      "id": "11759",
+      "letterGrade": "A",
+      "name": "Course 2",
+      "percentGrade": 96,
+      "period": "1",
+      "teacher": "Teacher 2",
+      "teacherEmail": "teacher2@asdnh.org"
+    },
+    {
+      "assignments": [
+      ],
+      "id": "11744",
+      "name": "Course 3",
+      "percentGrade": -1,
+      "period": "1",
+      "teacher": "Teacher 3",
+      "teacherEmail": "teacher3@asdnh.org"
+    },
+    {
+      "assignments": [
+      ],
+      "id": "11756",
+      "letterGrade": "A+",
+      "name": "Course 4",
+      "percentGrade": 97,
+      "period": "2",
+      "teacher": "Teacher 4",
+      "teacherEmail": "teacher4@asdnh.org"
+    },
+    {
+      "assignments": [
+      ],
+      "id": "11749",
+      "letterGrade": "A",
+      "name": "Course 5",
+      "percentGrade": 93,
+      "period": "3",
+      "teacher": "Teacher 5",
+      "teacherEmail": "teacher5@asdnh.org"
+    },
+    {
+      "assignments": [
+      ],
+      "id": "11754",
+      "letterGrade": "A",
+      "name": "Course 6",
+      "percentGrade": 95,
+      "period": "4",
+      "teacher": "Teacher 6",
+      "teacherEmail": "teacher6@asdnh.org"
+    },
+    {
+      "assignments": [
+      ],
+      "id": "11733",
+      "letterGrade": "A+",
+      "name": "Course 7",
+      "percentGrade": 98,
+      "period": "5",
+      "teacher": "Teacher 7",
+      "teacherEmail": "teacher7@asdnh.org"
+    }
+  ],
+  "events": [
+    {
+      "date": "2018-12-25T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2018-12-26T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2018-12-27T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2018-12-31T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2019-01-01T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2019-01-02T00:00:00.000-05:00",
+      "description": "No School - Holiday Recess"
+    },
+    {
+      "date": "2019-01-09T00:00:00.000-05:00",
+      "description": "Teacher Workshop Day"
+    }
+  ],
+  "markingPeriodYears": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "markingPeriods": [
+    {
+      "id": "462",
+      "name": "Sem1GradeBook",
+      "selected": true,
+      "year": 2018
+    },
+    {
+      "id": "461",
+      "name": "Sem2GradeBook",
+      "selected": false,
+      "year": 2018
+    }
+  ]
+}
