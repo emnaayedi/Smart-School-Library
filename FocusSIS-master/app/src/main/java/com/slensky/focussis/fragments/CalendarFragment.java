@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -20,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -33,13 +31,11 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.internal.MDRootLayout;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.slensky.focussis.R;
-import com.slensky.focussis.activities.MainActivity;
 import com.slensky.focussis.data.GoogleCalendarEvent;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
@@ -55,13 +51,11 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.Calendar;
 import com.slensky.focussis.data.CalendarEvent;
 import com.slensky.focussis.data.CalendarEventDetails;
 import com.slensky.focussis.data.ScheduleCourse;
-import com.slensky.focussis.network.RequestSingleton;
 import com.slensky.focussis.util.DateUtil;
 import com.slensky.focussis.views.CalendarDayDecorator;
 import com.slensky.focussis.views.CalendarDayEnableAllDecorator;
@@ -69,10 +63,7 @@ import com.slensky.focussis.views.CalendarDayEnableAllDecorator;
 import java.text.DateFormatSymbols;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by slensky on 5/8/17.

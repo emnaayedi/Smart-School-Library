@@ -10,7 +10,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -51,8 +51,7 @@ import com.android.volley.VolleyError;
 import com.slensky.focussis.data.CourseAssignment;
 
 import org.joda.time.DateTime;
-import org.json.JSONObject;
-import com.slensky.focussis.activities.MainActivity;
+
 import com.slensky.focussis.data.Course;
 import com.slensky.focussis.data.CourseCategory;
 import com.slensky.focussis.R;

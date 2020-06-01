@@ -6,10 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
+import androidx.recyclerview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,15 +18,12 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.slensky.focussis.R;
-import com.slensky.focussis.activities.MainActivity;
-import com.slensky.focussis.data.Student;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.util.CardViewAnimationController;
 import com.slensky.focussis.util.SchoolSingleton;
 import com.slensky.focussis.views.IconWithTextView;
 
 import org.apache.commons.lang.math.NumberUtils;
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.Demographic;
 import com.slensky.focussis.network.FocusApiSingleton;

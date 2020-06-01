@@ -1,6 +1,5 @@
 package com.slensky.focussis.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -26,7 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.slensky.focussis.R;
-import com.slensky.focussis.activities.MainActivity;
 import com.slensky.focussis.data.Course;
 import com.slensky.focussis.data.CourseAssignment;
 import com.slensky.focussis.data.GoogleCalendarEvent;
@@ -35,8 +33,6 @@ import com.slensky.focussis.data.PortalCourse;
 import com.slensky.focussis.data.PortalEvent;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.util.GsonSingleton;
-
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.Portal;
 import com.slensky.focussis.network.FocusApiSingleton;
