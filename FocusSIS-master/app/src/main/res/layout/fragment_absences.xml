@@ -16,77 +16,109 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_absences_summary"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="2dp"
-                style="@style/primaryBodyText"/>
+                android:layout_height="wrap_content">
 
-            <TextView
+                <TextView
+                    android:id="@+id/text_absences_summary"
+                    style="@style/primaryBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="0.9"
+                    android:textColor="#009688"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/text_absences_summary_nb"
+                    style="@style/primaryBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="0.1"
+                    android:textAlignment="center"
+                    android:textColor="#2196F3"
+                    android:textSize="20sp" />
+
+            </TableRow>
+
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_absent_header"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="4dp"
-                style="@style/primaryBodyText"/>
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="26dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="12dp"
+                    app:srcCompat="@drawable/thermometer" />
+
+                <TextView
+                    android:id="@+id/text_absent_header"
+                    style="@style/primaryBodyText"
+                    android:layout_width="124dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryBlack"
+                    android:textSize="18sp" />
+
+            </TableRow>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="184dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="2dp"
                 android:orientation="horizontal">
 
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="absent"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:id="@+id/text_absent"
-                    style="@style/primaryBodyText"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal">
-
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="excused"/>
-
-                <TextView
-                    android:id="@+id/text_excused_absences"
-                    android:layout_width="match_parent"
+                    style="@style/primaryBodyText"
+                    android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    style="@style/primaryBodyText"/>
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_other_marks_header"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="4dp"
-                style="@style/primaryBodyText"/>
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/text_other_marks_header"
+                    style="@style/primaryBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="0.1"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_other_mark"
+                    style="@style/primaryBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_weight="0.7"
+                    android:textAlignment="viewStart"
+                    android:textColor="#2196F3"
+                    android:textSize="18sp" />
+            </TableRow>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,14 +131,14 @@
                 <com.slensky.focussis.views.AbsenceLabelView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:status="late"/>
+                    app:status="late" />
 
                 <TextView
                     android:id="@+id/text_late"
+                    style="@style/primaryBodyText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    style="@style/primaryBodyText"/>
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
@@ -121,14 +153,14 @@
                 <com.slensky.focussis.views.AbsenceLabelView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:status="tardy"/>
+                    app:status="tardy" />
 
                 <TextView
                     android:id="@+id/text_tardy"
+                    style="@style/primaryBodyText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    style="@style/primaryBodyText"/>
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
@@ -143,14 +175,14 @@
                 <com.slensky.focussis.views.AbsenceLabelView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:status="misc"/>
+                    app:status="misc" />
 
                 <TextView
                     android:id="@+id/text_misc_activity"
+                    style="@style/primaryBodyText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    style="@style/primaryBodyText"/>
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
@@ -164,25 +196,25 @@
                 <com.slensky.focussis.views.AbsenceLabelView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:status="offsite"/>
+                    app:status="offsite" />
 
                 <TextView
                     android:id="@+id/text_offsite"
+                    style="@style/primaryBodyText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    style="@style/primaryBodyText"/>
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
             <TextView
+                style="@style/primaryHeadingText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/absences_table_header"
-                style="@style/primaryHeadingText"/>
+                android:layout_marginRight="24dp"
+                android:text="@string/absences_table_header" />
 
             <TableLayout
                 android:id="@+id/table_absences"
@@ -190,11 +222,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp" />
 
 
         </LinearLayout>
-
     </ScrollView>
 
 </LinearLayout>

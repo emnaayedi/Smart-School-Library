@@ -8,6 +8,18 @@
             android:title="@string/nav_home"
             android:checked="true" />
         <item
+            android:id="@+id/nav_absences"
+            android:icon="@drawable/ic_airline_seat_individual_suite_black_24px"
+            android:title="@string/nav_absences" />
+        <item
+            android:id="@+id/nav_referrals"
+            android:icon="@drawable/ic_assignment_black_24px"
+            android:title="@string/nav_referrals" />
+        <item
+            android:id="@+id/nav_demographic"
+            android:icon="@drawable/ic_person_black_24px"
+            android:title="@string/nav_demographic" />
+        <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_schedule_black_24px"
             android:title="@string/nav_schedule" />
@@ -16,21 +28,9 @@
             android:icon="@drawable/ic_date_range_black_24px"
             android:title="@string/nav_calendar" />
         <item
-            android:id="@+id/nav_demographic"
-            android:icon="@drawable/ic_person_black_24px"
-            android:title="@string/nav_demographic" />
-        <item
             android:id="@+id/nav_address"
             android:icon="@drawable/ic_contacts_black_24px"
             android:title="@string/nav_address" />
-        <item
-            android:id="@+id/nav_referrals"
-            android:icon="@drawable/ic_assignment_black_24px"
-            android:title="@string/nav_referrals" />
-        <item
-            android:id="@+id/nav_absences"
-            android:icon="@drawable/ic_airline_seat_individual_suite_black_24px"
-            android:title="@string/nav_absences" />
         <item
             android:id="@+id/nav_final_grades"
             android:icon="@drawable/ic_assessment_black_24px"

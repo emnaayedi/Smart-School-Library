@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_reporter_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="0.25"
-        android:text="@string/referrals_name_header"
-        style="@style/primaryBoldBodyText" />
 
     <TextView
-        android:id="@+id/text_entry_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="0.15"
-        android:text="@string/referrals_entry_date_header"
-        style="@style/primaryBoldBodyText" />
+            android:id="@+id/text_reporter_name"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.1"
+            android:text="@string/referrals_name_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/text_violation"
+        <TextView
+            android:id="@+id/text_entry_date"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.1"
+            android:text="@string/referrals_entry_date_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/text_violation"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            android:layout_weight="0.1"
+            android:text="@string/referrals_violation_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_weight="0.6"
-        android:text="@string/referrals_violation_header"
-        style="@style/primaryBoldBodyText" />
+        android:background="#A1FFFFFF"
+        android:clickable="true"
+        app:srcCompat="@drawable/wwbp_net_resizeimage" />
 
     <!--<TextView
         android:id="@+id/text_other_violation"
@@ -45,5 +64,8 @@
         android:layout_marginTop="12dp"
         android:text="@string/referrals_other_violation_header"
         style="@style/primaryBoldBodyText" />-->
+
+
+
 
 </TableRow>
