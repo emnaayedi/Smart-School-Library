@@ -57,11 +57,12 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_margin="12dp"
+            style="@style/primaryHeadingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:text="@string/bell_schedule"
-            style="@style/primaryHeadingText"/>
+            android:textColor="#00BCD4" />
 
         <Spinner
             android:layout_marginLeft="8dp"

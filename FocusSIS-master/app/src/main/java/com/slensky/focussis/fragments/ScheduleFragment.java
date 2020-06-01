@@ -31,7 +31,7 @@ public class ScheduleFragment extends NetworkTabAwareFragment {
     private Schedule schedule;
 
     static {
-        tabNames = Arrays.asList("COURSES", "SCHOOL");
+        tabNames = Arrays.asList("EMPRUNTES", "HORAIRES");
     }
 
     @Override
