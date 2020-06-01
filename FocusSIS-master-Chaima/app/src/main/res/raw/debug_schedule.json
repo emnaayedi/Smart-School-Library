@@ -1,0 +1,72 @@
+{
+  "courses": [
+    {
+      "name": "-M2xXVABQfNaThPJAQ7v",
+      "period": "sql",
+      "teacher": "1/04/2020",
+      "days": "15/04/2020",
+      "room": "Returned"
+    },
+
+    {
+      "name": "-M3ZedVfNaThPJAQ7v",
+      "period": "java",
+      "teacher": "5/04/2020",
+      "days": "15/04/2020",
+      "room": "Returned"
+    },
+
+    {
+      "name": "-M2xXVABQfNaThPJAQ7v",
+      "period": "C",
+      "teacher": "11/04/2020",
+      "days": "25/04/2020",
+      "room": "NotReturned"
+    },
+
+    {
+      "name": "-M2xXVABQfNaThPJAQ7v",
+      "period": "sql",
+      "teacher": "11/04/2020",
+      "days": "25/04/2020",
+      "room": "Returned"
+    },
+
+    {
+      "name": "-M2xXVABQfNaThPJAQ7v",
+      "period": "sql",
+      "teacher": "11/04/2020",
+      "days": "25/04/2020",
+      "room": "Returned"
+    }
+  ],
+  "currentMarkingPeriod": {
+    "id": "462",
+    "name": "Sem1GradeBook",
+    "selected": true,
+    "year": 2018
+  },
+  "markingPeriodYears": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019
+  ],
+  "markingPeriods": [
+    {
+      "id": "462",
+      "name": "Empruntes",
+      "selected": true,
+      "year": 2018
+    },
+    {
+      "id": "461",
+      "name": "Sem2GradeBook",
+      "selected": false,
+      "year": 2018
+    }
+  ]
+}
