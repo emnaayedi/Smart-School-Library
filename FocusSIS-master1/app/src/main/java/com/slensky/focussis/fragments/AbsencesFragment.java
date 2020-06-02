@@ -1,5 +1,6 @@
 package com.slensky.focussis.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -77,25 +78,31 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
         return null;
     }
 
+    @SuppressLint("StringFormatInvalid")
     protected void onSuccess(Absences absences) {
         View view = getView();
         if (view != null) {
             final ScrollView scrollView = view.findViewById(R.id.scrollview_absences);
             TextView summary = view.findViewById(R.id.text_absences_summary);
-            String html = "<b>" + getString(com.slensky.focussis.R.string.absences_days_possible) + ": </b>" + absences.getDaysPossible() + "|"
-                    + "<br><b>" + getString(com.slensky.focussis.R.string.absences_days_attended) + ": </b>" + absences.getDaysAttended() + "| (" + absences.getDaysAttendedPercent() + "%)"
-                    + "<br><b>" + getString(com.slensky.focussis.R.string.absences_days_absent) + ": </b>" + absences.getDaysAbsent() + "| (" + absences.getDaysAbsentPercent() + "%)";
+            String html = "<b>" + getString(com.slensky.focussis.R.string.absences_days_possible) + ": </b>"
+                    + "<br><br><b>" + getString(com.slensky.focussis.R.string.absences_days_attended) + ": </b>";
             html = html.replace(".0|", "").replace("|", "");
             summary.setText(Html.fromHtml(html));
+            TextView summaryNB = view.findViewById(R.id.text_absences_summary_nb);
+            String html1 = absences.getDaysPossible() + "|"
+                    + "<br><br>" + absences.getDaysAttended() + "| <br>(" + absences.getDaysAttendedPercent() + "%)";
+            html1 = html1.replace(".0|", "").replace("|", "");
+            summaryNB.setText(Html.fromHtml(html1));
 
             TextView absentHeader = view.findViewById(R.id.text_absent_header);
-            absentHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent_header, absences.getPeriodsAbsent(), absences.getDaysPartiallyAbsent())));
+            absentHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent_header)));
             TextView absent = view.findViewById(R.id.text_absent);
             absent.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent, absences.getPeriodsAbsentUnexcused())));
-            TextView absentExcused = view.findViewById(R.id.text_excused_absences);
-            absentExcused.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_excused, absences.getPeriodsAbsentExcused(), absences.getDaysAbsentExcused())));
             TextView otherMarksHeader = view.findViewById(R.id.text_other_marks_header);
-            otherMarksHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_other_marks, absences.getPeriodsOtherMarks(), absences.getDaysOtherMarks())));
+            otherMarksHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_other_marks)));
+            TextView otherMark = view.findViewById(R.id.text_other_mark);
+            otherMark.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absence_other_mark)));
+
             TextView late = view.findViewById(com.slensky.focussis.R.id.text_late);
             late.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_late, absences.getPeriodsLate())));
             TextView tardy = view.findViewById(com.slensky.focussis.R.id.text_tardy);

@@ -80,11 +80,11 @@ public class ReferralsFragment extends NetworkTabAwareFragment {
             TableRowAnimationController animationController = new TableRowAnimationController(getContext());
             for (final Referral r : refList) {
                 final TableRow referralRow = (TableRow) inflater.inflate(R.layout.view_referral, table, false);
+                TextView violation = (TextView) referralRow.findViewById(R.id.text_violation);
                 TextView reporter = (TextView) referralRow.findViewById(R.id.text_reporter_name);
-                reporter.setText(r.getTeacher().split(" ")[1] + ", " + r.getTeacher().split(" ")[0]);
                 TextView entryDate = (TextView) referralRow.findViewById(R.id.text_entry_date);
                 entryDate.setText(r.getEntryDate().monthOfYear().get() + "/" + r.getEntryDate().dayOfMonth().getAsText() + '/' + r.getEntryDate().year().getAsShortText().substring(2));
-                TextView violation = (TextView) referralRow.findViewById(R.id.text_violation);
+                reporter.setText(r.getTeacher());
                 if (r.getViolation() != null) {
                     violation.setText(r.getViolation());
                 } else {
@@ -184,23 +184,21 @@ public class ReferralsFragment extends NetworkTabAwareFragment {
     public void showReferralDialog(Referral r) {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         //alertDialog.setTitle();
-        String html = "<b>Reporter: </b>" + r.getTeacher() + "<br>" +
-                "<b>Name: </b>" + r.getName() + "<br>" +
-                "<b>Grade: </b>" + r.getGrade() + "<br>" +
-                "<b>Entry date: </b>" + DateUtil.dateTimeToLongString(r.getEntryDate()) + "<br>" +
-                "<b>Last updated: </b>" + DateUtil.dateTimeToLongString(r.getLastUpdated()) + "<br>" +
-                "<b>School: </b>" + r.getSchool();
+        String html = "<b>Titre: </b>" + r.getViolation() + "<br><br>" +
+                "<b>Domaine: </b>" + r.getName() + "<br><br>" +
+                "<b>Collection: </b>" + r.getSchool() + "<br><br>" +
+                "<b>Nombre Page: </b>" + r.getGrade() + "<br><br>" +
+                "<b>Date Parution: </b>" + DateUtil.dateTimeToLongString(r.getEntryDate()) + "<br><br>" +
+                "<b>Date Importation: </b>" + DateUtil.dateTimeToLongString(r.getLastUpdated()) + "<br><br>" +
+                "<b>Editeur:</b>" + r.getTeacher();
 
-        if (r.getViolation() != null) {
-            html += "<br><b>Violation: </b>" + r.getViolation();
-        }
         if (r.getOtherViolation() != null) {
-            html += "<br><b>Other violation: </b>" + r.getOtherViolation();
+            html += "<br><br><b>Résumé: </b>" + r.getOtherViolation();
         }
         if (r.isProcessed()) {
-            html += "<br><b>Processed: </b>Yes";
+            html += "<br><br><b>Possibilité d'Achat: </b>Yes";
         } else {
-            html += "<br><b>Processed: </b>No";
+            html += "<br><br><b>Possibilité d'Achat: </b>No";
         }
 
         float dpi = getContext().getResources().getDisplayMetrics().density;

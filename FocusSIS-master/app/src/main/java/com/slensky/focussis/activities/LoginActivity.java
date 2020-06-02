@@ -3,15 +3,10 @@ package com.slensky.focussis.activities;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,29 +14,37 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.material.textfield.TextInputLayout;
 import com.slensky.focussis.FocusApplication;
 import com.slensky.focussis.R;
+import com.slensky.focussis.data.FocusPreferences;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
-
-import org.json.JSONObject;
-import com.slensky.focussis.data.FocusPreferences;
 import com.slensky.focussis.network.FocusDebugApi;
 
-import butterknife.ButterKnife;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
-    @BindView(com.slensky.focussis.R.id.input_username) EditText _usernameText;
-    @BindView(com.slensky.focussis.R.id.input_password) EditText _passwordText;
-    @BindView(com.slensky.focussis.R.id.text_layout_email) TextInputLayout _usernameLayout;
-    @BindView(com.slensky.focussis.R.id.text_layout_password) TextInputLayout _passwordLayout;
-    @BindView(com.slensky.focussis.R.id.btn_login) Button _loginButton;
-    @BindView(com.slensky.focussis.R.id.check_remember) CheckBox _saveLoginCheckBox;
+    @BindView(com.slensky.focussis.R.id.input_username)
+    EditText _usernameText;
+    @BindView(com.slensky.focussis.R.id.input_password)
+    EditText _passwordText;
+    @BindView(com.slensky.focussis.R.id.text_layout_email)
+    TextInputLayout _usernameLayout;
+    @BindView(com.slensky.focussis.R.id.text_layout_password)
+    TextInputLayout _passwordLayout;
+    @BindView(com.slensky.focussis.R.id.btn_login)
+    Button _loginButton;
+    @BindView(com.slensky.focussis.R.id.check_remember)
+    CheckBox _saveLoginCheckBox;
 
     private SharedPreferences loginPrefs;
 
@@ -164,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(com.slensky.focussis.R.string.language_change_progress),true);
+                        final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(com.slensky.focussis.R.string.language_change_progress), true);
                         focusPreferences.setEnglishLanguage(true);
                         api.setPreferences(focusPreferences, new FocusApi.Listener<FocusPreferences>() {
                             @Override
@@ -214,8 +217,7 @@ public class LoginActivity extends AppCompatActivity {
         if (username.equals(getString(R.string.debug_username)) && password.equals(getString(R.string.debug_password))) {
             Log.d(TAG, "Using debug API");
             FocusApplication.USE_DEBUG_API = true;
-        }
-        else {
+        } else {
             FocusApplication.USE_DEBUG_API = false;
         }
 
@@ -223,16 +225,14 @@ public class LoginActivity extends AppCompatActivity {
         if (username.isEmpty()) {
             _usernameLayout.setError(getString(com.slensky.focussis.R.string.login_blank_username_error));
             attemptLogin = false;
-        }
-        else {
+        } else {
             _usernameLayout.setErrorEnabled(false);
         }
 
         if (password.isEmpty()) {
             _passwordLayout.setError(getString(com.slensky.focussis.R.string.login_blank_password_error));
             attemptLogin = false;
-        }
-        else {
+        } else {
             _passwordLayout.setErrorEnabled(false);
         }
 
@@ -241,12 +241,11 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(com.slensky.focussis.R.string.auth_progress_dialog),true);
+        final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(com.slensky.focussis.R.string.auth_progress_dialog), true);
 
         if (FocusApplication.USE_DEBUG_API) {
             api = new FocusDebugApi(username, password, getApplicationContext());
-        }
-        else {
+        } else {
             api = new FocusApi(username, password, getApplicationContext());
         }
         api.login(new FocusApi.Listener<Boolean>() {
@@ -284,8 +283,7 @@ public class LoginActivity extends AppCompatActivity {
                                     intent.putExtra(getString(com.slensky.focussis.R.string.EXTRA_PASSWORD), password);
                                     startActivity(intent);
                                     finish();
-                                }
-                                else {
+                                } else {
                                     progressDialog.hide();
                                     progressDialog.dismiss();
                                     _loginButton.setEnabled(true);
@@ -300,18 +298,15 @@ public class LoginActivity extends AppCompatActivity {
                                 if (error.networkResponse != null) {
                                     if (error.networkResponse.statusCode == 500) {
                                         onLoginFailed(getString(com.slensky.focussis.R.string.network_error_server));
-                                    }
-                                    else {
+                                    } else {
                                         onLoginFailed(getString(com.slensky.focussis.R.string.network_error_timeout));
                                     }
-                                }
-                                else {
+                                } else {
                                     onLoginFailed(getString(com.slensky.focussis.R.string.network_error_timeout));
                                 }
                             }
                         });
-                    }
-                    else {
+                    } else {
                         progressDialog.hide();
                         try {
                             progressDialog.dismiss();
@@ -327,8 +322,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }
-                else {
+                } else {
                     progressDialog.hide();
                     Log.d(TAG, "Login unsuccessful");
                     onLoginFailed(getString(com.slensky.focussis.R.string.network_error_auth));
@@ -343,12 +337,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (error.networkResponse != null) {
                     if (error.networkResponse.statusCode == 500) {
                         onLoginFailed(getString(com.slensky.focussis.R.string.network_error_server));
-                    }
-                    else {
+                    } else {
                         onLoginFailed(getString(com.slensky.focussis.R.string.network_error_timeout));
                     }
-                }
-                else {
+                } else {
                     onLoginFailed(getString(com.slensky.focussis.R.string.network_error_timeout));
                 }
             }

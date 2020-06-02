@@ -12,7 +12,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/course_name_header" />
+        android:text="ID Livre"
+        android:textColor="#009688" />
 
     <TextView
         android:id="@+id/text_course_period"
@@ -22,7 +23,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/course_period_header" />
+        android:text="Nom Livre"
+        android:textColor="#009688" />
 
     <TextView
         android:id="@+id/text_course_teacher"
@@ -32,7 +34,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/course_teacher_header" />
+        android:text="Date Emprunte"
+        android:textColor="#009688" />
 
     <TextView
         android:id="@+id/text_course_days"
@@ -42,7 +45,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/course_days_header" />
+        android:text="Date Retour"
+        android:textColor="#009688" />
 
     <TextView
         android:id="@+id/text_course_room"
@@ -52,16 +56,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/course_room_header" />
+        android:text="Etat"
+        android:textColor="#009688" />
 
-    <TextView
-        android:id="@+id/text_course_term"
-        style="@style/primaryBoldBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/course_term_header" />
 
 </TableRow>

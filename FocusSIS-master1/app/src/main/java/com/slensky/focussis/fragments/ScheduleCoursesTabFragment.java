@@ -1,5 +1,6 @@
 package com.slensky.focussis.fragments;
 
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import com.slensky.focussis.data.Schedule;
 import com.slensky.focussis.data.ScheduleCourse;
 import com.slensky.focussis.util.GsonSingleton;
 import com.slensky.focussis.util.TableRowAnimationController;
-import com.slensky.focussis.util.TermUtil;
 
 import java.util.List;
 
@@ -62,22 +62,23 @@ public class ScheduleCoursesTabFragment extends Fragment {
             name.setText(c.getName());
             TextView period = (TextView) courseRow.findViewById(com.slensky.focussis.R.id.text_course_period);
             String periodStr;
-            if (c.getPeriod() == null) {
+            /*if (c.getPeriod() == null) {
                 periodStr = "-";
-            } else if (c.isAdvisory()) {
-                periodStr = "Advisory";
-            } else {
-                periodStr = "Period " + c.getPeriod();
             }
-            period.setText(periodStr);
+            else if (c.isAdvisory()) {
+                periodStr = "Advisory";
+            }
+            else {
+                periodStr = "Period " + c.getPeriod();
+            }*/
+            period.setText(c.getPeriod());
             TextView teacher = (TextView) courseRow.findViewById(com.slensky.focussis.R.id.text_course_teacher);
             teacher.setText(c.getTeacher());
             TextView days = (TextView) courseRow.findViewById(com.slensky.focussis.R.id.text_course_days);
             days.setText(c.getDays());
             TextView room = (TextView) courseRow.findViewById(com.slensky.focussis.R.id.text_course_room);
             room.setText(c.getRoom().split(" ")[0]); // changes jr/sr area into just jr/sr for brevity
-            TextView term = (TextView) courseRow.findViewById(com.slensky.focussis.R.id.text_course_term);
-            term.setText(TermUtil.termToString(c.getTerm()));
+
 
             final View divider = inflater.inflate(R.layout.view_divider, table, false);
 

@@ -3,7 +3,8 @@ package com.slensky.focussis.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import org.acra.dialog.BaseCrashReportDialog;
 

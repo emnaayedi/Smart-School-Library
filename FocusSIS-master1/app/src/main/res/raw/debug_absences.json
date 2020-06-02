@@ -169,14 +169,12 @@
       "status": "PRESENT"
     }
   ],
-  "daysAbsent": 1.0,
   "daysAbsentExcused": 1,
-  "daysAbsentPercent": 1.39,
-  "daysAttended": 71.0,
-  "daysAttendedPercent": 98.61,
+  "daysAttended": 100,
+  "daysAttendedPercent": 33.3,
   "daysOtherMarks": 6,
   "daysPartiallyAbsent": 2,
-  "daysPossible": 72.0,
+  "daysPossible": 300,
   "periodsAbsent": 9,
   "periodsAbsentExcused": 8,
   "periodsAbsentUnexcused": 1,

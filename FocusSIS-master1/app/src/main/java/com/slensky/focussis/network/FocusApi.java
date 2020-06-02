@@ -82,6 +82,7 @@ public class FocusApi {
     private MarkingPeriodDomain markingPeriodDomain;
     private SchoolDomain schoolDomain;
     private long sessionLengthMillis = 20 * 60 * 1000; // milliseconds
+
     public FocusApi(String username, String password, Context context) {
         this.username = username;
         this.password = password;
