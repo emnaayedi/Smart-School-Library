@@ -8,7 +8,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -18,19 +32,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
@@ -46,8 +47,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
@@ -64,6 +63,9 @@ import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -84,12 +86,9 @@ import com.slensky.focussis.fragments.AbsencesFragment;
 import com.slensky.focussis.fragments.AddressFragment;
 import com.slensky.focussis.fragments.CalendarFragment;
 import com.slensky.focussis.fragments.DemographicFragment;
-import com.slensky.focussis.fragments.EmptyFragment;
 import com.slensky.focussis.fragments.FinalGradesFragment;
-import com.slensky.focussis.fragments.LoadingFragment;
 import com.slensky.focussis.fragments.NetworkErrorFragment;
 import com.slensky.focussis.fragments.NetworkFragment;
-import com.slensky.focussis.fragments.NetworkTabAwareFragment;
 import com.slensky.focussis.fragments.PageFragment;
 import com.slensky.focussis.fragments.PortalFragment;
 import com.slensky.focussis.fragments.ReferralsFragment;
@@ -98,6 +97,10 @@ import com.slensky.focussis.fragments.SettingsFragment;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.network.FocusDebugApi;
+
+import com.slensky.focussis.fragments.EmptyFragment;
+import com.slensky.focussis.fragments.LoadingFragment;
+import com.slensky.focussis.fragments.NetworkTabAwareFragment;
 import com.slensky.focussis.util.SchoolSingleton;
 import com.slensky.focussis.util.Syncable;
 import com.slensky.focussis.views.adapters.ViewPagerAdapter;
@@ -107,30 +110,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    // for exporting to calendar with google play services
-    static final int REQUEST_ACCOUNT_PICKER = 1000;
-    static final int REQUEST_AUTHORIZATION = 1001;
-    static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("msge");
+
     private static final String TAG = "MainActivity";
     private static final String USERNAME_BUNDLE_KEY = "username";
     private static final String PASSWORD_BUNDLE_KEY = "password";
     private static final String SESSION_TIMEOUT_BUNDLE_KEY = "session_timeout";
     private static final String FRAGMENT_ID_BUNDLE_KEY = "fragment_id";
+
     // tag set on reauthenticate request to prevent that request from getting cancelled by switchFragment()
     private static final String REAUTH_REQUEST_TAG = "reauth";
-    private static final String[] SCOPES = {CalendarScopes.CALENDAR};
-    // stored for keeping the session alive after it expires
-    String username;
-    String password;
-    // save old status bar color when action bar is created, restore when action bar is finished
-    int statusBarColor;
-    GoogleAccountCredential credential;
-    MaterialDialog calendarExportProgress;
-    Runnable onExportTaskFinishedListener;
+
     private NavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -139,19 +132,39 @@ public class MainActivity extends AppCompatActivity
     private int currentFragmentId;
     private LinearLayout loadingLayout;
     private LinearLayout networkErrorLayout;
+
     private boolean threadExit = false;
     private boolean inOnLoad = false;
+
     private FocusApi api;
+    // stored for keeping the session alive after it expires
+    String username;
+    String password;
+
     private boolean isVisible;
+
     // used by session thread to avoid spamming reauthenticate() calls
     private boolean authenticating;
+
+    // save old status bar color when action bar is created, restore when action bar is finished
+    int statusBarColor;
+
+    // for exporting to calendar with google play services
+    static final int REQUEST_ACCOUNT_PICKER = 1000;
+    static final int REQUEST_AUTHORIZATION = 1001;
+    static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
+    private static final String[] SCOPES = { CalendarScopes.CALENDAR};
     private GoogleSignInOptions googleSignInOptions;
     private GoogleSignInClient googleSignInClient;
+    GoogleAccountCredential credential;
+    MaterialDialog calendarExportProgress;
     private Collection<GoogleCalendarEvent> eventsToExport;
     private boolean updateEvents;
+    Runnable onExportTaskFinishedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        myRef.setValue("Hello, Chaima");
         setTheme(com.slensky.focussis.R.style.AppTheme_Light);
         if (savedInstanceState != null) {
             Log.d(TAG, "Restoring saved instance state");
@@ -159,7 +172,8 @@ public class MainActivity extends AppCompatActivity
             password = savedInstanceState.getString(PASSWORD_BUNDLE_KEY);
             if (FocusApplication.USE_DEBUG_API) {
                 api = new FocusDebugApi(username, password, getApplicationContext());
-            } else {
+            }
+            else {
                 api = new FocusApi(username, password, getApplicationContext());
             }
             FocusApiSingleton.setApi(api);
@@ -169,17 +183,20 @@ public class MainActivity extends AppCompatActivity
                 api.setSessionTimeout(savedInstanceState.getLong(SESSION_TIMEOUT_BUNDLE_KEY));
                 if (!api.isSessionExpired()) {
                     api.setLoggedIn(true);
-                } else {
+                }
+                else {
                     Log.d(TAG, "Session timed out, reauthenticating from saved instance state");
                     authenticating = true;
                     reauthenticate();
                 }
-            } else {
+            }
+            else {
                 Log.d(TAG, "API has no session, reauthenticating from saved instance state");
                 authenticating = true;
                 reauthenticate();
             }
-        } else {
+        }
+        else {
             super.onCreate(savedInstanceState);
             setContentView(com.slensky.focussis.R.layout.activity_main);
             api = FocusApiSingleton.getApi();
@@ -194,7 +211,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(com.slensky.focussis.R.id.main_drawer_layout);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar,
+                this,  mDrawerLayout, toolbar,
                 com.slensky.focussis.R.string.navigation_drawer_open, com.slensky.focussis.R.string.navigation_drawer_close
         );
 
@@ -215,7 +232,8 @@ public class MainActivity extends AppCompatActivity
             String first = n[0].substring(0, 1).toUpperCase() + n[0].substring(1);
             String last = n[1].substring(0, 1).toUpperCase() + n[1].substring(1);
             name.setText(first + " " + last);
-        } else {
+        }
+        else {
             name.setText(n[0]);
         }
 
@@ -301,13 +319,13 @@ public class MainActivity extends AppCompatActivity
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff() {
                     int tries = 0;
-
                     @Override
                     public long nextBackOffMillis() throws IOException {
                         tries += 1;
                         if (tries < 3) {
                             return super.nextBackOffMillis();
-                        } else {
+                        }
+                        else {
                             return BackOff.STOP;
                         }
                     }
@@ -317,7 +335,8 @@ public class MainActivity extends AppCompatActivity
             currentFragment = new PortalFragment();
             currentFragmentId = com.slensky.focussis.R.id.nav_home;
             switchFragment(currentFragment);
-        } else {
+        }
+        else {
             // switch back to correct fragment
             currentFragmentId = savedInstanceState.getInt(FRAGMENT_ID_BUNDLE_KEY);
             navigationView.getMenu().findItem(currentFragmentId).setChecked(true);
@@ -370,7 +389,8 @@ public class MainActivity extends AppCompatActivity
                 fragmentContainer.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 setupViewPager(viewPager, nFragment.getTabNames(), nFragment.getTabFragments());
-            } else {
+            }
+            else {
                 Log.d(TAG, "Configuring without tabs");
                 fragmentContainer.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.VISIBLE);
@@ -380,7 +400,8 @@ public class MainActivity extends AppCompatActivity
                     viewPager.getAdapter().notifyDataSetChanged();
                 }
             }
-        } else {
+        }
+        else {
             Log.d(TAG, "Configuring static non-tab page");
             tabLayout.setVisibility(View.GONE);
             loadingLayout.setVisibility(View.GONE);
@@ -400,7 +421,7 @@ public class MainActivity extends AppCompatActivity
             final Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (!nFragment.isRequestFinished() && !threadExit) {
+                    while(!nFragment.isRequestFinished() && !threadExit) {
                         try {
                             Thread.sleep(100);
                         } catch (InterruptedException e) {
@@ -434,12 +455,13 @@ public class MainActivity extends AppCompatActivity
                 Log.d(TAG, "Fragment does not have a network error");
                 if (fragment.hasTabs()) {
                     Log.d(TAG, "Setting tab fragments");
-                    ((ViewPagerAdapter) Objects.requireNonNull(viewPager.getAdapter())).setFragmentList((Fragment) fragment.getTabFragments());
+                    ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList(fragment.getTabFragments());
                     viewPager.getAdapter().notifyDataSetChanged();
                     Log.d(TAG, "Running fragment's onLoad()");
                     fragment.onFragmentLoad();
                     fragmentContainer.setVisibility(View.GONE);
-                } else {
+                }
+                else {
                     Log.d(TAG, "Displaying untabbed fragment");
                     loadingLayout.setVisibility(View.GONE);
                     fragmentContainer.setVisibility(View.VISIBLE);
@@ -449,18 +471,19 @@ public class MainActivity extends AppCompatActivity
                         viewPager.getAdapter().notifyDataSetChanged();
                     }
                 }
-            } else {
+            }
+            else {
                 if (fragment.getNetworkError().networkResponse != null) {
                     Log.d(TAG, "Fragment has network error, " + Integer.toString(fragment.getNetworkError().networkResponse.statusCode));
                     if (fragment.getNetworkError().networkResponse.statusCode == 403) {
                         Log.d(TAG, "Automatically refreshing session");
                         loadingLayout.setVisibility(View.GONE);
                         if (fragment.hasTabs()) {
-                            List<EmptyFragment> emptyFragments = new ArrayList<>();
+                            List<Fragment> emptyFragments = new ArrayList<>();
                             for (int i = 0; i < fragment.getTabNames().size(); i++) {
                                 emptyFragments.add(new EmptyFragment());
                             }
-                            ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList((Fragment) emptyFragments);
+                            ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList(emptyFragments);
                             viewPager.getAdapter().notifyDataSetChanged();
                         }
                         reauthenticate();
@@ -468,7 +491,8 @@ public class MainActivity extends AppCompatActivity
                         Log.d(TAG, "Showing generic retry page");
                         showNetworkError();
                     }
-                } else {
+                }
+                else {
                     Log.d(TAG, "Null network response");
                     Log.d(TAG, "Showing generic retry page");
                     showNetworkError();
@@ -484,8 +508,9 @@ public class MainActivity extends AppCompatActivity
         adapter.clear();
         for (int i = 0; i < tabNames.size(); i++) {
             if (tabFragments != null) {
-                adapter.addFragment((LoadingFragment) tabFragments.get(i), tabNames.get(i));
-            } else {
+                adapter.addFragment(tabFragments.get(i), tabNames.get(i));
+            }
+            else {
                 adapter.addFragment(new LoadingFragment(), tabNames.get(i));
             }
         }
@@ -516,7 +541,7 @@ public class MainActivity extends AppCompatActivity
 
         // And here we go, if the back stack is empty, we let the back button doing its job
         // Otherwise, we show the last entry in the back stack (our FragmentToShow)
-        if (childFragmentManager.getBackStackEntryCount() <= 1) {
+        if(childFragmentManager.getBackStackEntryCount() <= 1){
             super.onBackPressed();
         } else {
             Log.d(TAG, "Popping backstack of child fragment manager");
@@ -531,7 +556,8 @@ public class MainActivity extends AppCompatActivity
         MenuItem resetCourseItem = findMenuItem(menu, getString(R.string.toolbar_menu_delete_saved_assignments));
         if (currentFragment instanceof NetworkFragment) {
             refreshItem.setVisible(true);
-        } else {
+        }
+        else {
             refreshItem.setVisible(false);
         }
 
@@ -540,13 +566,15 @@ public class MainActivity extends AppCompatActivity
                 && ((NetworkFragment) currentFragment).isRequestFinished()
                 && !((NetworkFragment) currentFragment).hasNetworkError()) {
             syncItem.setVisible(true);
-        } else {
+        }
+        else {
             syncItem.setVisible(false);
         }
 
         if (currentFragment instanceof PortalFragment && ((PortalFragment) currentFragment).isCurrentFragmentNested()) {
             resetCourseItem.setVisible(true);
-        } else {
+        }
+        else {
             resetCourseItem.setVisible(false);
         }
         return super.onPrepareOptionsMenu(menu);
@@ -579,15 +607,18 @@ public class MainActivity extends AppCompatActivity
         if (id == com.slensky.focussis.R.id.action_refresh) {
             refresh();
             return true;
-        } else if (id == com.slensky.focussis.R.id.action_logout) {
+        }
+        else if (id == com.slensky.focussis.R.id.action_logout) {
             logout();
             return true;
-        } else if (id == R.id.action_sync_to_calendar) {
+        }
+        else if (id == R.id.action_sync_to_calendar) {
             if (currentFragment instanceof Syncable) {
                 ((Syncable) currentFragment).sync();
             }
             return true;
-        } else if (id == R.id.action_delete_saved_assignments) {
+        }
+        else if (id == R.id.action_delete_saved_assignments) {
             if (currentFragment instanceof PortalFragment && ((PortalFragment) currentFragment).getCourseFragment() != null) {
                 ((PortalFragment) currentFragment).getCourseFragment().resetCourse();
             }
@@ -607,7 +638,7 @@ public class MainActivity extends AppCompatActivity
                 final Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (!nFragment.isRequestFinished() && !threadExit) {
+                        while(!nFragment.isRequestFinished() && !threadExit) {
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e) {
@@ -729,7 +760,8 @@ public class MainActivity extends AppCompatActivity
                 progressDialog.dismiss();
                 if (error.networkResponse != null) {
                     showAuthenticateRetryDialog(error.networkResponse.statusCode);
-                } else {
+                }
+                else {
                     showAuthenticateRetryDialog(-1);
                 }
             }
@@ -741,17 +773,21 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (status == 504) {
             builder.setMessage(getString(com.slensky.focussis.R.string.retry_dialog_message_timeout));
-        } else {
+        }
+        else {
             if (status == -1) {
                 builder.setMessage(getString(com.slensky.focussis.R.string.retry_dialog_message_timeout));
-            } else {
+            }
+            else {
                 builder.setMessage(String.format(getString(com.slensky.focussis.R.string.retry_dialog_message_general), status));
             }
         }
         builder.setCancelable(false);
-        builder.setPositiveButton(getString(com.slensky.focussis.R.string.retry_dialog_button), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(com.slensky.focussis.R.string.retry_dialog_button), new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 dialog.dismiss();
                 reauthenticate();
             }
@@ -774,7 +810,10 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra(getString(com.slensky.focussis.R.string.EXTRA_DISABLE_AUTO_SIGN_IN), true);
+
+
                 startActivity(intent);
+
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -783,7 +822,8 @@ public class MainActivity extends AppCompatActivity
                 progressDialog.dismiss();
                 if (error.networkResponse != null) {
                     showLogoutRetryDialog(error.networkResponse.statusCode);
-                } else {
+                }
+                else {
                     showLogoutRetryDialog(-1);
                 }
             }
@@ -796,17 +836,21 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (status == 504) {
             builder.setMessage(getString(com.slensky.focussis.R.string.retry_dialog_message_timeout));
-        } else {
+        }
+        else {
             if (status == -1) {
                 builder.setMessage(getString(com.slensky.focussis.R.string.retry_dialog_message_timeout));
-            } else {
+            }
+            else {
                 builder.setMessage(String.format(getString(com.slensky.focussis.R.string.retry_dialog_message_general), status));
             }
         }
         builder.setCancelable(false);
-        builder.setPositiveButton(getString(com.slensky.focussis.R.string.retry_dialog_button), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(com.slensky.focussis.R.string.retry_dialog_button), new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 dialog.dismiss();
                 logout();
             }
@@ -827,13 +871,14 @@ public class MainActivity extends AppCompatActivity
         if (currentFragment instanceof NetworkTabAwareFragment) {
             NetworkTabAwareFragment nFragment = (NetworkTabAwareFragment) currentFragment;
             if (nFragment.hasTabs()) {
-                List<NetworkErrorFragment> errorFrags = new ArrayList<>();
+                List<Fragment> errorFrags = new ArrayList<>();
                 for (int i = 0; i < nFragment.getTabNames().size(); i++) {
                     errorFrags.add(new NetworkErrorFragment());
                 }
-                ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList((Fragment) errorFrags);
+                ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList(errorFrags);
                 viewPager.getAdapter().notifyDataSetChanged();
-            } else {
+            }
+            else {
                 loadingLayout.setVisibility(View.GONE);
                 fragmentContainer.setVisibility(View.GONE);
                 networkErrorLayout.setVisibility(View.VISIBLE);
@@ -852,13 +897,14 @@ public class MainActivity extends AppCompatActivity
         if (currentFragment instanceof NetworkTabAwareFragment) {
             NetworkTabAwareFragment nFragment = (NetworkTabAwareFragment) currentFragment;
             if (nFragment.hasTabs()) {
-                List<LoadingFragment> loadingFrags = new ArrayList<>();
+                List<Fragment> loadingFrags = new ArrayList<>();
                 for (int i = 0; i < nFragment.getTabNames().size(); i++) {
                     loadingFrags.add(new LoadingFragment());
                 }
-                ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList((Fragment) loadingFrags);
+                ((ViewPagerAdapter) viewPager.getAdapter()).setFragmentList(loadingFrags);
                 viewPager.getAdapter().notifyDataSetChanged();
-            } else {
+            }
+            else {
                 fragmentContainer.setVisibility(View.GONE);
                 networkErrorLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.VISIBLE);
@@ -971,7 +1017,7 @@ public class MainActivity extends AppCompatActivity
      * appropriate.
      */
     private void getResultsFromApi() {
-        if (!isGooglePlayServicesAvailable()) {
+        if (! isGooglePlayServicesAvailable()) {
             acquireGooglePlayServices();
         } else if (credential.getSelectedAccountName() == null) {
             chooseAccount();
@@ -994,18 +1040,17 @@ public class MainActivity extends AppCompatActivity
      * Called when an activity launched here (specifically, AccountPicker
      * and authorization) exits, giving you the requestCode you started it with,
      * the resultCode it returned, and any additional data from it.
-     *
      * @param requestCode code indicating which activity result is incoming.
-     * @param resultCode  code indicating the result of the incoming
-     *                    activity result.
-     * @param data        Intent (containing result data) returned by incoming
-     *                    activity result.
+     * @param resultCode code indicating the result of the incoming
+     *     activity result.
+     * @param data Intent (containing result data) returned by incoming
+     *     activity result.
      */
     @Override
     protected void onActivityResult(
             int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+        switch(requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
                     new MaterialDialog.Builder(this)
@@ -1024,14 +1069,16 @@ public class MainActivity extends AppCompatActivity
                     // if the settings fragment is selected, update the description of the preference
                     if (currentFragment instanceof SettingsFragment) {
                         ((SettingsFragment) currentFragment).updateAccountPreference();
-                    } else {
+                    }
+                    else {
                         getResultsFromApi();
                     }
                     Log.i(TAG, account.getEmail());
                 } catch (ApiException e) {
                     if (e.getStatusCode() == CommonStatusCodes.NETWORK_ERROR || e.getStatusCode() == CommonStatusCodes.TIMEOUT) {
                         Toast.makeText(this, R.string.network_error_timeout, Toast.LENGTH_LONG).show();
-                    } else {
+                    }
+                    else {
                         Log.e(TAG, "Unexpected APIException while choosing account!");
                         e.printStackTrace();
                         Toast.makeText(this, R.string.network_error_unknown, Toast.LENGTH_LONG).show();
@@ -1048,9 +1095,8 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Check that Google Play services APK is installed and up to date.
-     *
      * @return true if Google Play Services is available and up to
-     * date on this device; false otherwise.
+     *     date on this device; false otherwise.
      */
     private boolean isGooglePlayServicesAvailable() {
         GoogleApiAvailability apiAvailability =
@@ -1078,9 +1124,8 @@ public class MainActivity extends AppCompatActivity
     /**
      * Display an error dialog showing that Google Play Services is missing
      * or out of date.
-     *
      * @param connectionStatusCode code describing the presence (or lack of)
-     *                             Google Play Services on this device.
+     *     Google Play Services on this device.
      */
     void showGooglePlayServicesAvailabilityErrorDialog(
             final int connectionStatusCode) {
@@ -1090,13 +1135,6 @@ public class MainActivity extends AppCompatActivity
                 connectionStatusCode,
                 REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
-    }
-
-    private void saveGoogleCalendarId(String id) {
-        Log.d(MakeCalendarRequestTask.TAG, "Saving calendar id " + id);
-        SharedPreferences.Editor googleCalendarPrefsEditor = getSharedPreferences(getString(R.string.google_calendar_prefs), MODE_PRIVATE).edit();
-        googleCalendarPrefsEditor.putString(getString(R.string.google_calendar_prefs_id_for_account, credential.getSelectedAccountName()), id);
-        googleCalendarPrefsEditor.apply();
     }
 
     /**
@@ -1131,7 +1169,6 @@ public class MainActivity extends AppCompatActivity
 
         /**
          * Background task to call Google Calendar API.
-         *
          * @param params no parameters needed for this task.
          */
         @Override
@@ -1149,7 +1186,6 @@ public class MainActivity extends AppCompatActivity
 
         /**
          * Fetch a list of the next 10 events from the primary calendar.
-         *
          * @return List of Strings describing returned events.
          * @throws IOException
          */
@@ -1172,8 +1208,7 @@ public class MainActivity extends AppCompatActivity
             if (calendarId == null) {
                 // attempt to reacquire id by looking for a calendar with the default name
                 String pageToken = null;
-                outer:
-                do {
+                outer: do {
                     CalendarList calendarList = mService.calendarList().list().setMinAccessRole("owner").setPageToken(pageToken).execute();
                     List<CalendarListEntry> items = calendarList.getItems();
 
@@ -1205,13 +1240,15 @@ public class MainActivity extends AppCompatActivity
             for (GoogleCalendarEvent e : events) {
                 if (timeMin == null) {
                     timeMin = e.getStart();
-                } else if (e.getStart().isBefore(timeMin)) {
+                }
+                else if (e.getStart().isBefore(timeMin)) {
                     timeMin = e.getStart();
                 }
 
                 if (timeMax == null) {
                     timeMax = e.getEnd();
-                } else if (e.getEnd().isAfter(timeMax)) {
+                }
+                else if (e.getEnd().isAfter(timeMax)) {
                     timeMax = e.getEnd();
                 }
             }
@@ -1242,23 +1279,27 @@ public class MainActivity extends AppCompatActivity
                         calendarExportProgress.incrementProgress(1);
                         if (isEvent) {
                             eventSkippedCount += 1;
-                        } else if (isAssignment) {
+                        }
+                        else if (isAssignment) {
                             assignmentSkippedCount += 1;
                         }
                         continue outer;
-                    } else if (event.getSummary().equals(existingEvent.getSummary())
+                    }
+                    else if (event.getSummary().equals(existingEvent.getSummary())
                             && (event.getLocation() != null ? event.getLocation().equals(existingEvent.getLocation()) : existingEvent.getLocation() == null)
                             && event.getStart().equals(existingEvent.getStart())
                             && event.getEnd().equals(existingEvent.getEnd())) {
                         if (updateEvents) {
                             // only description has changed, just update the event
                             eventsToUpdate.add(existingEvent.setDescription(event.getDescription()));
-                        } else {
+                        }
+                        else {
                             Log.d(TAG, "Skipping duplicate event instead of updating " + event.getSummary());
                             calendarExportProgress.incrementProgress(1);
                             if (isEvent) {
                                 eventSkippedCount += 1;
-                            } else if (isAssignment) {
+                            }
+                            else if (isAssignment) {
                                 assignmentSkippedCount += 1;
                             }
                         }
@@ -1292,7 +1333,8 @@ public class MainActivity extends AppCompatActivity
                 boolean isAssignment = isAssignment(e) && !isEvent; // can't be both an assignment and an event
                 if (isEvent) {
                     eventCount += 1;
-                } else if (isAssignment) {
+                }
+                else if (isAssignment) {
                     assignmentCount += 1;
                 }
             }
@@ -1318,12 +1360,15 @@ public class MainActivity extends AppCompatActivity
                 none = true;
                 if (eventCount == 0) {
                     exportSummaryContent = getString(R.string.export_summary_dialog_summary_nothing_exported_assignments_only);
-                } else if (assignmentCount == 0) {
+                }
+                else if (assignmentCount == 0) {
                     exportSummaryContent = getString(R.string.export_summary_dialog_summary_nothing_exported_events_only);
-                } else {
+                }
+                else {
                     exportSummaryContent = getString(R.string.export_summary_dialog_summary_nothing_exported);
                 }
-            } else {
+            }
+            else {
                 if (eventCount > 0) {
                     exportSummaryContent += "<b>" + getString(R.string.export_summary_dialog_summary_events_exported) + "</b> "
                             + getString(R.string.export_summary_dialog_summary_number_exported, eventCount, eventCount - eventSkippedCount);
@@ -1391,6 +1436,13 @@ public class MainActivity extends AppCompatActivity
                     || (o instanceof CalendarEvent && ((CalendarEvent) o).getType().equals(CalendarEvent.EventType.ASSIGNMENT))
                     || (o instanceof CalendarEventDetails && ((CalendarEventDetails) o).getType().equals(CalendarEvent.EventType.ASSIGNMENT));
         }
+    }
+
+    private void saveGoogleCalendarId(String id) {
+        Log.d(MakeCalendarRequestTask.TAG, "Saving calendar id " + id);
+        SharedPreferences.Editor googleCalendarPrefsEditor = getSharedPreferences(getString(R.string.google_calendar_prefs), MODE_PRIVATE).edit();
+        googleCalendarPrefsEditor.putString(getString(R.string.google_calendar_prefs_id_for_account, credential.getSelectedAccountName()), id);
+        googleCalendarPrefsEditor.apply();
     }
 
 }

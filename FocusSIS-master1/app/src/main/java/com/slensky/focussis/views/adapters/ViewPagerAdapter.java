@@ -1,14 +1,10 @@
 package com.slensky.focussis.views.adapters;
 
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.slensky.focussis.fragments.LoadingFragment;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,14 +28,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return mFragmentList.size();
     }
 
-    public void addFragment(LoadingFragment fragment, String title) {
+    public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
 
-    public void setFragmentList(Fragment fragmentList) {
+    public void setFragmentList(List<Fragment> fragmentList) {
         this.mFragmentList.clear();
-        this.mFragmentList.addAll((Collection<? extends Fragment>) fragmentList);
+        this.mFragmentList.addAll(fragmentList);
     }
 
     public void clear() {

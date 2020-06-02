@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_basic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,9 +67,9 @@
 
                 </LinearLayout>
 
-            </androidx.recyclerview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_detailed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 
                 </LinearLayout>
 
-            </androidx.recyclerview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

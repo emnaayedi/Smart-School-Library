@@ -3,23 +3,27 @@ package com.slensky.focussis.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import androidx.fragment.app.DialogFragment;
+import android.os.Bundle;
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.preference.Preference;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.slensky.focussis.util.CourseAssignmentFileHandler;
+import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
+
 import com.slensky.focussis.R;
 import com.slensky.focussis.activities.MainActivity;
-import com.slensky.focussis.util.CourseAssignmentFileHandler;
 import com.slensky.focussis.views.PasswordChangePreference;
 import com.slensky.focussis.views.PasswordChangePreferenceDialogFragmentCompat;
-import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
 import java.io.IOException;
 

@@ -3,6 +3,8 @@ package com.slensky.focussis.fragments;
 import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Bundle;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -15,11 +17,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.slensky.focussis.R;
 import com.slensky.focussis.data.Referral;
 import com.slensky.focussis.data.Referrals;

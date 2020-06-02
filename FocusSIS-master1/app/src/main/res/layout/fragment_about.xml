@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,47 +11,47 @@
         android:fillViewport="true">
 
         <RelativeLayout
+            android:paddingTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="50dp">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/image_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
-                android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginBottom="50dp"
                 app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/text_about"
-                style="@style/primarySubheadingText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image_logo"
                 android:paddingLeft="24dp"
                 android:paddingRight="24dp"
-                android:text="@string/about_page_description" />
+                android:text="@string/about_page_description"
+                android:layout_below="@+id/image_logo"
+                style="@style/primarySubheadingText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:showDividers="beginning|middle|end"
+                android:divider="@drawable/divider"
+                android:paddingTop="40dp"
                 android:layout_below="@id/text_about"
                 android:layout_alignParentBottom="true"
-                android:divider="@drawable/divider"
-                android:gravity="bottom"
-                android:orientation="vertical"
-                android:paddingTop="40dp"
-                android:showDividers="beginning|middle|end">
+                android:gravity="bottom">
 
                 <RelativeLayout
                     android:id="@+id/email_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:padding="16dp">
 
                     <ImageView
@@ -59,17 +59,17 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/ic_email_black_24px" />
 
                     <TextView
-                        style="@style/primarySubheadingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/email_icon"
-                        android:text="@string/about_email" />
+                        android:layout_centerVertical="true"
+                        android:text="@string/about_email"
+                        style="@style/primarySubheadingText"/>
 
                 </RelativeLayout>
 
@@ -77,8 +77,8 @@
                     android:id="@+id/github_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:padding="16dp">
 
                     <ImageView
@@ -86,17 +86,17 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/ic_github_circle_black_24px" />
 
                     <TextView
-                        style="@style/primarySubheadingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/github_icon"
-                        android:text="@string/about_github" />
+                        android:layout_centerVertical="true"
+                        android:text="@string/about_github"
+                        style="@style/primarySubheadingText"/>
 
                 </RelativeLayout>
 
@@ -104,8 +104,8 @@
                     android:id="@+id/version_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:padding="16dp">
 
                     <ImageView
@@ -113,19 +113,20 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
+                        android:layout_centerVertical="true"
                         android:src="@drawable/ic_information_outline_black_24px" />
 
                     <TextView
                         android:id="@+id/text_version"
-                        style="@style/primarySubheadingText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/version_icon"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/version_icon" />
+                        style="@style/primarySubheadingText"/>
 
                 </RelativeLayout>
+
 
 
                 <!--<TextView

@@ -9,6 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,27 +26,23 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.slensky.focussis.R;
-import com.slensky.focussis.data.AbsenceDay;
-import com.slensky.focussis.data.AbsencePeriod;
 import com.slensky.focussis.data.Absences;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
-import com.slensky.focussis.util.DateUtil;
 import com.slensky.focussis.util.TableRowAnimationController;
 import com.slensky.focussis.views.AbsenceLabelView;
 
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
+
+import com.slensky.focussis.data.AbsenceDay;
+import com.slensky.focussis.data.AbsencePeriod;
+import com.slensky.focussis.util.DateUtil;
 
 import java.util.List;
 

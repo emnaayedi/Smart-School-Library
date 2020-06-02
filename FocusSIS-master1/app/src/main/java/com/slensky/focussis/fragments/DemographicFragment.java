@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +15,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.slensky.focussis.R;
 import com.slensky.focussis.activities.MainActivity;
-import com.slensky.focussis.data.Demographic;
 import com.slensky.focussis.network.FocusApi;
-import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.util.CardViewAnimationController;
-import com.slensky.focussis.util.DateUtil;
 import com.slensky.focussis.util.SchoolSingleton;
 import com.slensky.focussis.views.IconWithTextView;
 
 import org.apache.commons.lang.math.NumberUtils;
 
-import java.util.List;
+import com.slensky.focussis.data.Demographic;
+import com.slensky.focussis.network.FocusApiSingleton;
+import com.slensky.focussis.util.DateUtil;
 
+import java.util.List;
 /**
  * Created by slensky on 5/14/17.
  */
