@@ -8,7 +8,7 @@ import android.util.AttributeSet;
  * Created by slensky on 5/15/17.
  */
 
-public class DynamicImageView extends android.support.v7.widget.AppCompatImageView {
+public class DynamicImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     public DynamicImageView(final Context context, final AttributeSet attrs) {
         super(context, attrs);

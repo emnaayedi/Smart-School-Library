@@ -1,15 +1,14 @@
 package com.slensky.focussis.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -35,8 +34,6 @@ import com.slensky.focussis.data.PortalCourse;
 import com.slensky.focussis.data.PortalEvent;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.util.GsonSingleton;
-
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.Portal;
 import com.slensky.focussis.network.FocusApiSingleton;

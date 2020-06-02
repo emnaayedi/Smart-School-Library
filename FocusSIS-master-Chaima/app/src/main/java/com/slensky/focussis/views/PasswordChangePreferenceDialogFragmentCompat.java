@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.PreferenceDialogFragmentCompat;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceDialogFragmentCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +18,6 @@ import com.android.volley.VolleyError;
 import com.slensky.focussis.data.PasswordResponse;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
-
-import org.json.JSONObject;
 
 import static android.content.Context.MODE_PRIVATE;
 

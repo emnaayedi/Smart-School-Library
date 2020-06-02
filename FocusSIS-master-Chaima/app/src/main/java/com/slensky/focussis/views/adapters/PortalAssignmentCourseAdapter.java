@@ -1,21 +1,18 @@
 package com.slensky.focussis.views.adapters;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.slensky.focussis.R;
-import com.slensky.focussis.data.CourseAssignment;
 import com.slensky.focussis.data.PortalCourse;
-import com.slensky.focussis.util.CourseAssignmentFileHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by slensky on 3/23/17.

@@ -1,8 +1,8 @@
 package com.slensky.focussis.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +14,6 @@ import com.slensky.focussis.data.Schedule;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.util.GsonSingleton;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;

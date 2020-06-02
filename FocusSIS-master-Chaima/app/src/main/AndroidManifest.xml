@@ -14,8 +14,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="Smart Library"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Launcher">
-        <activity android:name="com.slensky.focussis.activities.LoginActivity">
+        android:theme="@style/AppTheme">
+        <activity android:name="com.slensky.focussis.activities.LoginActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,8 +25,7 @@
         <activity
             android:name="com.slensky.focussis.activities.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="Portal"
-            android:theme="@style/AppTheme.Light"/>
+            android:label="Portal"></activity>
         <activity android:name="com.slensky.focussis.activities.CrashReportActivity"
             android:excludeFromRecents="true"
             android:finishOnTaskLaunch="true"

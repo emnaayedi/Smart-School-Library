@@ -1,18 +1,15 @@
 package com.slensky.focussis.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputLayout;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,28 +22,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.google.gson.Gson;
 import com.slensky.focussis.R;
-import com.slensky.focussis.activities.MainActivity;
-import com.slensky.focussis.data.Demographic;
 import com.slensky.focussis.data.Schedule;
-import com.slensky.focussis.network.FocusApi;
-import com.slensky.focussis.network.FocusApiSingleton;
-import com.slensky.focussis.util.CardViewAnimationController;
-import com.slensky.focussis.util.DateUtil;
 import com.slensky.focussis.util.GsonSingleton;
 import com.slensky.focussis.util.JSONUtil;
 import com.slensky.focussis.util.SchoolSingleton;
-import com.slensky.focussis.views.IconWithTextView;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -1,13 +1,11 @@
 package com.slensky.focussis.fragments;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 
 import com.android.volley.VolleyError;
 import com.slensky.focussis.network.FocusApi;
-
-import org.json.JSONObject;
 
 /**
  * Created by slensky on 4/22/17.

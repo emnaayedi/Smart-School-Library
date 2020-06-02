@@ -4,11 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import android.util.Log;
 
 import android.content.Intent;
@@ -26,7 +25,6 @@ import com.slensky.focussis.R;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
 
-import org.json.JSONObject;
 import com.slensky.focussis.data.FocusPreferences;
 import com.slensky.focussis.network.FocusDebugApi;
 

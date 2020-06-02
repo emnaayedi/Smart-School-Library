@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -34,8 +34,6 @@ import com.slensky.focussis.R;
 import com.slensky.focussis.data.FinalGrade;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
-
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.FinalGrades;
 import com.slensky.focussis.util.TableRowAnimationController;

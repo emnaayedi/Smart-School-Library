@@ -1,7 +1,6 @@
 package com.slensky.focussis.parser;
 
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Pair;
 
@@ -14,7 +13,6 @@ import org.jsoup.nodes.Document;
 
 import com.slensky.focussis.data.MarkingPeriod;
 import com.slensky.focussis.data.Student;
-import com.slensky.focussis.util.JSONUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;

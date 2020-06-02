@@ -4,16 +4,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 
-import com.slensky.focussis.FocusApplication;
 import com.slensky.focussis.R;
-
-import java.util.List;
 
 /**
  * Created by slensky on 4/20/18.

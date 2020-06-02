@@ -3,8 +3,8 @@ package com.slensky.focussis.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,6 @@ import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.util.CardViewAnimationController;
 import com.slensky.focussis.views.IconWithTextView;
 
-import org.json.JSONObject;
 import com.slensky.focussis.R;
 import com.slensky.focussis.data.Address;
 import com.slensky.focussis.data.AddressContact;

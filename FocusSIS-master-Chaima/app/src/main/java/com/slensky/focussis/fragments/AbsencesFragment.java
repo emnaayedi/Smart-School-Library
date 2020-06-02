@@ -8,12 +8,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,15 +38,12 @@ import com.slensky.focussis.views.AbsenceLabelView;
 
 import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.json.JSONObject;
 
 import com.slensky.focussis.data.AbsenceDay;
 import com.slensky.focussis.data.AbsencePeriod;
 import com.slensky.focussis.util.DateUtil;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by slensky on 5/24/17.
