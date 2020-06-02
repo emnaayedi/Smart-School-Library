@@ -63,6 +63,9 @@ import com.google.api.services.calendar.model.Calendar;
 import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
@@ -108,8 +111,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
+
     private static final String TAG = "MainActivity";
     private static final String USERNAME_BUNDLE_KEY = "username";
     private static final String PASSWORD_BUNDLE_KEY = "password";
@@ -159,6 +164,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        myRef.setValue("Hello, World!");
         setTheme(com.slensky.focussis.R.style.AppTheme_Light);
         if (savedInstanceState != null) {
             Log.d(TAG, "Restoring saved instance state");
