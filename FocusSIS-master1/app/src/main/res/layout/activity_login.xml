@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:fitsSystemWindows="true">
 
@@ -56,7 +55,7 @@
                 android:layout_marginBottom="8dp"
                 android:hint="@string/login_user_hint">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,12 +72,11 @@
                 android:layout_marginBottom="8dp"
                 android:hint="@string/login_pass_hint">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:errorEnabled="true"
-                    app:endIconMode="password_toggle" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
@@ -88,7 +86,7 @@
                 android:layout_below="@id/text_layout_password"
                 android:text="@string/login_remember_user" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.recyclerview.widget.AppCompatButton
                 android:id="@+id/btn_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

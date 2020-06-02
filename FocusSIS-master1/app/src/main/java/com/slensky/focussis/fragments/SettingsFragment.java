@@ -3,14 +3,12 @@ package com.slensky.focussis.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

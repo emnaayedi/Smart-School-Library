@@ -59,7 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="@string/bell_schedule" />
+            android:text="@string/bell_schedule"
+            android:textColor="#009688" />
 
         <Spinner
             android:id="@+id/spinner_bell_schedule"

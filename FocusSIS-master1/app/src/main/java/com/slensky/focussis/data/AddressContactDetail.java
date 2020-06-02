@@ -9,6 +9,7 @@ public class AddressContactDetail {
     private final String title;
     private final String value;
     private final Type type;
+
     public AddressContactDetail(String title, String value, Type type) {
         this.title = title;
         this.value = value;

@@ -84,7 +84,7 @@
                 android:text="@string/login_remember_user"
                 android:layout_below="@id/text_layout_password"/>
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.recyclerview.widget.AppCompatButton
                 android:id="@+id/btn_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

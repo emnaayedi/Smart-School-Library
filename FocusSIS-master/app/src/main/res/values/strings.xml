@@ -97,7 +97,7 @@
     <string name="map_search_hint">Search for a room # or teacher</string>
     <string name="map_search_error">Room or teacher could not be found</string>
     <string name="pinch_to_zoom">Pinch to zoom</string>
-    <string name="bell_schedule">Bell Schedule</string>
+    <string name="bell_schedule">Horaires</string>
     <string-array name="asd_bell_schedule_type">
         <item>Grades 7–12</item>
         <item>Grade 6</item>
@@ -171,7 +171,7 @@
     <string name="absences_offsite">&#160;Off Site/Field Trip: %1$d periods</string>
     <string name="absences_date_header">Date</string>
     <string name="absences_daily_header">Overall Daily Status</string>
-    <string name="absences_table_header">Days with Absences</string>
+    <string name="absences_table_header">Horaires</string>
 
     <!-- Final Grades Page -->
     <string name="finalgrades_final_grades">Final Grades</string>

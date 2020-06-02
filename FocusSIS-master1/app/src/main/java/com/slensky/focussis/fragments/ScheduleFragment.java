@@ -29,7 +29,7 @@ public class ScheduleFragment extends NetworkTabAwareFragment {
     private static List<String> tabNames;
 
     static {
-        tabNames = Arrays.asList("COURSES", "SCHOOL");
+        tabNames = Arrays.asList("EMPRUNTES", "HORAIRES");
     }
 
     private Schedule schedule;
@@ -62,7 +62,7 @@ public class ScheduleFragment extends NetworkTabAwareFragment {
             coursesFragment.setArguments(args);
             tempTabFragments.add(coursesFragment);
 
-            Fragment schoolFragment = new ScheduleSchoolTabFragment();
+            Fragment schoolFragment = new Fragment();
             schoolFragment.setArguments(args);
             tempTabFragments.add(schoolFragment);
 

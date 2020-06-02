@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.slensky.focussis.fragments.LoadingFragment;
-import com.slensky.focussis.fragments.NetworkErrorFragment;
 
 import java.util.ArrayList;
 import java.util.Collection;

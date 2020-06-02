@@ -214,11 +214,11 @@ public class ASD extends School {
     @Override
     public int[] getBellScheduleLayouts() {
         return new int[]{
-                R.layout.view_school_schedule_asd_7_12,
-                R.layout.view_school_schedule_asd_6,
-                R.layout.view_school_schedule_asd_7_12_delay,
-                R.layout.view_school_schedule_asd_6_delay,
-                R.layout.view_school_schedule_asd_spark
+                R.layout.fragment_absences,
+                R.layout.fragment_absences,
+                R.layout.fragment_absences,
+                R.layout.fragment_absences,
+                R.layout.fragment_absences
         };
     }
 

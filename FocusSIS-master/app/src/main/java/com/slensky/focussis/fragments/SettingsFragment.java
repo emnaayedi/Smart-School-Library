@@ -18,7 +18,6 @@ import com.slensky.focussis.util.CourseAssignmentFileHandler;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
 import com.slensky.focussis.R;
-import com.slensky.focussis.activities.MainActivity;
 import com.slensky.focussis.views.PasswordChangePreference;
 import com.slensky.focussis.views.PasswordChangePreferenceDialogFragmentCompat;
 
