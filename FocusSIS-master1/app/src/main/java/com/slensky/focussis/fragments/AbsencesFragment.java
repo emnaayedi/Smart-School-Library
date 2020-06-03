@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,12 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.slensky.focussis.R;
 import com.slensky.focussis.data.Absences;
 import com.slensky.focussis.network.FocusApi;
@@ -45,6 +52,7 @@ import com.slensky.focussis.data.AbsencePeriod;
 import com.slensky.focussis.util.DateUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by slensky on 5/24/17.
@@ -78,6 +86,13 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
         return null;
     }
 
+    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref_place = database.child("biblio/place_total");
+    DatabaseReference ref_etud = database.child("biblio/nb_etud_existe");
+    DatabaseReference ref_temp = database.child("biblio/temp");
+    DatabaseReference ref_hor  = database.child("horaires");
+
+
     @SuppressLint("StringFormatInvalid")
     protected void onSuccess(Absences absences) {
         View view = getView();
@@ -87,19 +102,161 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
             String html = "<b>" + getString(com.slensky.focussis.R.string.absences_days_possible) + ": </b>"
                     + "<br><br><b>" + getString(com.slensky.focussis.R.string.absences_days_attended) + ": </b>";
             html = html.replace(".0|", "").replace("|", "");
+
             summary.setText(Html.fromHtml(html));
             TextView summaryNB = view.findViewById(R.id.text_absences_summary_nb);
-            String html1 = absences.getDaysPossible() + "|"
+           /* String html1 = absences.getDaysPossible() + "|"
                     + "<br><br>" + absences.getDaysAttended() + "| <br>(" + absences.getDaysAttendedPercent() + "%)";
-            html1 = html1.replace(".0|", "").replace("|", "");
-            summaryNB.setText(Html.fromHtml(html1));
+            html1 = html1.replace(".0|", "").replace("|", "");*/
+
+            ref_place.addValueEventListener(new ValueEventListener() {
+                @Override
+                   public void onDataChange (DataSnapshot dataSnapshot){
+
+                    ref_etud.addValueEventListener(new ValueEventListener() {
+                        int dispo=0;
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot data) {
+                            int etud = data.getValue(int.class);
+                            int place = dataSnapshot.getValue(int.class);
+                            dispo=place-etud;
+                            String html1=String.valueOf(place)+ "<br><br>" +String.valueOf(dispo);
+                            summaryNB.setText(Html.fromHtml(html1));
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+
+                      }
+
+                @Override
+                      public void onCancelled (DatabaseError databaseError){
+                          Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                          });
+
+
 
             TextView absentHeader = view.findViewById(R.id.text_absent_header);
             absentHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent_header)));
+
+
             TextView absent = view.findViewById(R.id.text_absent);
-            absent.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent, absences.getPeriodsAbsentUnexcused())));
+            //absent.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent, absences.getPeriodsAbsentUnexcused())));
+            ref_temp.addValueEventListener(new ValueEventListener() {
+                int dispo=0;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    int temp = data.getValue(int.class);
+                    String html_temp="<b>"+String.valueOf(temp)+" °c" ;
+                    absent.setText(Html.fromHtml(html_temp));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView lund_vend = view.findViewById(R.id.text_lun_vend);
+            ref_hor.child("lundi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("lundi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            lund_vend.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView samedi = view.findViewById(R.id.samedi);
+            ref_hor.child("samedi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("samedi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            samedi.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView dimanche = view.findViewById(R.id.dimanche);
+            ref_hor.child("dimanche/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("dimanche/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            dimanche.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
             TextView otherMarksHeader = view.findViewById(R.id.text_other_marks_header);
             otherMarksHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_other_marks)));
+
             TextView otherMark = view.findViewById(R.id.text_other_mark);
             otherMark.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absence_other_mark)));
 

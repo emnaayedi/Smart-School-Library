@@ -5,6 +5,8 @@
     android:columnCount="1"
     android:stretchMode="columnWidth">
 
+
+
     <TextView
         style="@style/schedule_textview"
         android:layout_width="250dp"
