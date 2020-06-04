@@ -148,6 +148,7 @@ public class FinalGradesFragment extends NetworkTabAwareFragment implements Adap
         messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(com.slensky.focussis.R.dimen.subheadingText));
         messageView.setPadding(16, 0, 16, 0);
         float dpi = getContext().getResources().getDisplayMetrics().density;
+
         gradeDialog.setView(messageView, (int) (19 * dpi), (int) (5 * dpi), (int) (14 * dpi), (int) (5 * dpi));
 
         return view;
