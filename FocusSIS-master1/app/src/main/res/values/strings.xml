@@ -33,11 +33,11 @@
     <string name="nav_about">About</string>
 
     <!-- Debug credentials -->
-    <string name="debug_username">debug</string>
-    <string name="debug_password">debug</string>
+    <!--string name="debug_username">debug</string -->
+    <!--string name="debug_password">123</string-->
 
     <!-- Login activity -->
-    <string name="login_user_hint">Username</string>
+    <string name="login_user_hint">Login</string>
     <string name="login_pass_hint">Password</string>
     <string name="login_remember_user">Remember me</string>
     <string name="login_button">Login</string>
@@ -196,8 +196,8 @@
 
     <!-- Network error messages -->
     <string name="network_error_timeout">Network error</string>
-    <string name="network_error_auth">Invalid username or password</string>
-    <string name="network_error_auth_expanded">Invalid username or password. Are you a student at the Academy for Science and Design?</string>
+    <string name="network_error_auth">Invalid login or password</string>
+    <string name="network_error_auth_expanded">Invalid username or password. Are you a student at Enis?</string>
     <string name="network_error_server">Server error. Please try again later</string>
     <string name="network_error_unknown">Error. Please try again later</string>
 

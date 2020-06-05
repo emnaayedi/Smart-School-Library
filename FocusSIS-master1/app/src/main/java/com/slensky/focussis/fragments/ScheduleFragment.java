@@ -29,15 +29,15 @@ public class ScheduleFragment extends NetworkTabAwareFragment {
 
     static {
         tabNames = Arrays.asList("EMPRUNTES", "HORAIRES");
-    }
 
+    }
     private Schedule schedule;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         api = FocusApiSingleton.getApi();
-        title = getString(com.slensky.focussis.R.string.schedule_label);
+        title = "Empruntes";
         refresh();
     }
 

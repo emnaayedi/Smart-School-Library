@@ -3,8 +3,6 @@ package com.slensky.focussis.fragments;
 import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
@@ -34,17 +32,21 @@ import com.slensky.focussis.util.TableRowAnimationController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+<<<<<<< HEAD
 import android.util.Log;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+=======
+>>>>>>> 7eec6345d4e53ab766518704075d4cfa85478b2c
 
 /**
  * Created by slensky on 5/23/17.
  */
 
 public class ReferralsFragment extends NetworkTabAwareFragment {
+<<<<<<< HEAD
 
     private static final String TAG = "";
     String html2,html_date,html_nom_doc,html_nom_dom, possachat, resume, nbpage, collection, editeur, datePar, nomDoc, nomDomaine, dateentree, key, ref_nom_doc, ref_nom_domaine, ref_date_parution, ref_qte, ref_nb_page, ref_collection, ref_date_entree, ref_editeur, ref_resume, ref_possAchat;
@@ -52,6 +54,8 @@ public class ReferralsFragment extends NetworkTabAwareFragment {
     TextView reporter, violation, entryDate;
     private ArrayList<String> mKeys = new ArrayList<>();
 TextView messageView;
+=======
+>>>>>>> 7eec6345d4e53ab766518704075d4cfa85478b2c
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,9 +83,12 @@ TextView messageView;
         return null;
     }
 
+<<<<<<< HEAD
     DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("stockage");
 
 
+=======
+>>>>>>> 7eec6345d4e53ab766518704075d4cfa85478b2c
     protected void onSuccess(Referrals referrals) {
 
         List<Referral> refList = referrals.getReferrals();
@@ -100,6 +107,7 @@ TextView messageView;
             TableRowAnimationController animationController = new TableRowAnimationController(getContext());
 
             for (final Referral r : refList) {
+<<<<<<< HEAD
                 database.addValueEventListener(new ValueEventListener() {
                     private static final String TAG = "";
 
@@ -303,6 +311,28 @@ TextView messageView;
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+=======
+                final TableRow referralRow = (TableRow) inflater.inflate(R.layout.view_referral, table, false);
+                TextView violation = (TextView) referralRow.findViewById(R.id.text_violation);
+                TextView reporter = (TextView) referralRow.findViewById(R.id.text_reporter_name);
+                TextView entryDate = (TextView) referralRow.findViewById(R.id.text_entry_date);
+                entryDate.setText(r.getEntryDate().monthOfYear().get() + "/" + r.getEntryDate().dayOfMonth().getAsText() + '/' + r.getEntryDate().year().getAsShortText().substring(2));
+                reporter.setText(r.getTeacher());
+                if (r.getViolation() != null) {
+                    violation.setText(r.getViolation());
+                } else {
+                    violation.setText(r.getOtherViolation());
+                }
+
+                referralRow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showReferralDialog(r);
+                    }
+                });
+
+                final View divider = inflater.inflate(R.layout.view_divider, table, false);
+>>>>>>> 7eec6345d4e53ab766518704075d4cfa85478b2c
 
                     }
                 });
@@ -329,7 +359,49 @@ TextView messageView;
                 onError(error);
             }
         });
+<<<<<<< HEAD
 
 
+=======
+    }
+
+    public void showReferralDialog(Referral r) {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        //alertDialog.setTitle();
+        String html = "<b>Titre: </b>" + r.getViolation() + "<br><br>" +
+                "<b>Domaine: </b>" + r.getName() + "<br><br>" +
+                "<b>Collection: </b>" + r.getSchool() + "<br><br>" +
+                "<b>Nombre Page: </b>" + r.getGrade() + "<br><br>" +
+                "<b>Date Parution: </b>" + DateUtil.dateTimeToLongString(r.getEntryDate()) + "<br><br>" +
+                "<b>Date Importation: </b>" + DateUtil.dateTimeToLongString(r.getLastUpdated()) + "<br><br>" +
+                "<b>Editeur:</b>" + r.getTeacher();
+
+        if (r.getOtherViolation() != null) {
+            html += "<br><br><b>Résumé: </b>" + r.getOtherViolation();
+        }
+        if (r.isProcessed()) {
+            html += "<br><br><b>Possibilité d'Achat: </b>Yes";
+        } else {
+            html += "<br><br><b>Possibilité d'Achat: </b>No";
+        }
+
+        float dpi = getContext().getResources().getDisplayMetrics().density;
+        TextView messageView = new TextView(getContext());
+        messageView.setText(Html.fromHtml(html));
+        messageView.setTextIsSelectable(true);
+        messageView.setTextColor(getResources().getColor(R.color.textPrimary));
+        messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.subheadingText));
+        messageView.setPadding(16, 0, 16, 0);
+
+        alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+>>>>>>> 7eec6345d4e53ab766518704075d4cfa85478b2c
 
     }}

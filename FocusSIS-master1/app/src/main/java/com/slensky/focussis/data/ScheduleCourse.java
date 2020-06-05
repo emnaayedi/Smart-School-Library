@@ -22,6 +22,9 @@ public class ScheduleCourse {
         this.term = term;
     }
 
+
+
+
     public String getDays() {
         return days;
     }
