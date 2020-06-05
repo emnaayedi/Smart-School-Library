@@ -165,7 +165,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                 }
             });
 
-            TextView lund_vend = view.findViewById(R.id.text_lun_vend);
+            TextView lund = view.findViewById(R.id.text_lun_vend);
             ref_hor.child("lundi/debut").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
@@ -176,7 +176,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
 
                             String fin = dataf.getValue(String.class);
 
-                            lund_vend.setText(debut+" - "+fin);
+                            lund.setText(debut+" - "+fin);
                         }
 
                         @Override
@@ -195,7 +195,129 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                 }
             });
 
-            TextView samedi = view.findViewById(R.id.samedi);
+
+
+            TextView mardi = view.findViewById(R.id.samedi);
+            ref_hor.child("mardi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("mardi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            mardi.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView mercredi = view.findViewById(R.id.dimanche);
+            ref_hor.child("mercredi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("mercredi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            mercredi.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView jeudi = view.findViewById(R.id.jeudi);
+            ref_hor.child("jeudi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("jeudi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            jeudi.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView vendredi = view.findViewById(R.id.vendredi);
+            ref_hor.child("vendredi/debut").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    ref_hor.child("vendredi/fin").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataf) {
+                            String debut = data.getValue(String.class);
+
+                            String fin = dataf.getValue(String.class);
+
+                            vendredi.setText(debut+" - "+fin);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.e(TAG, "onCancelled", databaseError.toException());
+
+                }
+            });
+
+            TextView samedi = view.findViewById(R.id.sam);
             ref_hor.child("samedi/debut").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
@@ -225,7 +347,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                 }
             });
 
-            TextView dimanche = view.findViewById(R.id.dimanche);
+            TextView dimanche = view.findViewById(R.id.dim);
             ref_hor.child("dimanche/debut").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
