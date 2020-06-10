@@ -1,6 +1,7 @@
 package com.slensky.focussis.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -136,26 +137,16 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                             int etud = data.getValue(int.class);
                             int place = dataSnapshot.getValue(int.class);
                             dispo=place-etud;
-                            Switch s = (Switch) view.findViewById(R.id.notif);
-                            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                    if (isChecked) {
-                                        CharSequence textTitle="";
-                                        CharSequence textContent="";
-                                        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                                                .setSmallIcon(R.drawable.wwbp_net_resizeimage)
-                                                .setContentTitle(textTitle)
-                                                .setContentText(textContent)
-                                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                                    }
-                                    if(dispo==0){
+                            String html3 = String.valueOf(place) + "<br><br>" + String.valueOf(dispo);
+                            summaryNB.setText(Html.fromHtml(html3));
+                            if (dispo == 0) {
 
                                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                                 //alertDialog.setTitle();
                                 TextView messageView = new TextView(getContext());
-                                String html1 ="Pas de places disponibles !";
-                                String html2=" Activez les notifications pour vous notifier dès qu'une place sera disponible !";
-                                String html=html1+"<br><br>"+html2;
+                                String html1 = "Pas de places disponibles !";
+                                String html2 = " Activez les notifications pour vous notifier dès qu'une place sera disponible !";
+                                String html = html1 + "<br><br>" + html2;
                                 messageView.setText(Html.fromHtml(html));
 
                                 messageView.setTextIsSelectable(true);
@@ -170,35 +161,31 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                                 alertDialog.show();
 
 
-
-
                             }
-                            String html1=String.valueOf(place)+ "<br><br>" +String.valueOf(dispo);
-                            summaryNB.setText(Html.fromHtml(html1));
+                            Switch s = (Switch) view.findViewById(R.id.notif);
+                            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                private final Object NOTIFICATION_ID = "1";
 
-                        }
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked) {
+
+                                        s.setText("");
+                                        String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
+                                        CharSequence textTitle = "";
+                                        CharSequence textContent = "";
 
 
-                        private void addNotification() {
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                                    .setSmallIcon(R.drawable.eebp_net_resizeimage__1_)
-                                    .setContentTitle("My notification")
-                                    .setContentText("Much longer text that cannot fit one line...")
-                                    .setStyle(new NotificationCompat.BigTextStyle()
-                                            .bigText("Much longer text that cannot fit one line..."))
-                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            // Create the NotificationChannel, but only on API 26+ because
-                            // the NotificationChannel class is new and not in the support library
-                            Intent notifyIntent = new Intent(getActivity(),MainActivity.class) ;
-// Set the Activity to start in a new, empty task
+                                    }
+                               else{s.setText("Activer les notifications");
 
-// Create the PendingIntent
-                            PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                                    getContext(), 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
-                            );
-                        builder.setContentIntent(notifyPendingIntent);
-                         NotificationManager   notificationManager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                        notificationManager.notify(0,builder.build());}});}
+                                    }
+
+
+
+                                }
+                            });}
+
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "onCancelled", databaseError.toException());
