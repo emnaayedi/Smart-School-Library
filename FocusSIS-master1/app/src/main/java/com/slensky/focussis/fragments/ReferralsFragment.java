@@ -94,7 +94,6 @@ TextView messageView;
         View view = getView();
         if (view != null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-
             TableLayout table = (TableLayout) view.findViewById(R.id.table_referrals);
             table.removeAllViews();
             TableRow headerRow = (TableRow) inflater.inflate(R.layout.view_referral_header, table, false);

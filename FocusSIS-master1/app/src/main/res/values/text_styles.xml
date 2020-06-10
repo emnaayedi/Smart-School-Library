@@ -52,6 +52,9 @@
     <style name="primarySmallText" parent="smallText">
         <item name="android:textColor">@color/textPrimary</item>
     </style>
+    <style name="center" parent="smallText">
+        <item name="android:textAlignment">center</item>
+    </style>
 
     <style name="secondarySmallText" parent="smallText">
         <item name="android:textColor">@color/textTertiary</item>

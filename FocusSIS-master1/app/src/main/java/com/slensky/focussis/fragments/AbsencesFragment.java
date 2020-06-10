@@ -1,28 +1,41 @@
 package com.slensky.focussis.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -38,6 +51,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.slensky.focussis.R;
+import com.slensky.focussis.activities.MainActivity;
 import com.slensky.focussis.data.Absences;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
@@ -60,6 +74,7 @@ import java.util.Map;
 
 public class AbsencesFragment extends NetworkTabAwareFragment {
     private static final String TAG = "AbsencesFragment";
+    private static final String CHANNEL_ID ="my_channel_01" ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +112,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     protected void onSuccess(Absences absences) {
         View view = getView();
         if (view != null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             final ScrollView scrollView = view.findViewById(R.id.scrollview_absences);
             TextView summary = view.findViewById(R.id.text_absences_summary);
             String html = "<b>" + getString(com.slensky.focussis.R.string.absences_days_possible) + ": </b>"
@@ -120,11 +136,69 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                             int etud = data.getValue(int.class);
                             int place = dataSnapshot.getValue(int.class);
                             dispo=place-etud;
+                            Switch s = (Switch) view.findViewById(R.id.notif);
+                            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if (isChecked) {
+                                        CharSequence textTitle="";
+                                        CharSequence textContent="";
+                                        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                                                .setSmallIcon(R.drawable.wwbp_net_resizeimage)
+                                                .setContentTitle(textTitle)
+                                                .setContentText(textContent)
+                                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                    }
+                                    if(dispo==0){
+
+                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                                //alertDialog.setTitle();
+                                TextView messageView = new TextView(getContext());
+                                String html1 ="Pas de places disponibles !";
+                                String html2=" Activez les notifications pour vous notifier dès qu'une place sera disponible !";
+                                String html=html1+"<br><br>"+html2;
+                                messageView.setText(Html.fromHtml(html));
+
+                                messageView.setTextIsSelectable(true);
+                                messageView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                                messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.subheadingText));
+                                messageView.setPadding(16, 0, 16, 0);
+                                float dpi = getContext().getResources().getDisplayMetrics().density;
+
+                                alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
+                                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                        (dialog, which) -> dialog.dismiss());
+                                alertDialog.show();
+
+
+
+
+                            }
                             String html1=String.valueOf(place)+ "<br><br>" +String.valueOf(dispo);
                             summaryNB.setText(Html.fromHtml(html1));
 
                         }
 
+
+                        private void addNotification() {
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                                    .setSmallIcon(R.drawable.eebp_net_resizeimage__1_)
+                                    .setContentTitle("My notification")
+                                    .setContentText("Much longer text that cannot fit one line...")
+                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                            .bigText("Much longer text that cannot fit one line..."))
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            // Create the NotificationChannel, but only on API 26+ because
+                            // the NotificationChannel class is new and not in the support library
+                            Intent notifyIntent = new Intent(getActivity(),MainActivity.class) ;
+// Set the Activity to start in a new, empty task
+
+// Create the PendingIntent
+                            PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                                    getContext(), 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+                            );
+                        builder.setContentIntent(notifyPendingIntent);
+                         NotificationManager   notificationManager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.notify(0,builder.build());}});}
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "onCancelled", databaseError.toException());
@@ -391,7 +465,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
             TextView offsite = view.findViewById(com.slensky.focussis.R.id.text_offsite);
             offsite.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_offsite, absences.getPeriodsOffsite())));
 
-            LayoutInflater inflater = LayoutInflater.from(getContext());
+
             TableLayout table = view.findViewById(com.slensky.focussis.R.id.table_absences);
             table.removeAllViews();
             TableRow headerRow = (TableRow) inflater.inflate(com.slensky.focussis.R.layout.view_absences_header, table, false);
