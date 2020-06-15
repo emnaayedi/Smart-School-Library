@@ -1,0 +1,66 @@
+Smart Library
+
+VI.1 Solution proposée :
+Dans le contexte des nouvelles stratégies d’amélioration de la qualité des services de la bibliotheque, notre solution consiste à développer une
+application mobile sous plateforme Android qui aide les etudiants a savoir le nombre de places disponibles a la bibliotheque en temps reel
+
+Objectif:
+L’application se devra être disponible et facile d’utilisation
+1-Acces a ditance (Application mobile) des etudiants pour savoir le nombre de places disponibles a la bibliotheque en temps reel.
+2- Acces a ditance (Application mobile) des bibliothecaires pour savoir l'etat de la bibliotheque.
+
+Utilisateurs:
+-Etudiants de l'ENIS
+-Bibliothecaires de l'ENIS
+
+Description fonctionnelle
+
+
+-Detecter le nombre de personnes entrants et sortants de la bibliotheque.
+-Afficher le nombre de places disponibles dans la bibliotheque.
+-En cas ou la bibliotheque est pleine, un etudiant peut activer les notifications pour qu'il soit notifier des qu'une place sera disponible.
+-Fixer le nombre de chaises dans la bibliotheque.
+-Envoyer une alerte aux bibliothecaires en cas de detection d'une entree ou une sortie des chaises de la part des etudiants.
+-Envoyer une alerte aux bibliothecaires en cas de detection d'une fumee:securite.
+-Automatisation de l'ouverture et la fermeture du climatiseur :climatisation intelligente.
+
+Choix technique
+
+Materiels:
+une camera.
+un capteur de temperature.
+un capteur de fumee.  
+
+
+ Contrainte
+ Nous sommes limités à l'autonomie de la batterie et de la taille de la mémoire du téléphone.
+Pour pouvoir communiquer avec le serveur web et s'échanger des données, le téléphone doit être
+connecté à Internet (abonnement chez un fournisseur). 
+
+Les services de l'application sont gratuit 
+
+Analyse conceptuelle:
+identifications  des acteurs:
+Etudiant: Profiteur principale:il profite de toutes les fonctionnalites offertes par l'application mobile.
+bibliothecaire: Profiteur secondaire:savoir l'etat de la bibliotheque 
+
+
+Le projet a pour but de nous initialiser à la plateforme de développement mobile sous
+Android et de tirer profit des gadgets que possèdent les Smartphones de nos jours. Les principaux
+gadgets qui nous seraient utiles pour élaborer ce projet sont les capteurs sensoriels et le GPS. Etant
+donnée l'émergence de technologie mobile, beaucoup d'applications ont été développées dans
+divers domaines. Cependant nous avons pensé comment utiliser ces gadgets pour aider chaque
+individu à suivre ses efforts physiques grâce à son Smartphone. 
+
+
+
+
+http://fc.isima.fr/~lacomme/L3/doc/Rapport%20projet%20Android.pdf
+Mis à part le développement proprement dit de l'application, la première étape consistait à
+nous familiariser avec l'environnement Android, puis de choisir les outils conviviaux et envisageables
+à l'aboutissement du projet. Par la suite, nous entamerons la modélisation et le développement de
+l'application. 
+
+
+Ensuite, créer un serveur web pour pouvoir stocker les données dans une base de donnée est
+facile d'accès grâce à un site web que nous avons développé par la suite. L

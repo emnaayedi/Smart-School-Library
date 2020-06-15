@@ -1,0 +1,301 @@
+import java.util.
+package parallel;
+
+public class Baguette {
+	int nbIngredient;
+	String ingredients;
+
+}
+package parallel;
+
+public class Boulanger extends Thread {
+	private String nom;
+	private Baguette []b;
+	private int n,N;
+	public Boulanger(String nom)
+	{this.nom=nom;
+	System.out.println(nom);
+	}
+		public void run() {
+			try {
+				Test.nbrePlaceVide.acquire(N);
+			
+			Test.s.acquire();
+			preparer(n);
+			deposer(b);
+			Test.s.release();
+			Test.nbrePlacePleine.release(N);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	 public void preparer(int n) {
+		 System.out.println("je suis entrain de preparer une baguette");
+ }
+	 public void deposer(Baguette[]b) {
+		 b=new Baguette[N];
+		 System.out.println("je suis entrain de deposer");
+		 for(int i=0;i<N;i++)
+		 { Test.panier[Test.in]=b[i];
+		}Test.in=(Test.in+N)%Test.n;
+	 }
+}
+package parallel;
+
+import java.util.concurrent.Semaphore;
+
+public class Test {
+	
+	static int n=10;
+	static Baguette [] panier;
+	static int in =0;
+	static int out=0;
+	static Semaphore nbrePlaceVide;
+	static Semaphore nbrePlacePleine;
+	static Semaphore s;
+public Test() {
+	panier= new Baguette[n];
+	s=new Semaphore(1);
+	nbrePlaceVide=new Semaphore(n);
+	nbrePlacePleine=new Semaphore(0);
+	
+	
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+Boulanger b1=new Boulanger("Ahmed");
+Boulanger b2=new Boulanger("Ahme");
+Boulanger b3=new Boulanger("Ahm");
+Boulanger b4=new Boulanger("Ah");
+Boulanger b5=new Boulanger("A");
+Vendeur v1= new Vendeur("semi");
+b1.start();
+b2.start();
+b3.start();
+b4.start();
+b5.start();
+v1.start();
+	}
+
+}
+package parallel;
+
+public class Vendeur extends Thread{
+	private int nb=1;
+	private String nom;
+
+	private Baguette [] panier ;
+
+	public Vendeur(String nom)
+	{this.nom=nom;
+	System.out.println(nom);}
+		public void run() {
+			try {
+				Baguette[] bs;
+			Test.nbrePlacePleine.acquire();
+			Test.s.acquire();
+			bs=vendre();
+			Test.s.release();
+			Test.nbrePlaceVide.release(nb);
+			
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}}
+			public Baguette[] vendre()
+			{	 System.out.println("je suis entrain de vendre"+nb);
+				Baguette[] bs=new Baguette[nb];
+				for (int i=0;i<nb;i++)
+				{ bs[Test.out]=Test.panier[Test.out+i];}
+				Test.out=(Test.out+nb)%Test.n;
+				return bs;
+
+			}
+	
+}
+import java.lang.Thread;
+public class TwoThread extends Thread{
+
+	/**
+	 * @param args
+	 */
+	public TwoThread(String nom){
+		super(nom);
+	}
+	public void run(){
+		for(int i=0;i<10;i++)
+		{   System.out.println("i="+i+getName());
+			System.out.println("New thread");
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TwoThread tt=new TwoThread("tt");
+		tt.start();
+		try{
+			tt.join();
+		for(int i=0;i<10;i++){
+			System.out.println("Main Thread");}
+		System.out.println("Execution terminee");}
+		catch(Exception e){
+		
+		}
+		
+		
+
+	}
+
+}
+import java.util.Scanner;
+
+
+public class Operation extends Thread{
+
+	/**
+	 * @param args
+	 */
+	private Compte c;
+	private float s;
+	public Operation(Compte c,String nom,float s){
+		super(nom);
+		this.s=s;
+		this.c=c;
+		
+	}
+	public void run(){
+		System.out.println("Apres execution de l'operation de "+getName()+" ,le compte contient: "+c.getContenu());
+		c.modif(s);
+		System.out.println(c.getContenu());
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try{
+			Scanner x = new Scanner(System.in);		
+		Compte c=new Compte(500);	
+		System.out.println("Operation retrait ou depot?");
+	       String ch=x.nextLine();
+	    	System.out.println("Operation retrait ou depot?");
+			String cx=x.nextLine();
+	       
+	       System.out.println("Somme volu a  ajouter ou soustraire");
+	       float si=x.nextFloat();
+	  
+	     
+	     System.out.println("Somme volu a  ajouter ou soustraire");
+	     float si1=x.nextFloat();
+	     Operation o1=new Operation(c,cx,si1);
+		Operation o=new Operation(c,ch,si);
+		o.start();
+		Thread.sleep((long) (Math.random() * 5000));
+	
+
+		o1.start();
+		Thread.sleep((long) (Math.random() * 5000));
+		
+	}
+		catch(Exception e){}
+
+}}
+import java.lang.Thread;
+
+public class Ex2 extends Thread {
+
+	/**
+	 * @param args
+	 */
+	public Ex2(String nom) {
+		super(nom);
+	}
+
+	public void run() {
+
+		System.out.println(getName());
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Ex2 A = new Ex2("A");
+		Ex2 B = new Ex2("B");
+		Ex2 C = new Ex2("C");
+		Ex2 D = new Ex2("D");
+		try {
+			Thread.sleep((long) (Math.random() * 5000));
+			A.start();
+			A.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			B.start();
+			B.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			C.start();
+			C.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			D.start();
+			D.join();
+			System.out.println("EXecution terminee");
+		} catch (Exception e) {
+		}
+	}
+
+}
+
+public class Ex22 implements Runnable{
+
+	/**
+	 * @param args
+	 */
+	
+
+	public void run() {
+
+		System.out.println(Thread.currentThread().getName());
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Thread A = new Thread(new Ex22(),"A");
+		Thread B = new Thread(new Ex22(),"B");
+		Thread C = new Thread(new Ex22(),"C");
+		Thread D = new Thread(new Ex22(),"D");
+		try {
+			Thread.sleep((long) (Math.random() * 5000));
+			A.start();
+			A.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			B.start();
+			B.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			C.start();
+			C.join();
+			Thread.sleep((long) (Math.random() * 5000));
+			D.start();
+			D.join();
+			System.out.println("EXecution terminee");
+		} catch (Exception e) {
+		}
+	}
+
+}
+
+public class Compte {
+
+	/**
+	 * @param args
+	 */
+	private float contenu;
+	public Compte(float contenu){
+		this.contenu=contenu;
+	}
+	public void affiche(){
+		System.out.println(this.contenu);
+	}
+	public float getContenu(){
+		return this.contenu;
+	}
+	public void modif (float somme){
+		this.contenu+=somme;
+	}
+	
+}

@@ -1,0 +1,158 @@
+ (Techniques et Langages Internet:1,2 , Data Model & Databases, Programmation orientée objet ,Programmation Web dynamique,Développement par composant logiciel,Technologies IOT,Programmation  parallèle et distribuée,Développement des applications mobiles,Technologies  XML    )vous a bien informé et préparé à votre insertion professionnelle dans ce secteur? 
+(Computer Vision:1,2 , Machine Learning ,Théorie de  l'information et codage,Signal & Communication  
+A – Estimez-vous que votre formation vous prépare correctement au futur métier d'ingénieur ?
+Dans l’ensemble, quelle est votre appréciation sur votre formation ?
+ Très satisfait
+ Satisfait
+ Insatisfait
+ Très insatisfait
+
+41. Dans l’ensemble, quelle est votre appréciation sur la disponibilité de l’équipe enseignante ?
+ Très satisfait
+ Satisfait
+ Insatisfait
+ Très insatisfait
+42. Dans l’ensemble, estimez-vous que la quantité de travail attendu est …
+ Trop importante
+ Importante
+ Raisonnable
+ Insuffisante
+ Etes-vous satisfait de votre emploi du temps ?
+ Oui, vraiment
+ Oui, plutôt
+ Non, pas vraiment
+ Non, pas du tout 
+E – La charge de travail entre les deux semestres vous parait-elle équilibrée ? 
+B – Faudrait-il supprimer certaines matières ? 
+C – Y a-t-il un domaine dans lequel vous souhaiteriez une formation plus approfondie ? 
+B – Cette formation vous a-t-elle permis d’orienter votre projet professionnel ? 
+C – Pensez-vous que le travail de groupe constitue un élément majeur de la formation ? 
+45. Si non, pourquoi ? (plusieurs réponses possibles)
+ Trop de temps entre les cours
+ Pas assez de pauses, trop dense
+ Les cours commencent trop tôt
+ Les cours finissent trop tard
+ Je viens à la fac trop de jours par semaine
+ Il ne me permet pas de travailler à côté
+46. Lors du premier semestre, vous a-t-il semblé facile/ difficile de :
+ Vous adapter à la quantité de travail à fournir
+ Très facile
+ Assez facile
+ Moyennement difficile
+ Très difficile
+ Suivre en cours
+ Très facile
+ Assez facile
+ Moyennement difficile
+ Très difficile
+ Organiser votre travail
+ Très facile
+ Assez facile
+ Moyennement difficile
+ Très difficile
+Quel est le niveau de votre satisfaction globale des études à notre université ?
+Extrêmement satisfait(e)
+Très satisfait(e)
+Plutôt satisfait(e)
+Plutôt insatisfait(e)
+Très insatisfait(e)
+Dans quelle mesure l'enseigenement des cours dans votre programme universitaire est-il efficace ?
+Extrêmement efficace
+Très efficace
+Plutôt efficace
+Plutôt inefficace
+Très inefficace
+
+Les salles de classe à notre université sont-elles assez bien equipées pour les besoins éducatifs des étudiants ?
+Oui, très bien
+Oui, suffisamment bien
+Plutôt bien
+Plutôt mal
+Très mal
+Pas du tout
+48. Avez-vous été surpris par le format des contrôles (longueur, contenu, types de questions …) ?
+ Oui, très souvent
+ Oui, souvent
+ Non, rarement
+ Non, jamais 
+
+
+C – Le niveau 
+1-La difficulté du cours est-elle en conformité avec vos attentes ?
+Oui
+Non
+
+
+
+2 - Quelle matiere du module auriez-vous souhaité voir plus développé ?
+
+3 - Quelle matiere du module vous a le moins intéressé ?
+
+
+
+
+
+8-– Selon vous, la formation en ingenieurie web vous prépare-t-elle bien a? A – 
+9-– Selon vous, la formation en ingenieurie multimedia vous prépare-t-elle bien à?A – Pensez-vous que la formation en ingenieurie multimedia vous a bien informé et préparé à votre insertion professionnelle dans ce secteur? 
+C – Le niveau 
+
+
+
+
+1-Que pensez-vous du niveau de difficulté de ce module ?
+ Très facile
+ Assez facile
+ Moyennement difficile
+ Très difficile
+2-Dans l’ensemble, quel est votre niveau de satisfaction de ce module ?
+ Très satisfait
+ Satisfait
+ Insatisfait
+ Très insatisfait
+
+3-Le niveau de difficulté du module vous a-t-il semblé adapté au volume horaire attribué ?
+oui 
+non
+
+4-Le lien entre les différentes formes d’enseignement (cours, TD et TP) vous semble-t-il
+suffisant ?
+Oui, très bien
+Oui, suffisamment bien
+Plutôt bien
+Plutôt mal
+Très mal
+Pas du tout
+
+5-Auriez-vous aimé voir abordés plus d'activités et d'exercices?
+oui 
+non
+
+6-Sur une échelle de 1 à 10, à quel point pensez-vous maîtrisez les nouvelles compétences acquises  ?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+7-Lequels de ces cours optionnelles que vous Recommanderiez  aux  autres étudiants des  annees  prochaines ?
+-Web Sémantique   
+-Développement d'applications web avancée 
+-Réalité Virtuelle  
+-Deep learning pour la  vision par ordinateur 
+-Développement .Net  
+   
+8-Pensez-vous que la formation en developpement multimedia vous a bien informé et préparé à votre insertion professionnelle dans ce secteur? 
+ Oui, vraiment
+ Oui, plutôt
+ Non, pas vraiment
+ Non, pas du tout 
+9-Pensez-vous que la formation en developpement web et mobile vous a bien informé et préparé à votre insertion professionnelle dans ce secteur? 
+ Oui, vraiment
+ Oui, plutôt
+ Non, pas vraiment
+ Non, pas du tout 
+        
