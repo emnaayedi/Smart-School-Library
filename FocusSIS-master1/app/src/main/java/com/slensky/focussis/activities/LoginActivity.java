@@ -255,7 +255,7 @@ public class LoginActivity extends AppCompatActivity {
         final String password = _passwordText.getText().toString();
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference ref_etud = database.child("a");
+        DatabaseReference ref_etud = database.child("etudiants");
 
         ref_etud.addValueEventListener(new ValueEventListener() {
 
