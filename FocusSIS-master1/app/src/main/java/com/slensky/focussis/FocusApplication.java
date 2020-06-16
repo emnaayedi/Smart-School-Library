@@ -18,7 +18,10 @@ import org.acra.annotation.ReportsCrashes;
 public class FocusApplication extends Application {
 
     public static boolean USE_DEBUG_API = false;
+    public static boolean test = false;
+    public static boolean test1 = false;
     public static  String loginn;
+
 
     @Override
     public void onCreate() {

@@ -172,6 +172,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             password = savedInstanceState.getString(PASSWORD_BUNDLE_KEY);
             if (FocusApplication.USE_DEBUG_API) {
                 api = new FocusDebugApi(username, password, getApplicationContext());
+                SessionManagement sessionManagement=new SessionManagement(this);
+                sessionManagement.checkLogin();
             }
             else {
                 api = new FocusApi(username, password, getApplicationContext());
@@ -610,6 +612,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == com.slensky.focussis.R.id.action_logout) {
             logout();
+            //FocusApplication.USE_DEBUG_API=false;
             return true;
         }
         else if (id == R.id.action_sync_to_calendar) {
@@ -813,7 +816,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 startActivity(intent);
-
+                FocusApplication.USE_DEBUG_API=false;
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -941,6 +944,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+
         this.isVisible = true;
     }
 

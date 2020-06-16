@@ -1,6 +1,10 @@
 package com.slensky.focussis.fragments;
 
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.LogPrinter;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +29,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.slensky.focussis.FocusApplication;
 import com.slensky.focussis.R;
+import com.slensky.focussis.data.Calendar;
 import com.slensky.focussis.data.Schedule;
 import com.slensky.focussis.data.ScheduleCourse;
 import com.slensky.focussis.util.GsonSingleton;
 import com.slensky.focussis.util.TableRowAnimationController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by slensky on 5/9/18.
@@ -37,11 +46,35 @@ import java.util.List;
 
 public class ScheduleCoursesTabFragment extends Fragment {
     private static final String TAGn = "ScheduleCoursesTabFragment";
+    private static final String CHANNEL_ID ="my_channel_01" ;
+    private static String livre;
     private Schedule schedule;
 
     public ScheduleCoursesTabFragment() {
         // required empty constructor
     }
+
+    public static int getDay() {
+        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.getDefault());
+        Date date = new Date();
+        String d=day.format(date);
+        int d1 =Integer.valueOf(d);
+        return d1;
+
+    }
+    public static String getMonth() {
+        SimpleDateFormat month = new SimpleDateFormat("MM", Locale.getDefault());
+        Date date = new Date();
+        String m=month.format(date);
+        return m;
+    }
+    public static String getYear() {
+        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.getDefault());
+        Date date = new Date();
+        String y=year.format(date);
+        return  y;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +84,30 @@ public class ScheduleCoursesTabFragment extends Fragment {
     }
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref_emp = database.child("emprunte");
+
+    public void addNotification(String nom) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_sms_notification)
+                .setContentTitle("Smart Library")
+                .setContentText("Ne oubliez pas de rendre le livre "+nom+" au bibliotheque")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Ne oubliez pas de rendre le livre "+ nom+" au bibliotheque"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        Intent notifyIntent = new Intent(getActivity(),ScheduleCoursesTabFragment.class) ;
+// Set the Activity to start in a new, empty task
+
+// Create the PendingIntent
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                getContext(), 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        builder.setAutoCancel(true);
+        builder.setContentIntent(notifyPendingIntent);
+        NotificationManager notificationManager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0,builder.build());
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +147,7 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                String nom = dataSnapshot.getValue().toString();
+                                               livre=nom;
                                                System.out.println(nom);
                                                period.setText(nom);
 
@@ -143,6 +201,15 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                String nom = dataSnapshot.getValue().toString();
+                                               String d=nom.substring(0,2);
+                                               String m=nom.substring(3,5);
+                                               String y=nom.substring(6,7);
+                                               int d1 = Integer.valueOf(d);
+                                                if (d1==getDay()-1){
+                                                    addNotification(livre);
+                                                }
+                                               System.out.println(d1);
+
                                                System.out.println(nom);
                                                days.setText(nom);
 
