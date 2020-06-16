@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.CharacterData;
 
+import java.util.ArrayList;
+
 public class SensorAccelrationActivity extends Activity implements SensorEventListener {
     private static final String APP_NAME = "chock";
     SensorManager sensorManager;
@@ -33,6 +35,8 @@ public class SensorAccelrationActivity extends Activity implements SensorEventLi
         setContentView(R.layout.activity_main);
 // Instancier le gestionnaire des capteurs, le SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        ArrayList<Sensor> liste = (ArrayList<Sensor>) sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD);
+
 // Instancier l'accéléromètre
         accelerometer =
                 sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
