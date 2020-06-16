@@ -172,8 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             password = savedInstanceState.getString(PASSWORD_BUNDLE_KEY);
             if (FocusApplication.USE_DEBUG_API) {
                 api = new FocusDebugApi(username, password, getApplicationContext());
-                SessionManagement sessionManagement=new SessionManagement(this);
-                sessionManagement.checkLogin();
+
             }
             else {
                 api = new FocusApi(username, password, getApplicationContext());

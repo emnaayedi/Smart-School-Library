@@ -109,7 +109,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     private void addNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_sms_notification)
-                .setContentTitle("My notification")
+                .setContentTitle("Smart Library")
                 .setContentText("Much longer text that cannot fit one line...")
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Much longer text that cannot fit one line..."))
@@ -127,7 +127,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
         builder.setAutoCancel(true);
         builder.setContentIntent(notifyPendingIntent);
         NotificationManager   notificationManager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,builder.build());}
+        notificationManager.notify(3,builder.build());}
 
     @SuppressLint("StringFormatInvalid")
     protected void onSuccess(Absences absences) {
@@ -189,13 +189,8 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                                         s.setText("Notifications Activees");
                                         CharSequence textTitle = "";
                                         CharSequence textContent = "";
-                                        // NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                                        // .setSmallIcon(R.drawable.wwbp_net_resizeimage)
-                                        //  .setContentTitle(textTitle)
-                                        //   .setContentText(textContent)
-                                        //  .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                                       if (dispo==0){
+                                       if (dispo==1){
                                         addNotification();}
 
                                     }

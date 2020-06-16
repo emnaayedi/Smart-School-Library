@@ -1,7 +1,10 @@
 package com.slensky.focussis.activities;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.preference.PreferenceManager;
 
 import com.android.volley.Response;
@@ -38,12 +42,16 @@ import com.slensky.focussis.R;
 import com.slensky.focussis.data.FocusPreferences;
 import com.slensky.focussis.data.Schedule;
 import com.slensky.focussis.data.ScheduleCourse;
+import com.slensky.focussis.fragments.ScheduleCoursesTabFragment;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.network.FocusDebugApi;
 import com.slensky.focussis.util.TableRowAnimationController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +89,77 @@ public class LoginActivity extends AppCompatActivity {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref_emp = database.child("emprunte");
-    private Schedule schedule;
+
+    private String livre;
+    private String etat;
+    private String e="notReturned";
+
+
+    private static final String CHANNEL_ID1 ="my_channel_01" ;
+    private static final String CHANNEL_ID2 ="my_channel_02" ;
+    public static int getDay() {
+        SimpleDateFormat day = new SimpleDateFormat("dd", Locale.getDefault());
+        Date date = new Date();
+        String d=day.format(date);
+        int d1 =Integer.valueOf(d);
+        // int d1=01;
+        return d1;
+
+    }
+    public static int getMonth() {
+        SimpleDateFormat month = new SimpleDateFormat("MM", Locale.getDefault());
+        Date date = new Date();
+        String m=month.format(date);
+        int m1 =Integer.valueOf(m);
+        //int m1=05;
+        return m1;
+    }
+    public static int getYear() {
+        SimpleDateFormat year = new SimpleDateFormat("yyyy", Locale.getDefault());
+        Date date = new Date();
+        String y=year.format(date);
+        int y1 =Integer.valueOf(y);
+        return  y1;}
+
+    public void addNotification(String nom) {
+        Intent notifyIntent = new Intent(this, ScheduleCoursesTabFragment.class) ;
+
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID1)
+                .setSmallIcon(R.drawable.notification)
+                .setContentTitle("Smart Library")
+                .setContentText("N'oubliez pas de rendre le livre "+nom+" au bibliotheque")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("N'oubliez pas de rendre le livre "+ nom+" au bibliotheque"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(notifyPendingIntent);
+
+
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0,builder.build());
+    }
+
+    public void notif_retard(String nom) {
+        Intent notifyIntent = new Intent(this,ScheduleCoursesTabFragment.class) ;
+
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID2)
+                .setSmallIcon(R.drawable.notification)
+                .setContentTitle("Smart Library")
+                .setContentText("Vous avez depassez le temps limite pour rendre le livre "+nom)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Vous avez depassez le temps limite pour rendre le livre "+nom))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(notifyPendingIntent);
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1,builder.build());
+    }
 
 
 
@@ -266,8 +344,6 @@ public class LoginActivity extends AppCompatActivity {
                             // Check if key 'title' exists and if title value is equal to value to save (title_val)
                             if (ds.hasChild("login") && (username.equals(ds.child("login").getValue()))) {
                                 if (ds.hasChild( "passwd") && (password.equals(ds.child("passwd").getValue()))) {
-                                    Log.d(TAG, "hfvbdhfvb                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa                          " + ds.child("login").getValue());
-                                    Log.d(TAG, "hfvbdhfvb                   bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb                        " + ds.child("passwd").getValue());
                                     Log.d(TAG, "Using debug API");
                                     FocusApplication.USE_DEBUG_API = true;
                                     FocusApplication.loginn = username;
@@ -306,10 +382,93 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(R.string.auth_progress_dialog), true);
-
+                            DatabaseReference ref_emp = database.child("emprunte");
                             if (FocusApplication.USE_DEBUG_API) {
                                 api = new FocusDebugApi(username, password, getApplicationContext());
-                            } else {
+                                ref_emp.orderByChild("id_emprunteur").equalTo(FocusApplication.loginn).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        int i = 0;
+                                        String[] b=new String[(int) dataSnapshot.getChildrenCount()];
+
+                                        if (dataSnapshot.exists()) {
+                                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                                b[i] = d.getKey();
+                                                i++;
+                                            }}
+
+                                        for (int j = 0; j < i; j++) {
+
+                                            DatabaseReference ref_nom = database.child("emprunte/" + b[j] + "/nom_livre");
+                                            ref_nom.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    String nom = dataSnapshot.getValue().toString();
+                                                    livre=nom;
+                                                    System.out.println(nom);
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+                                            DatabaseReference ref_etat = database.child("emprunte/" + b[j] + "/etat");
+                                            ref_etat.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    String nom = dataSnapshot.getValue().toString();
+                                                    etat=nom;
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+                                            DatabaseReference ref_retour = database.child("emprunte/" + b[j] + "/date_retour");
+                                            ref_retour.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    String nom = dataSnapshot.getValue().toString();
+                                                    String d=nom.substring(0,2); int d1 = Integer.valueOf(d);
+                                                    String m=nom.substring(3,5); int m1 = Integer.valueOf(m);
+                                                    String y=nom.substring(6,10); int y1 = Integer.valueOf(y);
+                                                    if (((d1==getDay()+1)||(d1==getDay()))&&(m1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                        addNotification(livre);
+                                                    }//avec retard
+                                                    if ((((d1==30)&&((m1==4)||(m1==6)||(m1==9)|(m1==11)))||
+                                                            ((d1==31)&&((m1==3)||(m1==5)||(m1==7)||(m1==8)||(m1==10)))||((d1==28)&&(m1==2))||
+                                                            ((d1==29)&&(m1==2)))&&
+                                                            (getDay()==1)&&
+                                                            (m1==getMonth()-1)&&(y1==getYear())&&(etat.equals(e))){
+                                                        addNotification(livre);
+                                                    }
+
+                                                    if ((d1<getDay())&&(m1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                        notif_retard(livre);
+                                                    }
+
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+
+                                        }//for
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {}
+
+                                });
+                            }
+                                else {
                                 api = new FocusApi(username, password, getApplicationContext());
                             }
                             api.login(new FocusApi.Listener<Boolean>() {
