@@ -8,7 +8,8 @@
     <ScrollView
         android:id="@+id/scrollview_absences"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/back9">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,6 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="260dp"
                 android:layout_marginLeft="50dp"
+                android:layout_marginBottom="50dp"
                 android:columnCount="9">
 
                 <TextView
@@ -147,7 +149,7 @@
                     android:layout_rowSpan="1"
                     android:layout_column="0"
                     android:layout_columnWeight="2"
-                    android:text="Lunedi"
+                    android:text="Lundi"
                     android:textColor="#F44336"
                     android:textStyle="bold" />
 
@@ -283,103 +285,6 @@
 
 
             </GridLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="2dp"
-                android:orientation="horizontal">
-
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="late" />
-
-                <TextView
-                    android:id="@+id/text_late"
-                    style="@style/primaryBodyText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="20dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="2dp"
-                android:orientation="horizontal">
-
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="tardy" />
-
-                <TextView
-                    android:id="@+id/text_tardy"
-                    style="@style/primaryBodyText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="2dp"
-                android:orientation="horizontal">
-
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="misc" />
-
-                <TextView
-                    android:id="@+id/text_misc_activity"
-                    style="@style/primaryBodyText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:orientation="horizontal">
-
-                <com.slensky.focussis.views.AbsenceLabelView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:status="offsite" />
-
-                <TextView
-                    android:id="@+id/text_offsite"
-                    style="@style/primaryBodyText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp" />
-
-            </LinearLayout>
-
-            <TableLayout
-                android:id="@+id/table_absences"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp" />
 
 
         </LinearLayout>
