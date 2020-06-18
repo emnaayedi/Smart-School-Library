@@ -5,14 +5,15 @@
         android:id="@+id/nav_group_focus"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:checked="true"
-            android:icon="@drawable/ic_home_black_24px"
-            android:title="@string/nav_home" />
-        <item
             android:id="@+id/nav_absences"
+            android:checked="true"
+
             android:icon="@drawable/ic_airline_seat_individual_suite_black_24px"
             android:title="@string/nav_absences" />
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24px"
+            android:title="@string/nav_home" />
         <item
             android:id="@+id/nav_referrals"
             android:icon="@drawable/ic_assignment_black_24px"
@@ -40,6 +41,7 @@
             android:id="@+id/nav_final_grades"
             android:icon="@drawable/ic_assessment_black_24px"
             android:title="@string/nav_final_grades" />
+
     </group>
 
     <group

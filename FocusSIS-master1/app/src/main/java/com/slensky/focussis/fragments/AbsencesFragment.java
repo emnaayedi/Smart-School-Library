@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
@@ -68,6 +71,8 @@ import com.slensky.focussis.util.DateUtil;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+
 /**
  * Created by slensky on 5/24/17.
  */
@@ -76,11 +81,20 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     private static final String TAG = "AbsencesFragment";
     private static final String CHANNEL_ID ="my_channel_01" ;
 
+  // @BindView(R.id.notif)
+    //CheckBox _savenotif;
+
+    private SharedPreferences loginPrefs;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View view = getView();
+
+
         api = FocusApiSingleton.getApi();
-        title = getString(com.slensky.focussis.R.string.absences_label);
+        title = getString(R.string.absences_label);
+
         refresh();
     }
 
@@ -88,7 +102,10 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         return inflater.inflate(R.layout.fragment_absences, container, false);
+
     }
 
     @Override
@@ -107,6 +124,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     DatabaseReference ref_temp = database.child("biblio/temp");
     DatabaseReference ref_hor  = database.child("horaires");
     private void addNotification() {
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_sms_notification)
                 .setContentTitle("Smart Library")
@@ -129,8 +147,10 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
         NotificationManager   notificationManager = (NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(3,builder.build());}
 
+
     @SuppressLint("StringFormatInvalid")
     protected void onSuccess(Absences absences) {
+
         View view = getView();
         if (view != null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -160,14 +180,13 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                             String html3=String.valueOf(place)+ "<br><br>" +String.valueOf(dispo);
                             summaryNB.setText(Html.fromHtml(html3));
 
-                            Switch s = (Switch) view.findViewById(R.id.notif);
-                            if(dispo==0 && s.isEnabled() ){
+                            if(dispo==0  ){
 
                                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                                 //alertDialog.setTitle();
                                 TextView messageView = new TextView(getContext());
                                 String html1 ="Pas de places disponibles !";
-                                String html2=" Activez les notifications pour vous notifier dès qu'une place sera disponible !";
+                                String html2=" Vous serez notifié dès qu'une place sera disponible !";
                                 String html=html1+"<br><br>"+html2;
                                 messageView.setText(Html.fromHtml(html));
 
@@ -180,30 +199,12 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
                                 alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
                                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                                         (dialog, which) -> dialog.dismiss());
-                                alertDialog.show();}
-                            s.setText("Activer les notifications");
-                            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                                    if (isChecked) {
-                                        s.setText("Notifications Activees");
-                                        CharSequence textTitle = "";
-                                        CharSequence textContent = "";
-
-                                       if (dispo==1){
-                                        addNotification();}
-
-                                    }
-                                    else { s.setText("Activer les notifications");}
-
+                                alertDialog.show();
 
                             }
 
 
-
-
-
-                       });}
+                        }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "onCancelled", databaseError.toException());

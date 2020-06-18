@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,9 @@ import androidx.cardview.widget.CardView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.slensky.focussis.R;
 import com.slensky.focussis.data.Address;
 import com.slensky.focussis.data.AddressContact;
@@ -26,18 +31,25 @@ import com.slensky.focussis.views.IconWithTextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * Created by slensky on 5/22/17.
  */
 
 public class AddressFragment extends NetworkTabAwareFragment {
     private final static String TAG = "AddressFragment";
+    EditText text;
+    Button btn_reclamation;
+    TextInputLayout layout_reclamation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         api = FocusApiSingleton.getApi();
         title = getString(R.string.address_label);
+
         refresh();
     }
 
@@ -59,125 +71,65 @@ public class AddressFragment extends NetworkTabAwareFragment {
         return null;
     }
 
+    Reclamation reclamation;
+    DatabaseReference ref;
+
     protected void onSuccess(Address address) {
         View view = getView();
         if (view != null) {
             CardViewAnimationController animationController = new CardViewAnimationController(getContext());
             LinearLayout addressLayout = (LinearLayout) view.findViewById(R.id.address_layout);
-            for (int i = 0; i < address.getContacts().size(); i++) {
-                final AddressContact c = address.getContacts().get(i);
-                CardView cview = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_address_contact, addressLayout, false);
+            CardView cview = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.view_address_contact, addressLayout, false);
 
-                TextView title = (TextView) cview.findViewById(R.id.text_contact_title);
-                title.setText(getString(R.string.address_contact_title) + " " + (i + 1));
+            btn_reclamation = (Button) cview.findViewById(R.id.btn_reclamation);
+            text = (EditText)cview.findViewById(R.id.reclamation);
+            layout_reclamation=(TextInputLayout)cview.findViewById(R.id.layout_reclamation);
+            reclamation = new Reclamation();
+            ref = FirebaseDatabase.getInstance().getReference().child("reclamation");
+            btn_reclamation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final String a = text.getText().toString();
 
-                IconWithTextView name = (IconWithTextView) cview.findViewById(R.id.view_name);
-                name.setText(c.getName());
-                IconWithTextView relationship = (IconWithTextView) cview.findViewById(R.id.view_relationship);
-                if (c.hasRelationship()) {
-                    relationship.setText(c.getRelationship());
-                } else {
-                    relationship.setVisibility(View.GONE);
-                }
-                IconWithTextView custody = (IconWithTextView) cview.findViewById(R.id.view_custody);
-                if (c.isCustody()) {
-                    custody.setText(boolToYesNo(c.isCustody()));
-                } else {
-                    custody.setVisibility(View.GONE);
-                }
-                IconWithTextView emergency = (IconWithTextView) cview.findViewById(R.id.view_emergency);
-                if (c.isEmergency()) {
-                    emergency.setText(boolToYesNo(c.isEmergency()));
-                } else {
-                    emergency.setVisibility(View.GONE);
-                }
-                IconWithTextView contactAddress = (IconWithTextView) cview.findViewById(R.id.view_address);
-                if (c.hasAddress()) {
-                    contactAddress.setText(c.getAddress() + "\n" + c.getCity() + " " + c.getState() + ", " + c.getZip());
-                    contactAddress.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            Uri geoLocation = Uri.parse("geo:0,0?q=" + Uri.encode(c.getAddress() + " " + c.getCity() + " " + c.getState() + " " + c.getZip()));
-                            intent.setData(geoLocation);
-                            if (getContext() != null && intent.resolveActivity(getContext().getPackageManager()) != null) {
-                                startActivity(intent);
-                            }
-                        }
-                    });
-                } else {
-                    contactAddress.setVisibility(View.GONE);
-                }
-                IconWithTextView phone = (IconWithTextView) cview.findViewById(R.id.view_phone);
-                if (c.hasPhone()) {
-                    phone.setText(formatPhone(c.getPhone()));
-                    phone.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            intent.setData(Uri.parse("tel:" + c.getPhone()));
-                            if (getContext() != null && intent.resolveActivity(getContext().getPackageManager()) != null) {
-                                startActivity(intent);
-                            }
-                        }
-                    });
-                } else {
-                    phone.setVisibility(View.GONE);
-                }
-                IconWithTextView email = (IconWithTextView) cview.findViewById(R.id.view_email);
-                if (c.hasEmail()) {
-                    email.setText(c.getEmail());
-                    email.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(Intent.ACTION_SENDTO);
-                            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{c.getEmail()});
-                            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-                            //startActivity(intent);
-                            if (getContext() != null && intent.resolveActivity(getContext().getPackageManager()) != null) {
-                                Log.i(TAG, "Emailing " + c.getEmail());
-                                startActivity(intent);
-                            }
-                        }
-                    });
-                } else {
-                    email.setVisibility(View.GONE);
-                }
 
-                IconWithTextView details = (IconWithTextView) cview.findViewById(R.id.view_details);
-                if (c.hasDetails()) {
-                    StringBuilder sb = new StringBuilder();
-                    for (AddressContactDetail d : c.getDetails()) {
-                        sb.append(d.getTitle()).append(": ");
-                        if (d.getType() == AddressContactDetail.Type.PHONE) {
-                            sb.append(formatPhone(d.getValue()));
-                        } else {
-                            sb.append(d.getValue());
-                        }
-                        sb.append("\n");
+
+                    if((!a.trim().isEmpty())&&((a.trim().length()>20))) {
+                        reclamation.setMsg(a);
+                        System.out.println("111111111111111111111111CHAIMA1111111111111111111111111" + reclamation.getMsg());
+                        ref.push().setValue(reclamation);
+                        text.setText("");
+
                     }
-                    sb.deleteCharAt(sb.length() - 1);
-                    details.setText(sb.toString());
-                } else {
-                    details.setVisibility(View.GONE);
+                    else
+                        if((a.trim().length()<20)&&(!a.isEmpty())&&(!a.equals(""))){
+                            layout_reclamation.setError("Message must contain at least 20 characters");
+                        }
+                    else if((a.isEmpty()&&(!a.equals("")))){
+                        layout_reclamation.setError("Message cannot be blank");
+
+                    }
+
                 }
 
-                // i have no idea why i have to reset the margins like this, but it won't work without it
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                int margin = dpToPixel(16);
-                params.setMargins(margin, margin, margin, margin);
-                cview.setLayoutParams(params);
+            });
 
-                cview.setAnimation(animationController.nextAnimation());
+            // i have no idea why i have to reset the margins like this, but it won't work without it
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            int margin = dpToPixel(16);
+            params.setMargins(margin, margin, margin, margin);
+            cview.setLayoutParams(params);
 
-                addressLayout.addView(cview);
-            }
+            cview.setAnimation(animationController.nextAnimation());
+
+            addressLayout.addView(cview);
         }
-        requestFinished = true;
-    }
+
+
+    requestFinished =true;
+}
 
     @Override
     protected void makeRequest() {

@@ -42,6 +42,8 @@ import com.slensky.focussis.R;
 import com.slensky.focussis.data.FocusPreferences;
 import com.slensky.focussis.data.Schedule;
 import com.slensky.focussis.data.ScheduleCourse;
+import com.slensky.focussis.fragments.PageFragment;
+import com.slensky.focussis.fragments.PortalFragment;
 import com.slensky.focussis.fragments.ScheduleCoursesTabFragment;
 import com.slensky.focussis.network.FocusApi;
 import com.slensky.focussis.network.FocusApiSingleton;
@@ -75,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox _saveLoginCheckBox;
 
     private SharedPreferences loginPrefs;
+    private SharedPreferences sharedpreferences;
 
     private AlertDialog languageErrorDialog;
     private FocusPreferences focusPreferences;
@@ -89,6 +92,9 @@ public class LoginActivity extends AppCompatActivity {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref_emp = database.child("emprunte");
+    DatabaseReference ref_place = database.child("biblio/place_total");
+    DatabaseReference ref_etud_existe = database.child("biblio/nb_etud_existe");
+
 
     private String livre;
     private String etat;
@@ -142,6 +148,28 @@ public class LoginActivity extends AppCompatActivity {
         notificationManager.notify(0,builder.build());
     }
 
+    public void notif_place() {
+        Intent notifyIntent = new Intent(this, ScheduleCoursesTabFragment.class) ;
+
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID1)
+                .setSmallIcon(R.drawable.notification)
+                .setContentTitle("Smart Library")
+                .setContentText("Existe une place disponible dans la bibliotheque")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Existe une place disponible" +
+                                " dans la bibliotheque"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(notifyPendingIntent);
+
+
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(5,builder.build());
+    }
+
     public void notif_retard(String nom) {
         Intent notifyIntent = new Intent(this,ScheduleCoursesTabFragment.class) ;
 
@@ -160,20 +188,6 @@ public class LoginActivity extends AppCompatActivity {
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1,builder.build());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -271,7 +285,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Boolean saveLogin = loginPrefs.getBoolean(getString(R.string.login_prefs_save_login), false);
-        if (saveLogin) {
+       if (saveLogin) {
             _usernameText.setText(loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_username), ""));
             _passwordText.setText(loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_password), ""));
             _saveLoginCheckBox.setChecked(true);
@@ -312,7 +326,7 @@ public class LoginActivity extends AppCompatActivity {
                 .create();
 
         defaultSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (saveLogin && defaultSharedPrefs.getBoolean("automatic_login", false)
+       if (saveLogin && defaultSharedPrefs.getBoolean("automatic_login", false)
                 && !intent.getBooleanExtra(getString(com.slensky.focussis.R.string.EXTRA_DISABLE_AUTO_SIGN_IN), false)
                 && loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_password), null) != null) { // occurs after password change
             login();
@@ -334,6 +348,7 @@ public class LoginActivity extends AppCompatActivity {
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref_etud = database.child("etudiants");
+        sharedpreferences = getSharedPreferences("chaima", Context.MODE_PRIVATE);
 
         ref_etud.addValueEventListener(new ValueEventListener() {
 
@@ -347,6 +362,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d(TAG, "Using debug API");
                                     FocusApplication.USE_DEBUG_API = true;
                                     FocusApplication.loginn = username;
+
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    editor.putInt("2", 1109695);
+                                    editor.apply();
 
                                 }
 
@@ -460,6 +479,38 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                                             });
 
+                                            ref_place.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange (DataSnapshot dataSnapshot1){
+
+                                                    ref_etud_existe.addValueEventListener(new ValueEventListener() {
+                                                        int dispo=0;
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot data) {
+                                                            int etud = data.getValue(int.class);
+                                                            int place = dataSnapshot1.getValue(int.class);
+                                                            dispo=place-etud;
+                                                                if (dispo==1){
+                                                                    notif_place();
+                                                                }
+
+                                                         }
+                                           @Override
+                                          public void onCancelled (@NonNull DatabaseError databaseError){
+
+                                                      }
+                                                                                           });
+
+
+
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
 
                                         }//for
                                     }
@@ -477,7 +528,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (response) {
                                         Log.d(TAG, "Login successful");
                                         final SharedPreferences.Editor loginPrefsEditor = loginPrefs.edit();
-                                        if (_saveLoginCheckBox.isChecked()) {
+                                         if (_saveLoginCheckBox.isChecked()) {
                                             Log.d(TAG, "Remembering user " + username);
                                             loginPrefsEditor.putBoolean(getString(R.string.login_prefs_save_login), true);
                                             loginPrefsEditor.putString(getString(R.string.login_prefs_username), username);
@@ -489,7 +540,7 @@ public class LoginActivity extends AppCompatActivity {
                                             loginPrefsEditor.putString(getString(R.string.login_prefs_password), "");
                                             loginPrefsEditor.apply();
                                         }
-                                        loginPrefsEditor.apply();
+                                       loginPrefsEditor.apply();
 
                                         if (defaultSharedPrefs.getBoolean("always_check_preferences", true)) {
                                             api.getPreferences(new FocusApi.Listener<FocusPreferences>() {
@@ -549,8 +600,6 @@ public class LoginActivity extends AppCompatActivity {
                                         progressDialog.hide();
                                         Log.d(TAG, "Login unsuccessful");
                                         onLoginFailed(getString(R.string.network_error_auth));
-                                        _usernameText.setText("");
-
                                         _passwordText.setText("");
                                     }
                                 }
@@ -580,11 +629,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }//login
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         // disable going back to the MainActivity
         moveTaskToBack(true);
-    }
+    }*/
 
     public void onLoginFailed(String error) {
         Log.e(TAG, error);

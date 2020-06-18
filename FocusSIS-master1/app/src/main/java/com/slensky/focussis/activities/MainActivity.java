@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LinearLayout loadingLayout;
     private LinearLayout networkErrorLayout;
 
-    private boolean threadExit = false;
-    private boolean inOnLoad = false;
+    private static boolean threadExit = false;
+    private static boolean inOnLoad = false;
 
     private FocusApi api;
     // stored for keeping the session alive after it expires
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void switchFragment(final PageFragment fragment) {
+    public void switchFragment(final PageFragment fragment) {
         Log.d(TAG, "Switching to fragment " + fragment.getClass().getCanonicalName());
         threadExit = true;
         if (inOnLoad) {
