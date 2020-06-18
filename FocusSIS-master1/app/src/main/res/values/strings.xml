@@ -222,9 +222,9 @@
 
     <!-- Preferences page -->
     <string name="settings_title_general">General</string>
-    <string name="settings_title_portal">Bibliotheque</string>
-    <string name="settings_title_course">Salle de Lecture</string>
-    <string name="settings_title_account">Magasin</string>
+    <string name="settings_title_portal">Portal</string>
+    <string name="settings_title_course">Courses</string>
+    <string name="settings_title_account">Account</string>
     <string name="settings_automatic_login_title">Sign in automatically</string>
     <string name="settings_automatic_login_summary">Automatically log in when the app starts</string>
     <string name="settings_always_check_preferences_title">Always check language on login</string>
