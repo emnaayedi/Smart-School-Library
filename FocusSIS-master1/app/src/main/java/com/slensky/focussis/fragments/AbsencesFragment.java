@@ -68,6 +68,7 @@ import com.slensky.focussis.data.AbsenceDay;
 import com.slensky.focussis.data.AbsencePeriod;
 import com.slensky.focussis.util.DateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +124,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
     DatabaseReference ref_etud = database.child("biblio/nb_etud_existe");
     DatabaseReference ref_temp = database.child("biblio/temp");
     DatabaseReference ref_hor  = database.child("horaires");
+    DatabaseReference ref_clim  = database.child("climatiseur");
     private void addNotification() {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
@@ -168,26 +170,27 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
 
             ref_place.addValueEventListener(new ValueEventListener() {
                 @Override
-                   public void onDataChange (DataSnapshot dataSnapshot){
+                   public void onDataChange (DataSnapshot dataSnapshot) {
 
                     ref_etud.addValueEventListener(new ValueEventListener() {
-                        int dispo=0;
+                        int dispo = 0;
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot data) {
                             int etud = data.getValue(int.class);
                             int place = dataSnapshot.getValue(int.class);
-                            dispo=place-etud;
-                            String html3=String.valueOf(place)+ "<br><br>" +String.valueOf(dispo);
+                            dispo = place - etud;
+                            String html3 = String.valueOf(place) + "<br><br>" + String.valueOf(dispo);
                             summaryNB.setText(Html.fromHtml(html3));
 
-                            if(dispo==0  ){
+                            if (dispo == 0) {
 
                                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                                 //alertDialog.setTitle();
                                 TextView messageView = new TextView(getContext());
-                                String html1 ="Pas de places disponibles !";
-                                String html2=" Vous serez notifié dès qu'une place sera disponible !";
-                                String html=html1+"<br><br>"+html2;
+                                String html1 = "Pas de places disponibles !";
+                                String html2 = " Vous serez notifié dès qu'une place sera disponible !";
+                                String html = html1 + "<br><br>" + html2;
                                 messageView.setText(Html.fromHtml(html));
 
                                 messageView.setTextIsSelectable(true);
@@ -205,15 +208,16 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
 
 
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "onCancelled", databaseError.toException());
 
                         }
                     });
+                }
 
 
-                      }
 
                 @Override
                       public void onCancelled (DatabaseError databaseError){
@@ -230,7 +234,7 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
             TextView absent = view.findViewById(R.id.text_absent);
             //absent.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_absent, absences.getPeriodsAbsentUnexcused())));
             ref_temp.addValueEventListener(new ValueEventListener() {
-                int dispo=0;
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
                     int temp = data.getValue(int.class);
@@ -244,6 +248,11 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
 
                 }
             });
+            TextView etathtml=(TextView) view.findViewById(R.id.text_other_mark);
+
+String html13="Active";
+
+                    etathtml.setText(Html.fromHtml(html13));
 
             TextView lund = view.findViewById(R.id.text_lun_vend);
             ref_hor.child("lundi/debut").addValueEventListener(new ValueEventListener() {
@@ -460,130 +469,11 @@ public class AbsencesFragment extends NetworkTabAwareFragment {
             TextView otherMarksHeader = view.findViewById(R.id.text_other_marks_header);
             otherMarksHeader.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_other_marks)));
 
-            TextView otherMark = view.findViewById(R.id.text_other_mark);
-            otherMark.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absence_other_mark)));
-
-            TextView late = view.findViewById(com.slensky.focussis.R.id.text_late);
-            late.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_late, absences.getPeriodsLate())));
-            TextView tardy = view.findViewById(com.slensky.focussis.R.id.text_tardy);
-            tardy.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_tardy, absences.getPeriodsTardy())));
-            TextView misc = view.findViewById(com.slensky.focussis.R.id.text_misc_activity);
-            misc.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_misc, absences.getPeriodsMisc())));
-            TextView offsite = view.findViewById(com.slensky.focussis.R.id.text_offsite);
-            offsite.setText(Html.fromHtml(getString(com.slensky.focussis.R.string.absences_offsite, absences.getPeriodsOffsite())));
 
 
-            TableLayout table = view.findViewById(com.slensky.focussis.R.id.table_absences);
-            table.removeAllViews();
-            TableRow headerRow = (TableRow) inflater.inflate(com.slensky.focussis.R.layout.view_absences_header, table, false);
-            table.addView(headerRow);
 
-            TableRowAnimationController animationController = new TableRowAnimationController(getContext());
-            for (final AbsenceDay d : absences.getDays()) {
-                if (d.getPeriods().size() == 0) {
-                    continue;
-                }
-                final TableRow absenceRow = (TableRow) inflater.inflate(com.slensky.focussis.R.layout.view_absences_row, table, false);
-                TextView date = absenceRow.findViewById(R.id.text_absence_date);
-                date.setText(DateUtil.dateTimeToShortString(d.getDate()));
-                TextView daily = absenceRow.findViewById(R.id.text_absence_daily);
-                String status = statusToString(d.getStatus());
-                daily.setText(status);
 
-                if (d.getStatus() == Absences.Status.ABSENT) {
-                    int padding = dpToPixels(4);
-                    TableRow.LayoutParams lp = (TableRow.LayoutParams) daily.getLayoutParams();
-                    lp.setMargins(lp.leftMargin - padding, lp.topMargin - padding, lp.rightMargin - padding, lp.bottomMargin - padding);
-                    absenceRow.removeView(daily);
-                    LinearLayout ll = new LinearLayout(getContext());
-                    ll.addView(daily);
-                    daily.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    daily.setPadding(padding, padding, padding, padding);
-                    daily.setTextColor(ContextCompat.getColor(getContext(), com.slensky.focussis.R.color.textPrimaryDark));
-                    ll.setBackgroundResource(com.slensky.focussis.R.drawable.absence_label);
-                    Drawable background = ll.getBackground();
-                    int red = Color.parseColor("#F44336");
-                    if (background instanceof ShapeDrawable) {
-                        ((ShapeDrawable) background).getPaint().setColor(red);
-                    } else if (background instanceof GradientDrawable) {
-                        ((GradientDrawable) background).setColor(red);
-                    } else if (background instanceof ColorDrawable) {
-                        ((ColorDrawable) background).setColor(red);
-                    }
-                    absenceRow.addView(ll);
-                    ll.setLayoutParams(lp);
-                }
 
-                absenceRow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showAbsenceDialog(d);
-                    }
-                });
-
-                final View divider = inflater.inflate(R.layout.view_divider, table, false);
-
-                final Animation animation = animationController.nextAnimation();
-                //absenceRow.setAnimation(animation);
-                //divider.setAnimation(animation);
-
-                divider.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Rect scrollBounds = new Rect();
-                        scrollView.getHitRect(scrollBounds);
-                        if (divider.getLocalVisibleRect(scrollBounds)) {
-                            divider.setAnimation(animation);
-                        }
-                        divider.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                });
-
-                absenceRow.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Rect scrollBounds = new Rect();
-                        scrollView.getHitRect(scrollBounds);
-                        if (absenceRow.getLocalVisibleRect(scrollBounds)) {
-                            absenceRow.setAnimation(animation);
-                        }
-                        absenceRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                });
-
-                divider.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-                absenceRow.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        if (divider.getLayerType() != View.LAYER_TYPE_NONE) {
-                            divider.setLayerType(View.LAYER_TYPE_NONE, null);
-                        }
-                        if (absenceRow.getLayerType() != View.LAYER_TYPE_NONE) {
-                            absenceRow.setLayerType(View.LAYER_TYPE_NONE, null);
-                        }
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-
-                table.addView(divider);
-                table.addView(absenceRow);
-            }
-
-            if (absences.getDays().size() == 0)
-            {
-                table.addView(inflater.inflate(R.layout.view_no_records_row, table, false));
-            }
 
         }
         requestFinished = true;
