@@ -9,31 +9,51 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/back2"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="2dp"
+            android:text="Smart Library"
+            android:textAlignment="center"
+            android:textColor="#CDFF4081"
+            android:textSize="30sp"
+            android:textStyle="bold|italic"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="90dp"
+            android:background="@color/calendarSelectBackground"
+            android:backgroundTint="#4FFFFFFF"
+            android:text="Better discover for School Library News and Updates"
+            android:textAlignment="center"
+            android:textColor="#BE000000"
+            android:textSize="14sp" />
 
         <RelativeLayout
             android:id="@+id/login_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-70dp"
+            android:layout_marginTop="170dp"
+            android:background="#92009688"
             android:orientation="vertical"
             android:paddingLeft="48dp"
-            android:paddingTop="16dp"
+            android:paddingTop="10dp"
             android:paddingRight="48dp"
-            android:paddingBottom="32dp">
-
-            <ImageView
-                android:id="@+id/image_logo"
-                android:layout_width="363dp"
-                android:layout_height="173dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="44dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/smartlibrary" />
+            android:visibility="visible">
 
 
             <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
@@ -57,16 +77,18 @@
                 android:id="@+id/text_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/image_logo"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:hint="@string/login_user_hint">
-
+                android:hint="@string/login_user_hint"
+                android:textColorHint="#FFFFFF">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textVisiblePassword" />
+                    android:inputType="textVisiblePassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password Label -->
@@ -77,7 +99,8 @@
                 android:layout_below="@+id/text_layout_email"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:hint="@string/login_pass_hint">
+                android:hint="@string/login_pass_hint"
+                android:textColorHint="#FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_password"
