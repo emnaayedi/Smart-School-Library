@@ -54,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -129,7 +130,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void addNotification(String nom) {
         Intent notifyIntent = new Intent(this, ScheduleCoursesTabFragment.class) ;
-
+        Random r = new Random();
+        int valeur =  r.nextInt(2);
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
         );
@@ -145,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,builder.build());
+        notificationManager.notify(valeur,builder.build());
     }
 
     public void notif_place() {
@@ -172,6 +174,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void notif_retard(String nom) {
         Intent notifyIntent = new Intent(this,ScheduleCoursesTabFragment.class) ;
+        Random r = new Random();
+        int valeur =  r.nextInt(2);
 
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
@@ -186,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setContentIntent(notifyPendingIntent);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1,builder.build());
+        notificationManager.notify(valeur,builder.build());
     }
 
 

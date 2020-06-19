@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by slensky on 5/9/18.
@@ -53,6 +54,7 @@ public class ScheduleCoursesTabFragment extends Fragment {
     public ScheduleCoursesTabFragment() {
         // required empty constructor
     }
+
 
 
 

@@ -95,7 +95,6 @@ public class AddressFragment extends NetworkTabAwareFragment {
 
                     if((!a.trim().isEmpty())&&((a.trim().length()>20))) {
                         reclamation.setMsg(a);
-                        System.out.println("111111111111111111111111CHAIMA1111111111111111111111111" + reclamation.getMsg());
                         ref.push().setValue(reclamation);
                         text.setText("");
 
@@ -104,7 +103,7 @@ public class AddressFragment extends NetworkTabAwareFragment {
                         if((a.trim().length()<20)&&(!a.isEmpty())&&(!a.equals(""))){
                             layout_reclamation.setError("Message must contain at least 20 characters");
                         }
-                    else if((a.isEmpty()&&(!a.equals("")))){
+                    else if((a.isEmpty())){
                         layout_reclamation.setError("Message cannot be blank");
 
                     }
