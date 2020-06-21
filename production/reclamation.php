@@ -331,24 +331,58 @@ var rootRef=firebase.database().ref().child("reclamation");
   var childKey = snap.key;
 
   var msg=snap.child("msg").val();
-  console.log(msg); 
   i++
 
   $("#msg_reclamation").DataTable().row.add([
- i,msg,"<button  id=\"delete\" type=\"button\" class=\"btn btn-round btn-danger\">Supprimer</button>"
+ i,msg,"<button  id=\"delete\" value=\"Delete row\" onclick=\"deleteRow(this);\" type=\"button\" class=\"btn btn-round btn-danger\">Supprimer</button>"
   ]).draw();
-    var button = document.getElementById('delete');
 
-    button.setAttribute('onclick', 'removeRow(this)');
 
 
 });
+function deleteRow(el) {
+    // while there are parents, keep going until reach TR 
+    while (el.parentNode && el.tagName.toLowerCase() != 'tr') {
+        el = el.parentNode;
+    }
+    var table = document.getElementById("msg_reclamation");
 
-  function removeRow(oButton) {
-        var empTab = document.getElementById('msg_reclamation');
-        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex); // buttton -> td -> tr
-    
+    // If el has a parentNode it must be a TR, so delete it
+    // Don't delte if only 3 rows left in table
+    if (el.parentNode && el.parentNode.rows.length > 0) {
+
+            Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.value) {
+    var rowIndex = $(el).closest('tr').index();
+               var msg=table.rows[rowIndex+1].cells[1].innerHTML;
+                  var rootRef=firebase.database().ref().child("reclamation");
+              rootRef.orderByChild('msg').equalTo(msg).on("child_added",snap => {
+              var childKey = snap.key;
+              rootRef.child(childKey).remove();
+
+});
+                  el.parentNode.removeChild(el);
+    Swal.fire(
+      'Deleted!',
+      'The Message has been deleted.',
+      'success'
+    )
+  }
+})
+            
+
+
+    }
 }
+
 function reload_page() { 
 window.location.reload();     
 }
@@ -405,19 +439,16 @@ window.location.reload();
             if ((((j_emp<d)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
                   nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
-                     console.log(date);
 
  }
  else if((j_emp==31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\" /></span><span>John Smith</span><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
-                     console.log(date);
 
  }
  else if((j_emp==30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\" /></span><span>John Smith</span><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
-                     console.log(date);
 
  }
  else if(((j_emp==28)||(j_emp==29))&&(m_emp==2)&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
