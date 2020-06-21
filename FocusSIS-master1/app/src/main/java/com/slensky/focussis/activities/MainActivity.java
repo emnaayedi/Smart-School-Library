@@ -3,7 +3,9 @@ package com.slensky.focussis.activities;
 import android.Manifest;
 import android.accounts.Account;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -164,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        myRef.setValue("Hello, Chaima");
         setTheme(com.slensky.focussis.R.style.AppTheme_Light);
         if (savedInstanceState != null) {
             Log.d(TAG, "Restoring saved instance state");
@@ -940,6 +941,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setStatusBarColor(statusBarColor);
     }
 
+    public static void cancelAllNotification(Context ctx) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancelAll();
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -956,6 +962,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStop() {
         super.onStop();
+        cancelAllNotification(getApplicationContext());
+
         this.isVisible = false;
     }
 

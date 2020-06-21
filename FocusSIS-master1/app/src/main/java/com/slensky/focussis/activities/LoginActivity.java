@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
     public void addNotification(String nom) {
         Intent notifyIntent = new Intent(this, ScheduleCoursesTabFragment.class) ;
         Random r = new Random();
-        int valeur =  r.nextInt(2);
+        int valeur = 3* r.nextInt(2);
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
         );
@@ -163,8 +163,10 @@ public class LoginActivity extends AppCompatActivity {
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Existe une place disponible" +
                                 " dans la bibliotheque"))
+
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
+
                 .setContentIntent(notifyPendingIntent);
 
 
@@ -175,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
     public void notif_retard(String nom) {
         Intent notifyIntent = new Intent(this,ScheduleCoursesTabFragment.class) ;
         Random r = new Random();
-        int valeur =  r.nextInt(2);
+        int valeur =  2*r.nextInt(2);
 
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
@@ -459,18 +461,18 @@ public class LoginActivity extends AppCompatActivity {
                                                     String d=nom.substring(0,2); int d1 = Integer.valueOf(d);
                                                     String m=nom.substring(3,5); int m1 = Integer.valueOf(m);
                                                     String y=nom.substring(6,10); int y1 = Integer.valueOf(y);
-                                                    if (((d1==getDay()+1)||(d1==getDay()))&&(m1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                    if (((m1==getDay()+1)||(m1==getDay()))&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
                                                         addNotification(livre);
                                                     }//avec retard
-                                                    if ((((d1==30)&&((m1==4)||(m1==6)||(m1==9)|(m1==11)))||
-                                                            ((d1==31)&&((m1==3)||(m1==5)||(m1==7)||(m1==8)||(m1==10)))||((d1==28)&&(m1==2))||
-                                                            ((d1==29)&&(m1==2)))&&
+                                                    if ((((m1==30)&&((d1==4)||(d1==6)||(d1==9)|(d1==11)))||
+                                                            ((m1==31)&&((d1==3)||(d1==5)||(d1==7)||(d1==8)||(d1==10)))||((m1==28)&&(d1==2))||
+                                                            ((m1==29)&&(d1==2)))&&
                                                             (getDay()==1)&&
-                                                            (m1==getMonth()-1)&&(y1==getYear())&&(etat.equals(e))){
+                                                            (d1==getMonth()-1)&&(y1==getYear())&&(etat.equals(e))){
                                                         addNotification(livre);
                                                     }
 
-                                                    if ((d1<getDay())&&(m1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                    if ((m1<getDay())&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
                                                         notif_retard(livre);
                                                     }
 
