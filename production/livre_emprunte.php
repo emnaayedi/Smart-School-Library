@@ -68,11 +68,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="images/logo1.jpg"  class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>Mohamed Ayedi</h2>
+                <br>
+                <span><h4>Welcome</h4></span>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -80,23 +80,18 @@
             <br />
 
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="index.php"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
+                  <li ><a href="index.php" ><i class="fa fa-home"></i> Home </a>
+                    
                   </li>
-  <li><a><i class="fa fa-edit"></i> Bibliotheque <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Bibliotheque <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a><strong>Salle de Lecture</strong> <i class="fa fa-plus"></i></a>
                       <ul id="fct" class="nav child_menu">
-                      <li><a href="index.php#etat">Etat</a></li>
-                      <li><a href="index.php#calendrier">Regles</a></li>
+                      <li><a href="#etat">Etat</a></li>
+                      <li><a href="#calendrier">Regles</a></li>
 
                     </ul>
                   </li>
@@ -111,6 +106,11 @@
                       
                     </ul>
                   </li>
+                   <li ><a href="reclamation.php" ><i class="fa fa-home"></i> Reclamation </a>
+                    
+                  </li>
+                      
+                  
                   <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
@@ -181,7 +181,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" >
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -200,22 +200,20 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Mohamed Ayedi
+                    <img src="images/logo1.jpg" alt="">Log Out
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item"  href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                 <a class="dropdown-item"  onclick="signout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
 
          <li role="presentation" class="nav-item dropdown open">
                   <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa big-icon fa-envelope icon-wrap" ></i>
+      <i class="fa fa-bell-o icon-wrap"></i>
                     <span  id="number_msg" > </span>
                   </a>
                   <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1" id="ida">   
-                  <li>
                     
-                  </li>   
                 </ul>
                 </li>
               </ul>
@@ -232,7 +230,7 @@
    <div class="col-md-3 col-sm-5  tile_stats_count" style="padding-left: 50px padding-right: 50px;">
               <span class="count_top"><i class="fa fa-user" aria-hidden="true" style="margin-right: 5px;"></i>Nombre d'etudiants </span>
               <div class="count" id="nb_etud"></div>
-                <button type="button" class="btn btn-success btn-xs"><a href="contacts.html" style="color: white;">modifier</a><span class="glyphicon glyphicon-pencil" aria-hidden="true"style="padding-left: 10px;"></span></button>
+                <button type="button" class="btn btn-success btn-xs"><a href="contacts.php" style="color: white;">modifier</a><span class="glyphicon glyphicon-pencil" aria-hidden="true"style="padding-left: 10px;"></span></button>
             </div>
             
             
@@ -252,7 +250,7 @@
             <div class="col-md-3 col-sm-3  tile_stats_count" style="padding-left: 50px padding-right: 50px;">
               <span class="count_top"><i class="fa fa-book"style="margin-right: 5px;"></i>Livre Emprunte </span>
               <div class="count" id="liv_emp"></div>
-                <button type="button" class="btn btn-info"><a href="livre_emprunte.php" style="color: white;">Add</a><span class="glyphicon glyphicon-pencil" aria-hidden="true"style="padding-left: 10px;"></span></button>
+                <button type="button" class="btn btn-info"><a href="livre_emprunte.php" style="color: white;">Ajouter</a><span class="glyphicon glyphicon-pencil" aria-hidden="true"style="padding-left: 10px;"></span></button>
             </div>
              </div>
           </div>
@@ -437,28 +435,19 @@
               $("#nb_chaises").append("<div>"+ etat_dispo+"</div>");
             });
 
-       var doc=firebase.database().ref('biblio/').child("document");
+       var doc=firebase.database().ref('stockage/');
       doc.on('value', function(sna) {
-              var etat_dispo = sna.val();  
+              var etat_dispo = sna.numChildren(); 
               $("#document").append("<div>"+ etat_dispo+"</div>");
             });
 
-       var liv_emp=firebase.database().ref('biblio/').child("liv_emp");
+       var liv_emp=firebase.database().ref('emprunte/');
       liv_emp.on('value', function(sna) {
-              var etat_dispo = sna.val();  
+              var etat_dispo = sna.numChildren();  
               $("#liv_emp").append("<div>"+ etat_dispo+"</div>");
             });
 
-      var dateRetour=firebase.database().ref().child("emprunte");
-      dateRetour.on("child_added",snap => {
-            var date_retour=snap.child("date_retour").val();
-            var etat=snap.child("etat").val();
-            var d=new Date();
-            var d1=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-              if ((d1<=date_retour) && (etat=="notReturned")) 
-                $("#id_msg").append("<span>"+ "Livre n'est pas encore retournee"+"</span>");
 
-            });
 
       var test=firebase.database().ref().child("emprunte");
   test.on("value", function(snapshot){
@@ -467,19 +456,33 @@
           t.on("child_added",snap => {
              var id_emprunte=snap.child("emp_id").val();
              var date=snap.child("date_retour").val();
+             var test=new Date(date);
+             var j_emp=test.getDate(); var m_emp=test.getMonth()+1; var y_emp=test.getFullYear();
              var etat=snap.child("etat").val();
              var d=new Date();
-             var j=d.getDate(); var m=d.getMonth()+1; 
-             if (j < 10) { 
-                 j = '0' + j; 
-                          } 
-                if (m < 10) { 
-                 m = '0' + m; 
-                  } 
-             var d1 = j+'/'+m+'/'+ d.getFullYear();
-            if ((date<d1)&&(etat=="notReturned")) {
+            // var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
+       var j=1;var m=6;var y=2020;
+            if ((((j_emp<d)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
                   nb=nb+1;
-        $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\" /></span><span>John Smith</span><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
+        $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
+                     console.log(date);
+
+ }
+ else if((j_emp==31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
+   nb=nb+1;
+        $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
+                     console.log(date);
+
+ }
+ else if((j_emp==30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
+   nb=nb+1;
+        $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
+                     console.log(date);
+
+ }
+ else if(((j_emp==28)||(j_emp==29))&&(m_emp==2)&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
+   nb=nb+1;
+        $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
  }
     
 });

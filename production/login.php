@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +100,7 @@
 <!--===============================================================================================-->
   <script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-  <script src="js/loginn.js"></script>
+  <script src="js/login1.js"></script>
 
 </body>
 </html>

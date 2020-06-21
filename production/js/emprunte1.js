@@ -1,4 +1,5 @@
 
+
 var rootRef=firebase.database().ref().child("emprunte");
 
    rootRef.on("child_added",snap => {
@@ -119,7 +120,7 @@ e.once('value', function(snapshot) {
               etat=etat_dispo;}); 
             console.log(etat) ;
         if(etat!="Returned"){      
-      etudiant.orderByChild('login').equalTo(id_etudiant).on('child_added', function(snap) {
+      etudiant.orderByChild('id').equalTo(id_etudiant).on('child_added', function(snap) {
           var reff=firebase.database().ref('etudiants/' + id_etudiant).child("nb_emp");
           var b;        var a;
           reff.on('value', function(snaps) {
@@ -255,7 +256,7 @@ test.once('value', function(snapshot) {
     else if((b==true)&&(bb==true)&&(nom_livre!="")){
 
 
-    etudiant.orderByChild('login').equalTo(id_etudiant).on('child_added', function(snap) {
+    etudiant.orderByChild('id').equalTo(id_etudiant).on('child_added', function(snap) {
       var reff=firebase.database().ref('etudiants/' + id_etudiant).child("nb_emp");
           var b;
           reff.on('value', function(snaps) {
