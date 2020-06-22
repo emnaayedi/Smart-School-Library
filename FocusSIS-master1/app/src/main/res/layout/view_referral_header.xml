@@ -7,13 +7,6 @@
     android:layout_height="wrap_content">
 
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="13dp"
-        android:layout_height="match_parent"
-        android:background="#A1FFFFFF"
-        android:clickable="true"
-        app:srcCompat="@drawable/wwbp_net_resizeimage" />
 
     <TextView
         android:id="@+id/text_reporter_name"

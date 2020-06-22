@@ -37,7 +37,7 @@
             android:layout_marginTop="90dp"
             android:background="@color/calendarSelectBackground"
             android:backgroundTint="#4FFFFFFF"
-            android:text="Better discover for School Library News and Updates"
+            android:text="ENIS Advanced Library Management Application"
             android:textAlignment="center"
             android:textColor="#BE000000"
             android:textSize="14sp" />
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="170dp"
-            android:background="#92009688"
+            android:background="#83009688"
             android:orientation="vertical"
             android:paddingLeft="48dp"
             android:paddingTop="10dp"
@@ -81,6 +81,7 @@
                 android:layout_marginBottom="8dp"
                 android:hint="@string/login_user_hint"
                 android:textColorHint="#FFFFFF">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_username"
                     android:layout_width="match_parent"
