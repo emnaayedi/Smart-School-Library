@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -89,6 +90,7 @@ public class AddressFragment extends NetworkTabAwareFragment {
             btn_reclamation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(getContext(), "Reclamation envoyee avec succes", Toast.LENGTH_SHORT).show();
                     final String a = text.getText().toString();
 
 

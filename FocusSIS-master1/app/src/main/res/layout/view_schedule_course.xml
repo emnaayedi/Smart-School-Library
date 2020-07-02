@@ -6,59 +6,64 @@
     android:clickable="true"
     android:focusable="true">
 
-    <TextView
-        android:id="@+id/text_course_name"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp" />
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_course_period"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:id="@+id/text_course_name"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/text_course_teacher"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:id="@+id/text_course_period"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/text_course_days"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:id="@+id/text_course_teacher"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/text_course_room"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:id="@+id/text_course_days"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/text_course_term"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="12dp" />
+        <TextView
+            android:id="@+id/text_course_room"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/text_course_term"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="12dp" />
+    </androidx.gridlayout.widget.GridLayout>
 
 </TableRow>

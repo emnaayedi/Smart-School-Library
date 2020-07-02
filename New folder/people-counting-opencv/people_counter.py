@@ -1,6 +1,6 @@
 # USAGE
 # To read and write back out to video:
-# python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt --model mobilenet_ssd/MobileNetSSD_deploy.caffemodel --input videos/example_01.mp4 --output output/output_01.avi
+# python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt --model mobilenet_ssd/MobileNetSSD_deploy.caffemodel --input videos/example_03.mp4 --output output/output_01.avi
 #
 # To read from webcam and write back out to disk:
 # python people_counter.py --prototxt mobilenet_ssd/MobileNetSSD_deploy.prototxt \
@@ -32,7 +32,7 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
-
+total =db.child("biblio").child("nb_etud_existe").get().val()
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -90,7 +90,7 @@ trackableObjects = {}
 # initialize the total number of frames processed thus far, along
 # with the total number of objects that have moved either up or down
 totalFrames = 0
-total=db.child("biblio").child("nb_etud_existe").get().val()
+total=int(db.child("biblio").child("nb_etud_existe").get().val())
 
 # start the frames per second throughput estimator
 fps = FPS().start()
@@ -235,15 +235,13 @@ while True:
 				# if the direction is negative (indicating the object
 				# is moving up) AND the centroid is above the center
 				# line, count the object
-				if direction < 0 and centroid[1] < H // 2:
+				if direction < 0 and centroid[1] < H // 2 and total >0:
 					total-= 1
 					to.counted = True
-					
-
 				# if the direction is positive (indicating the object
 				# is moving down) AND the centroid is below the
 				# center line, count the object
-				elif direction > 0 and centroid[1] > H // 2:
+				elif direction > 0 and centroid[1] > H // 2 and total <db.child("biblio").child("place_total").get().val():
 					to.counted = True
 					total+=1
 		db.child("biblio").update({"nb_etud_existe": total})
@@ -278,7 +276,7 @@ while True:
 	key = cv2.waitKey(1) & 0xFF
 
 	# if the `q` key was pressed, break from the loop
-	if key == ord("q"):
+	if key == ord("q") :
 		break
 
 	# increment the total number of frames processed thus far and

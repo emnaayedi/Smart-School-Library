@@ -5,12 +5,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.util.LogPrinter;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
@@ -50,6 +55,7 @@ public class ScheduleCoursesTabFragment extends Fragment {
     private static final String CHANNEL_ID ="my_channel_01" ;
     private static String livre;
     private Schedule schedule;
+    String html12,html11,html10,html13,html14,nom,nom1,nom2,nom4,nom5,nom6,html15;
 
     public ScheduleCoursesTabFragment() {
         // required empty constructor
@@ -72,8 +78,8 @@ public class ScheduleCoursesTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_courses_tab, container, false);
-        TextView header = (TextView) view.findViewById(R.id.text_schedule_header);
-        header.setText(schedule.getCurrentMarkingPeriod().getName());
+
+
 
         TableLayout table = (TableLayout) view.findViewById(R.id.table_courses);
         table.removeAllViews();
@@ -106,10 +112,10 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                        ref_nom.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               String nom = dataSnapshot.getValue().toString();
-                                               livre=nom;
-                                               System.out.println(nom);
-                                               period.setText(nom);
+                                               nom4 = dataSnapshot.getValue().toString();
+                                               livre=nom4;
+                                               period.setText(nom4);
+                                               html14 = "<b>Nom Livre: </b>" + nom4 + "<br><br>";
 
                                            }
 
@@ -119,15 +125,16 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                            }
                                        });
 
-                                       TextView name = (TextView) courseRow.findViewById(R.id.text_course_name);
+
 
                                        DatabaseReference ref_id = database.child("emprunte/" + b[j] + "/id_livre");
                                        ref_id.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               String nom = dataSnapshot.getValue().toString();
-                                               System.out.println(nom);
-                                               name.setText(nom);
+                                               nom = dataSnapshot.getValue().toString();
+                                               html10="<b>Id-livre: </b>" + nom + "<br><br>";
+
+
 
                                            }
 
@@ -137,15 +144,15 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                            }
                                        });
 
-                                       TextView teacher = (TextView) courseRow.findViewById(R.id.text_course_teacher);
+
 
                                        DatabaseReference ref_datee = database.child("emprunte/" + b[j] + "/date_emp");
                                        ref_datee.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               String nom = dataSnapshot.getValue().toString();
-                                               System.out.println(nom);
-                                               teacher.setText(nom);
+                                                nom1 = dataSnapshot.getValue().toString();
+                                               html11="<b>Date Emprunte: </b>" + nom1+ "<br><br>";
+
 
                                            }
 
@@ -160,9 +167,26 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                        ref_retour.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               String nom = dataSnapshot.getValue().toString();
+                                               nom2 = dataSnapshot.getValue().toString();
 
-                                               days.setText(nom);
+                                               days.setText(nom2);
+                                               html12=  "<b>Date Retour: </b>" + nom2 + "<br><br>";
+
+                                           }
+
+                                           @Override
+                                           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                           }
+                                       });
+                                       DatabaseReference avis = database.child("emprunte/" + b[j] + "/Avis");
+                                       avis.addListenerForSingleValueEvent(new ValueEventListener() {
+                                           @Override
+                                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                               nom6 = dataSnapshot.getValue().toString();
+                                               html15="<b>Avis: </b>" + nom6 + "<br><br>";
+
+
 
                                            }
 
@@ -179,10 +203,32 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                        ref_etat.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               String nom = dataSnapshot.getValue().toString();
-                                               System.out.println(nom);
-                                               room.setText(nom);
+                                              nom5 = dataSnapshot.getValue().toString();
+                                              html13= "<b>Etat: </b>" + nom5 + "<br><br>";
+                                               room.setText(nom5);
+                                               AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                                               //alertDialog.setTitle();
+                                               TextView messageView= new TextView(getContext());
 
+                                               messageView.setText(Html.fromHtml(html10+html11+html12+html13+html14+html15));
+
+                                               messageView.setTextIsSelectable(true);
+                                               messageView.setTextColor(getResources().getColor(R.color.textPrimary));
+                                               messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.subheadingText));
+                                               messageView.setPadding(16, 0, 16, 0);
+                                               float dpi = getContext().getResources().getDisplayMetrics().density;
+
+                                               alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
+                                               alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                                                       (dialog, which) -> dialog.dismiss());
+                                               courseRow.setOnClickListener(new View.OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+
+
+                                                       alertDialog.show();
+                                                   }
+                                               });
                                            }
 
                                            @Override
@@ -191,12 +237,28 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                            }
                                        });
 
+
                                        // room.setText(c.getRoom().split(" ")[0]); // changes jr/sr area into just jr/sr for brevity
 
 
                                        final View divider = inflater.inflate(R.layout.view_divider, table, false);
 
-                                       Animation animation = animationController.nextAnimation();
+
+
+
+                                       final Animation animation = animationController.nextAnimation();
+
+                                       courseRow.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                           @Override
+                                           public void onGlobalLayout() {
+                                               Rect scrollBounds = new Rect();
+                                               if (courseRow.getLocalVisibleRect(scrollBounds)) {
+                                                   courseRow.setAnimation(animation);
+                                               }
+                                               courseRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                           }
+                                       });
+
                                        courseRow.setAnimation(animation);
                                        divider.setAnimation(animation);
 
