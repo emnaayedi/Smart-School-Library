@@ -281,6 +281,8 @@
                   <div class="col-sm-6">
                     <div class="mb-md">
                       <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-lg"><i class="fa fa-plus" style="margin-right: 10px;"></i>Ajouter</button>
+
+                      
                       <button type="button" id="add_button" data-toggle="modal" data-target="#userModalReturn" class="btn btn-success btn-lg"><i class="fas fa-minus" style="margin-right: 10px;" ></i>Edit</button>
                     </div>
                   </div>
@@ -320,6 +322,7 @@
        </div>
      </div>
       </div>
+
     <div id="userModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
      	 <form method="post" id="user_form" enctype="multipart/form-data">
@@ -335,8 +338,8 @@
        <label>Domaine</label>
        <input type="text" name="nom_domain" id="nom_domain" class="form-control"  />
         <br />
-        <label>prix</label>
-       <input type="text" name="prix" id="prix" class="form-control" />
+        <label>Prix</label>
+       <input type="number" name="prix" id="id_prix" class="form-control" />
        <br />
         <label>Date entree</label>
           <fieldset >
@@ -352,24 +355,24 @@
                         </fieldset>
        <br />
         <label>Quantite</label>
-       <input type="text" name="qte" id="qte" class="form-control" />
+       <input type="number" name="qte" id="qte" class="form-control" />
       
        </div>
        
        
-      </div>
       <div class="modal-footer">
        <input type="hidden" name="nom_doc" id="nom_doc" />
    
-      
+             <input type="hidden" name="operation" id="operation" />
 
-        <button type="button"  data-dismiss="modal" class="btn btn-success" onclick="add()">Add</button>
+
+ <button type="button"  data-dismiss="modal" class="btn btn-success" onclick="add()">Add</button>
        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         
       </div>
 
-       </div></form>
+       </div>
      </div>
       </div>
                             <thead>
@@ -377,10 +380,10 @@
                           <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">ID document</th> 
                           <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Nom document</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Domaine</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 59px;" aria-label="Office: activate to sort column ascending">action</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 25px;" aria-label="Age: activate to sort column ascending">Quantite Disponible</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Date entree</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 48px;" aria-label="Salary: activate to sort column ascending">prix</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 48px;" aria-label="Salary: activate to sort column ascending">Prix</th>
                         </tr>
                       </thead>
                       <tbody id="table_body">
@@ -501,7 +504,7 @@
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-  <script src="js/do.js"></script>
+  <script src="js/document1.js"></script>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

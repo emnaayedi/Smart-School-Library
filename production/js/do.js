@@ -12,7 +12,7 @@ var rootRef=firebase.database() .ref().child("stockage");
 
 
    $("#datatable-buttons").DataTable().row.add([
- idll, nom_doc, nom_domain, action, qte, dateretour,prix
+ idll, nom_doc, nom_domain, qte, dateretour,prix
   ])
 .draw();
 
@@ -23,13 +23,45 @@ function add() {
           const nom_doc=document.getElementById('nom_doc');
           const database=firebase.database();
           const rootRef=database.ref('stockage');
-          rootRef.child(nom_doc.value).set({
+
+          var ud = firebase.database().ref().child('stockage').push().key;
+   
+              var daata = {
+            id:ud,
+            nomDomain:document.getElementById('nom_domain').value,
+            dateEntree:document.getElementById('single_cal3').value,
+            Qte:document.getElementById('qte').value,
+            Prix:document.getElementById('id_prix').value,
+            nomDoc:document.getElementById('nom_doc').value
+
+             }
+
+         const nomDoc=document.getElementById('nom_doc');
+          const  nomDomain=document.getElementById('nom_domain');
+          const  dateEntree=document.getElementById('single_cal3');
+          const  Qte=document.getElementById('qte');
+          const  Prix=document.getElementById('id_prix');
+                      if((nomDoc=="")||(nomDomain=="")||(Qte=="")||(Prix=="")
+                        ||(dateEntree=="")){
+                        Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "Verifier vos donnees",
+                        });}
+                      else{               
+                       var updatess = {};
+                      updatess['/stockage/' + ud] = daata;
+                          firebase.database().ref().update(updatess);}
+          /*rootRef.child(nom_doc.value).set({
             nomDoc:document.getElementById('nom_doc').value,
             nomDomain:document.getElementById('nom_domain').value,
             dateEntree:document.getElementById('single_cal3').value,
             Qte:document.getElementById('qte').value,
             Prix:document.getElementById('prix').value,
-        });
+
+
+
+        });*/
         }
 
 function update() {

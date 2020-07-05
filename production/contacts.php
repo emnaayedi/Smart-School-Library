@@ -314,12 +314,12 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
+        <!-- <footer>
           <div class="pull-right">
             
           </div>
           <div class="clearfix"></div>
-        </footer>
+        </footer> -->
         <!-- /footer content -->
 
      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

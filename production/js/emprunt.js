@@ -12,12 +12,114 @@ var rootRef=firebase.database().ref().child("emprunte");
  
 
   $("#datatable-buttons").DataTable().row.add([
-  id_emprunte, id_livre, id_emprunteur, date_emp, date_retour,nom_livre, etat
+  id_emprunte, id_emprunteur, date_emp, date_retour,nom_livre, etat,
+  "<button id=\"up\" value=\"update row\" onclick=\"updateRow(this);\"  class=\"btn btn-success btn-sm rounded-0\" type=\"button\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Edit\"><i class=\"fa fa-edit\"></i></button>"+
+ "    "+"   "+"    "+ "<button id=\"delete\" value=\"Delete row\" onclick=\"deleteRow(this);\" class=\"btn btn-danger btn-sm rounded-0\" type=\"button\" data-toggle=\"tooltip\"  title=\"Delete\"><i class=\"fa fa-trash\"></i></button>"
+
   ])
+
 .draw();
 
 });
 
+
+function deleteRow(el) {
+    // while there are parents, keep going until reach TR 
+    while (el.parentNode && el.tagName.toLowerCase() != 'tr') {
+        el = el.parentNode;
+    }
+    var table = document.getElementById("datatable-buttons");
+
+    // If el has a parentNode it must be a TR, so delete it
+    // Don't delte if only 3 rows left in table
+    if (el.parentNode && el.parentNode.rows.length > 0) {
+
+            Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.value) {
+    var rowIndex = $(el).closest('tr').index();
+               var msg=table.rows[rowIndex+1].cells[0].innerHTML;
+               console.log(msg);
+                  var rootRef=firebase.database().ref().child("emprunte");
+              rootRef.orderByChild('emp_id').equalTo(msg).on("child_added",snap => {
+              var childKey = snap.key;
+              rootRef.child(childKey).remove();
+
+});
+                  el.parentNode.removeChild(el);
+
+    Swal.fire(
+      'Deleted!',
+      'The Message has been deleted.',
+      'success'
+    )
+
+  }
+
+})
+            
+
+    }
+
+}
+
+function updateRow(el) {
+    // while there are parents, keep going until reach TR 
+    while (el.parentNode && el.tagName.toLowerCase() != 'tr') {
+        el = el.parentNode;
+    }
+    var table = document.getElementById("datatable-buttons");
+
+    // If el has a parentNode it must be a TR, so delete it
+    // Don't delte if only 3 rows left in table
+    if (el.parentNode && el.parentNode.rows.length > 0) {
+
+            Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to update this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, update it!'
+}).then((result) => {
+  if (result.value) {
+    var rowIndex = $(el).closest('tr').index();
+               var msg=table.rows[rowIndex+1].cells[0].innerHTML;
+               console.log(msg);
+                  var rootRef=firebase.database().ref().child("emprunte");
+              rootRef.orderByChild('emp_id').equalTo(msg).on("child_added",snap => {
+              var childKey = snap.key;
+              rootRef.child(childKey).remove();
+
+});
+                  el.parentNode.removeChild(el);
+
+    Swal.fire(
+      'Deleted!',
+      'The Message has been deleted.',
+      'success'
+    )
+
+  }
+
+})
+            
+
+    }
+
+}
+
+function reload_page() { 
+window.location.reload();     
+}
 
 function update() {
 
@@ -324,6 +426,7 @@ test.once('value', function(snapshot) {
            });
   }
 
+reload_page();
 
   });
            }
@@ -337,9 +440,7 @@ test.once('value', function(snapshot) {
 
 
 
- function reload_page(){
-   window.location.reload();
-  }
+ 
 
 
 

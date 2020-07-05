@@ -359,7 +359,7 @@
             
             <th class="sorting_asc" tabindex="0"  rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id-Emprunte</th>
             
-            <th class="sorting_asc" tabindex="0"  rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id-Livre</th>
+          
 
             <th class="sorting_asc" tabindex="0"  rowspan="1" colspan="1" style="width: 110px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">id-Emprunteur</th>
 
@@ -373,6 +373,10 @@
             <th class="sorting" tabindex="0"  rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Nom-livre</th>
 
             <th class="sorting" tabindex="0"  rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Etat</th>
+
+            <th class="sorting" tabindex="0"  rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Action</th>
+
+
 
             
           </tr>
@@ -494,7 +498,7 @@
 </script>
 
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="js/emprunt.js"></script>
+  <script src="js/chaima.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
