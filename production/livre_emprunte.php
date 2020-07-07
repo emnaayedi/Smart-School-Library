@@ -106,12 +106,12 @@
                       
                     </ul>
                   </li>
-                   <li ><a href="reclamation.php" ><i class="fa fa-home"></i> Reclamation </a>
+                   <li ><a href="reclamation.php" ><i class="fa big-icon fa-envelope icon-wrap"></i> Reclamation </a>
                     
                   </li>
                       
                   
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                 <!--  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -164,13 +164,13 @@
                       <li><a href="login.php">Login Page</a></li>
                       <li><a href="pricing_tables.html">Pricing Tables</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
                     </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
+            <!-- /menu footer buttons >
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -185,7 +185,7 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
-            <!-- /menu footer buttons -->
+            </menu footer buttons -->
           </div>
         </div>
 
@@ -277,7 +277,7 @@
                     <div class="mb-md">
                       <button type="button" id="add_button" data-toggle="modal" data-target="#userModal" class="btn btn-info btn-lg"><i class="fa fa-plus" style="margin-right: 10px;" ></i>Ajouter</button>
 
-                      <button type="button" id="add_button" data-toggle="modal" data-target="#userModalReturn"  class="btn btn-secondary btn-lg btn-danger"><i class="fas fa-minus" style="margin-right: 10px;" ></i>Return</button>
+                      <!-- <button type="button" id="add_button" data-toggle="modal" data-target="#userModalReturn"  class="btn btn-secondary btn-lg btn-danger"><i class="fas fa-minus" style="margin-right: 10px;" ></i>Return</button> -->
                     </div>
                   </div>
                 </div>
@@ -296,12 +296,8 @@
         <label>id-Emprunteur</label>
        <input type="text" name="reference" id="id_emp" class="form-control"  />
        <br />
-        <label>nom-Livre</label>
-       <input type="text" name="quantite" id="nom_livre" class="form-control" />
-       <br />
         
-             
-       
+        
        
       </div>
       <div class="modal-footer">
@@ -309,14 +305,14 @@
        <input type="hidden" name="operation" id="operation" />
       
 
-        <button type="button"  data-dismiss="modal" class="btn btn-success" onclick="add()">Add</button>
+        <button id="addid" type="button"  data-dismiss="modal" class="btn btn-success" onclick="adde()">Add</button>
        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
        </div>
        </div>
      </div>
       </div>
 
-      <div id="userModalReturn" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--       <div id="userModalReturn" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
        <div class="modal-content">
       <div class="modal-header">
@@ -349,7 +345,7 @@
        </div>
        </div>
      </div>
-      </div>
+      </div> -->
 
 
       
@@ -443,12 +439,15 @@
       doc.on('value', function(sna) {
               var etat_dispo = sna.numChildren(); 
               $("#document").append("<div>"+ etat_dispo+"</div>");
+    
             });
 
        var liv_emp=firebase.database().ref('emprunte/');
       liv_emp.on('value', function(sna) {
-              var etat_dispo = sna.numChildren();  
+              var etat_dispo = sna.numChildren(); 
+
               $("#liv_emp").append("<div>"+ etat_dispo+"</div>");
+
             });
 
 
@@ -494,11 +493,187 @@
              $("#number_msg").append("<span class=\"badge bg-green\">" + nb + "</span>");
 
 });
+
+
+
+
+  function adde(){
+
+          var d=new Date();
+          var d1=new Date();
+          var d2=d1.addDays(14);
+          var j=d.getDate(); var m=d.getMonth()+1; 
+             if (j < 10) { 
+                 j ="0" + j; 
+                          } 
+                if (m < 10) { 
+                 m = "0" + m; 
+                  } 
+             var date_emp = j+'/'+m+'/'+d.getFullYear();
+
+           var jj=d2.getDate(); var mm=d2.getMonth()+1; 
+             if (jj < 10) { 
+                 jj = "0" + jj; 
+                          } 
+                if (mm < 10) { 
+                 mm = "0" + mm; 
+                  } 
+           var date_ret = jj+'/'+mm+'/'+d2.getFullYear();
+
+
+  var id_livre= document.getElementById('id_liv').value;
+  var id_etudiant=document.getElementById('id_emp').value;
+
+  var stockage = firebase.database().ref().child('stockage');
+  var etudiant = firebase.database().ref().child('etudiants');
+    var ok=false;
+
+var testt=firebase.database().ref('stockage/');
+var test=firebase.database().ref('etudiants/');
+test.once('value', function(snapshot) {
+  var a;
+  var b=false;
+  var bb=false;
+
+    snapshot.forEach(function(childSnapshot) {
+        var id = childSnapshot.key;
+           a=id;
+           if(a==id_etudiant) {
+                 b=true;           }
+});
+        
+    testt.once('value', function(snapshoot) {
+        var idliv;
+        snapshoot.forEach(function(childSnapshoot) {
+            var idkey = childSnapshoot.key;
+              idliv=idkey;
+              if(idliv==id_livre) {
+                 bb=true;          
+
+
+               }
+                                                  });
+                                            
+     if((b==false)&&(bb==false)){
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "id-Emprunteur et id-Livre sont incorrects",
+                        });
+            }
+    else if(b==false){
+        Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "id-Emprunteur est incorrect",
+                        });
+    }
+    
+    else if(bb==false){
+      Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "id-Livre est incorrect",
+                        });}
+   
+    
+
+    else if((b==true)&&(bb==true)){
+
+
+    etudiant.orderByChild('login').equalTo(id_etudiant).on('child_added', function(snap) {
+      var reff=firebase.database().ref('etudiants/' + id_etudiant).child("nb_emp");
+          var b;
+          reff.on('value', function(snaps) {
+              var nbemp = snaps.val();
+              b=nbemp});
+            if(b==0)  {
+                   Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "le nombre de possibilite etudiants egale 0",
+                        });}
+            else if((b==1)||(b==2)){
+                b=b-1;
+                ok=true;
+            }
+            
+
+      if(ok==true){
+ stockage.orderByChild('id').equalTo(id_livre).on('child_added', function(snap) {
+          var ref=firebase.database().ref('stockage/' + id_livre).child("Qte");
+          var ref1=firebase.database().ref('stockage/' + id_livre).child("nomDoc");
+          var a;
+          var nom;
+          ref.on('value', function(snapshot) {
+              var uid = snapshot.val();          
+              a=uid;
+                });
+          ref1.on('value', function(snapshot) {
+              var nom1 = snapshot.val();          
+              nom=nom1;
+              console.log(nom);
+                });
+             if(a==1){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "le nombre de livres disponibles egale à 1",
+                        });
+              }
+
+
+            else  if(a>1){
+                a=a-1;
+
+                var ud = firebase.database().ref().child('emprunte').push().key;
+   
+              var daata = {
+            emp_id:ud,
+            id_livre:document.getElementById('id_liv').value,
+            id_emprunteur:document.getElementById('id_emp').value,
+            date_emp:date_emp,
+            date_retour:date_ret,
+            nom_livre:nom,
+            etat:"notReturned"  }
+   
+                var updatess = {};
+                      updatess['/emprunte/' + ud] = daata;
+                          firebase.database().ref().update(updatess);
+   
+  
+              
+              
+             console.log(a);
+
+                var data = { Qte : a ,
+                }
+                  path='stockage/'+ id_livre;
+               firebase.database().ref(path).update(data);
+
+            var datanew = { nb_emp: b }
+                  path='etudiants/'+ id_etudiant;
+               firebase.database().ref(path).update(datanew);}
+           });
+  }
+
+
+  });
+           }
+
+    
+   
+});
+
+});
+}
+
+
       
 </script>
 
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="js/chaima.js"></script>
+  <script src="js/empfinal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 

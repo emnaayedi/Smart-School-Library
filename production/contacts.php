@@ -86,10 +86,11 @@
                       
                     </ul>
                   </li>
-                   <li ><a href="reclamation.php" ><i class="fa fa-home"></i> Reclamation </a>
+                   <li ><a href="reclamation.php" ><i class="
+                    fa big-icon fa-envelope icon-wrap"></i> Reclamation </a>
                     
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -174,14 +175,14 @@
                         </li>
                     </ul>
                   </li>                  
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li> -->
                 </ul>
               </div>
 
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
+            <!-- /menu footer buttons >
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -196,7 +197,7 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
-            <!-- /menu footer buttons -->
+            </menu footer buttons -->
           </div>
         </div>
 

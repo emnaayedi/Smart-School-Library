@@ -1,46 +1,50 @@
 var rootRef=firebase.database() .ref().child("stockage");
-
-   rootRef.on("child_added",snapp => {
-  var idll=snapp.child("id").val();
+   rootRef.on("child_added",snap => {
+  var idll=snap.child("id").val();
   console.log(idll);
-  var action=snapp.child("action").val();
-  var nom_doc=snapp.child("nomDoc").val();
-  var nom_domain=snapp.child("nomDomain").val();
-  var dateretour=snapp.child("dateEntree").val();
-  var qte=snapp.child("Qte").val();
-   var prix=snapp.child("Prix").val();
-
-
+   var nom_doc=snap.child("nomDoc").val();
+  var nom_domain=snap.child("nomDomain").val();
+  var dateretour=snap.child("dateEntree").val();
+  var dateparution=snap.child("dateParution").val();
+  var qte=snap.child("Qte").val();
+   var prix=snap.child("Prix").val();
+    var resume=snap.child("Resume").val();
+     var poss=snap.child("PossAchat").val();
+      var collect=snap.child("Collection").val();
+       var nbpage=snap.child("nbrePage").val();
+        var editeur=snap.child("editeur").val();
+        var avis=snap.child("Avis").val();
    $("#datatable-buttons").DataTable().row.add([
- idll, nom_doc, nom_domain, qte, dateretour,prix
+ idll,  nom_doc, nom_domain,collect,prix,nbpage,poss,dateretour,dateparution,qte,editeur,resume,avis,
   ])
 .draw();
-
 });
- 
-
 function add() {
-          const nom_doc=document.getElementById('nom_doc');
-          const database=firebase.database();
+        const nom_doc=document.getElementById('nom_doc');
+        const database=firebase.database();
           const rootRef=database.ref('stockage');
-
-          var ud = firebase.database().ref().child('stockage').push().key;
-   
-              var daata = {
-            id:ud,
+          var table = $('#datatable-buttons').DataTable(); 
+          const iD=table.column(0).data().length;
+          rootRef.child(iD).set({
+            id:iD,
+           nomDoc:document.getElementById('nom_doc').value,
             nomDomain:document.getElementById('nom_domain').value,
             dateEntree:document.getElementById('single_cal3').value,
+            dateParution:document.getElementById('datePar').value,
             Qte:document.getElementById('qte').value,
-            Prix:document.getElementById('id_prix').value,
-            nomDoc:document.getElementById('nom_doc').value
-
-             }
-
+            Prix:document.getElementById('prix').value,
+            Resume:document.getElementById('resume').value,
+            editeur:document.getElementById('editeur').value,
+            Collection:document.getElementById('collection').value,
+            PossAchat:document.getElementById('achat').value,
+            nbrePage:document.getElementById('page').value,
+            Avis:0
+             });
          const nomDoc=document.getElementById('nom_doc');
           const  nomDomain=document.getElementById('nom_domain');
           const  dateEntree=document.getElementById('single_cal3');
           const  Qte=document.getElementById('qte');
-          const  Prix=document.getElementById('id_prix');
+          const  Prix=document.getElementById('prix');
                       if((nomDoc=="")||(nomDomain=="")||(Qte=="")||(Prix=="")
                         ||(dateEntree=="")){
                         Swal.fire({
@@ -58,26 +62,29 @@ function add() {
             dateEntree:document.getElementById('single_cal3').value,
             Qte:document.getElementById('qte').value,
             Prix:document.getElementById('prix').value,
-
-
-
         });*/
         }
-
 function update() {
-
-  var id_livre= document.getElementById('idl').value;
-  var qte= document.getElementById('qt').value;
-  var prix= document.getElementById('prix').value;
-  database=firebase.database();
-  var stockage = firebase.database().ref().child('stockage');
-
-  var l=false; 
-  stockage.once('value', function(snapshoot) {
-        var idliv;
-        snapshoot.forEach(function(childSnapshoot) {
+  var id_livre= document.getElementById('idl1').value;
+   var nom_doc=document.getElementById('nom_doc1').value;
+           var nom_domain=document.getElementById('nom_domain1').value;
+            var dateentree =document.getElementById('single_cal31').value;
+           var  dateparution=document.getElementById('datePar1').value;
+         var   qte=document.getElementById('qte1').value;
+            var prix=document.getElementById('prix1').value;
+            var resume=document.getElementById('resume1').value;
+            var eediteur=document.getElementById('editeur1').value;
+            var collection=document.getElementById('collection1').value;
+            var possaachat=document.getElementById('achat1').value;
+            var nbrep=document.getElementById('page1').value;
+            database=firebase.database();
+           var stockage = firebase.database().ref().child('stockage');
+           var l=false; 
+            stockage.once('value', function(snapshoot) {
+           var idliv;
+           snapshoot.forEach(function(childSnapshoot) {
             var idkey = childSnapshoot.key;
-              idliv=idkey;
+             idliv=idkey;
               if(idliv==id_livre) {
                  l=true;          }
                                          });     
@@ -87,42 +94,62 @@ function update() {
                     title: 'Oops...',
                     text: "id-Livre est incorrect",
                         });}
-       
     else {    
        stockage.orderByChild('id').equalTo(id_livre).on('child_added', function(snap) {
-          
-
                               path='stockage/'+ id_livre;
-                                if(qte==""){
+                                if(qte!=""){
                                 const newData ={ 
-                                  Prix:prix
+            Qte:qte,
                                   }
                             database.ref(path).update(newData);
-
                                       reload_page();
                                 }
-
-                                if(prix==""){
+                                 if(prix!=""){
+                 const newData ={ 
+Prix:prix,
+           } 
+            database.ref(path).update(newData);
+                                      reload_page();}
+                               if(dateentree!=""){
                                 const newData ={ 
-                                  Qte:qte
-                                  }
-
-                                    database.ref(path).update(newData);
-
-                                      reload_page();
-                                }
-                                if((qte!="")&&(prix!="")){
-                                  const newData ={ Qte:qte,
-                                  Prix:prix
+             dateEntree:dateentree,
+                 }
+                                  database.ref(path).update(newData);
+                                      reload_page();}
+                                  if(dateparution!=""){
+                                const newData ={ 
+            dateParution:dateparution,
+                     }
+                                  database.ref(path).update(newData);
+                                      reload_page();}
+                                  if(resume!=""){
+                                const newData ={ 
+            Resume:resume,
                                   }
                                   database.ref(path).update(newData);
-
-                                      reload_page();
-                                                                  }
-
-                                
-                           });                                 
-                                                          
-
-}
- }); }  
+                                      reload_page();}
+                                  if(editeur!=""){
+                                const newData ={ 
+            editeur:eediteur,
+                                  }
+                                  database.ref(path).update(newData);
+                                      reload_page();}
+                                  if(collection!=""){
+                                const newData ={ 
+            Collection:collection,
+            }
+            database.ref(path).update(newData);
+                                      reload_page();}   
+                                    if(possaachat!=""){
+                                const newData ={ 
+            PossAchat:possaachat,
+                                  }
+                                  database.ref(path).update(newData);
+                                      reload_page();}
+                                    if(nbrep!=""){
+                                const newData ={ 
+            nbrePage:nbrep 
+                                  } 
+                                  database.ref(path).update(newData);
+                                      reload_page();}  
+                            });}});}
