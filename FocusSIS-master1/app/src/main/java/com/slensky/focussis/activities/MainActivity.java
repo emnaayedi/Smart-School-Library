@@ -683,8 +683,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void switchFragmentFromNav(int id) {
         if (id == R.id.nav_absences) {
-            if (!(currentFragment instanceof PortalFragment)) {
-                currentFragment = new PortalFragment();
+            if (!(currentFragment instanceof AbsencesFragment)) {
+                currentFragment = new AbsencesFragment();
                 switchFragment(currentFragment);
             }
         } else if (id == com.slensky.focussis.R.id.nav_schedule) {

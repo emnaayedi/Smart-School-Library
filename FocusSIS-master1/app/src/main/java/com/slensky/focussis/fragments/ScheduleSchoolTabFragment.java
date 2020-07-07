@@ -76,6 +76,7 @@ public class ScheduleSchoolTabFragment extends Fragment {
     }
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref_emp = database.child("emprunte");
+    DatabaseReference ref_livre = database.child("stockage");
 
 
     @Nullable
@@ -116,6 +117,8 @@ public class ScheduleSchoolTabFragment extends Fragment {
                     ref_nom.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            int i = 0;
+                            String[] b=new String[(int) dataSnapshot.getChildrenCount()];
                             nom4 = dataSnapshot.getValue().toString();
                             livre=nom4;
                             period.setText(nom4);
@@ -133,8 +136,11 @@ public class ScheduleSchoolTabFragment extends Fragment {
                     RatingBar ratingBar=new RatingBar(getContext());
 
 
+                      String x=b[j];
+
                     DatabaseReference avis = database.child("emprunte/" + b[j] + "/Avis");
                     avis.addListenerForSingleValueEvent(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             nom6 = dataSnapshot.getValue().toString();
@@ -157,6 +163,23 @@ public class ScheduleSchoolTabFragment extends Fragment {
 
                                     r.setRating(ratingBar.getRating());
                                     avis.setValue(ratingBar.getRating());
+
+                                    DatabaseReference avis_liv = database.child("stockage/"+ref_nom+"/Avis");
+                                    avis_liv.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            nom=dataSnapshot.getValue().toString();
+
+                                            avis_liv.setValue((Float.parseFloat(nom)+ratingBar.getRating()/2));
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                 }
                             });
                             ratingBar.setStepSize((float) 0.5);

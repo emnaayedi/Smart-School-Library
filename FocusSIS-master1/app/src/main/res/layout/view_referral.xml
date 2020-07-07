@@ -8,47 +8,53 @@
     android:focusable="true">
 
 
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/text_reporter_name"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.2"
+            android:textAlignment="gravity"
+            android:textColor="#F44336"
+            android:textSize="12sp"
+            android:layout_marginLeft="16dp"/>
 
+        <TextView
+            android:id="@+id/text_violation"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.2"
+            android:textAlignment="viewStart"
+            android:textSize="12sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
-    <TextView
-        android:id="@+id/text_reporter_name"
-        style="@style/primaryBodyText"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/text_entry_date"
+            style="@style/primaryBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.2"
+            android:inputType="date"
+            android:textAlignment="viewStart"
+            android:textSize="12sp" />
+    </androidx.gridlayout.widget.GridLayout>
 
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.2"
-        android:textAlignment="gravity"
-        android:textColor="#F44336"
-        android:textSize="12sp" />
-
-
-    <TextView
-        android:id="@+id/text_violation"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.2"
-        android:textAlignment="viewStart"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/text_entry_date"
-        style="@style/primaryBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.2"
-        android:inputType="date"
-        android:textAlignment="viewStart"
-        android:textSize="12sp" />
 
     <!--<TextView
         android:id="@+id/text_other_violation"

@@ -7,49 +7,53 @@
     android:layout_height="wrap_content">
 
 
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_reporter_name"
-        style="@style/primaryBoldBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.1"
-        android:text="@string/referrals_name_header"
-        android:textAlignment="center"
-        android:textColor="#009688"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/text_reporter_name"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.1"
+            android:text="@string/referrals_name_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/text_entry_date"
-        style="@style/primaryBoldBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="0.1"
-        android:text="@string/referrals_entry_date_header"
-        android:textAlignment="center"
-        android:textColor="#009688"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/text_entry_date"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.1"
+            android:text="@string/referrals_entry_date_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/text_violation"
-        style="@style/primaryBoldBodyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        <TextView
+            android:id="@+id/text_violation"
+            style="@style/primaryBoldBodyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
 
-        android:layout_weight="0.1"
-        android:text="@string/referrals_violation_header"
-        android:textAlignment="center"
-        android:textColor="#009688"
-        android:textSize="15sp" />
+            android:layout_weight="0.1"
+            android:text="@string/referrals_violation_header"
+            android:textAlignment="center"
+            android:textColor="#009688"
+            android:textSize="15sp" />
+    </androidx.gridlayout.widget.GridLayout>
 
     <!--<TextView
         android:id="@+id/text_other_violation"

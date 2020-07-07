@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -50,7 +51,22 @@ public class ReferralsFragment extends NetworkTabAwareFragment {
 
 
     private static final String TAG = "";
-    String html2,html_date,html_nom_doc,html_nom_dom, possachat, resume, nbpage, collection, editeur, datePar, nomDoc, nomDomaine, dateentree, key, ref_nom_doc, ref_nom_domaine, ref_date_parution, ref_qte, ref_nb_page, ref_collection, ref_date_entree, ref_editeur, ref_resume, ref_possAchat;
+    String html2;
+    String html_date;
+    String html_nom_doc;
+    String html_nom_dom;
+    String ref_nom_doc;
+    String ref_id;
+    String ref_nom_domaine;
+    String ref_date_parution;
+    Integer ref_qte;
+    String ref_nb_page;
+    String ref_collection;
+    String ref_date_entree;
+    String ref_editeur;
+    String ref_resume;
+    String ref_possAchat;
+    String ref_avis;
     boolean b;
     TextView reporter, violation, entryDate;
     private ArrayList<String> mKeys = new ArrayList<>();
@@ -115,18 +131,20 @@ TextView messageView;
 
                                 final TableRow referralRow = (TableRow) inflater.inflate(R.layout.view_referral, table, false);
                                 ref_nom_doc = postSnapshot.child("nomDoc").getValue(String.class);
-                                if (ref_nom_doc != null) {
+                                ref_id=postSnapshot.child("id").getValue(String.class);
+                                if (ref_nom_doc != null && ref_id !=null ) {
 
                                     ref_nom_domaine = postSnapshot.child("nomDomain").getValue(String.class);
                                     ref_date_parution = postSnapshot.child("dateParution").getValue(String.class);
-                                    ref_qte = postSnapshot.child("Qte").getValue(String.class);
+                                    ref_avis = postSnapshot.child("Avis").getValue(String.class);
+                                    ref_qte = postSnapshot.child("Qte").getValue(int.class);
                                     ref_collection = postSnapshot.child("Collection").getValue(String.class);
                                     ref_nb_page = postSnapshot.child("nbrePage").getValue(String.class);
                                     ref_date_entree = postSnapshot.child("dateEntree").getValue(String.class);
-                                    ref_editeur = postSnapshot.child("Editeur").getValue(String.class);
+                                    ref_editeur = postSnapshot.child("editeur").getValue(String.class);
                                     ref_resume = postSnapshot.child("Resume").getValue(String.class);
                                     ref_possAchat = postSnapshot.child("PossAchat").getValue(String.class);
-                                    b = (ref_qte.compareTo("2") >= 1);
+                                    b = (ref_qte.compareTo(2) >= 1);
 
                                     html_date = "<b>" + ref_date_parution;
                                     entryDate.setText(Html.fromHtml(html_date));
@@ -134,15 +152,18 @@ TextView messageView;
                                     reporter.setText(Html.fromHtml(html_nom_doc));
                                     html_nom_dom = "<b>" + ref_nom_domaine;
                                     violation.setText(Html.fromHtml(html_nom_dom));
+
+
                                     html2 = "<b>Titre: </b>" + ref_nom_doc + "<br><br>" +
                                             "<b>Domaine: </b>" + ref_nom_domaine + "<br><br>" +
                                             "<b>Collection: </b>" + ref_collection + "<br><br>" +
                                             "<b>Nombre Page: </b>" + ref_nb_page + "<br><br>" +
                                             "<b>Date Parution: </b>" + ref_date_parution + "<br><br>" +
                                             "<b>Date Importation: </b>" + ref_date_entree + "<br><br>" +
-                                            "<b>Editeur:</b>" + ref_editeur + "<br><br><b>Résumé: </b>" + ref_resume + "<br><br><b>Possibilité d'Achat: </b>" + ref_possAchat;
+                                            "<b>editeur:</b>" + ref_editeur + "<br><br><b>Résumé: </b>" + ref_resume + "<br><br><b>Possibilité d'Achat: </b>" + ref_possAchat;
 
                                     AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+
                                     //alertDialog.setTitle();
                                     TextView messageView = new TextView(getContext());
 
@@ -153,7 +174,6 @@ TextView messageView;
                                     messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.subheadingText));
                                     messageView.setPadding(16, 0, 16, 0);
                                     float dpi = getContext().getResources().getDisplayMetrics().density;
-
                                     alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
                                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                                             (dialog, which) -> dialog.dismiss());
@@ -189,17 +209,21 @@ TextView messageView;
                                 violation = (TextView) referralRow.findViewById(R.id.text_violation);
                                 reporter = (TextView) referralRow.findViewById(R.id.text_reporter_name);
                                 entryDate = (TextView) referralRow.findViewById(R.id.text_entry_date);
+                                ref_id=postSnapshot.child("id").getValue(String.class);
                                 ref_nom_doc = postSnapshot.child("nomDoc").getValue(String.class);
                                 ref_nom_domaine = postSnapshot.child("nomDomain").getValue(String.class);
                                 ref_date_parution = postSnapshot.child("dateParution").getValue(String.class);
-                                ref_qte = postSnapshot.child("Qte").getValue(String.class);
+                                ref_qte = postSnapshot.child("Qte").getValue(int.class);
                                 ref_collection = postSnapshot.child("Collection").getValue(String.class);
                                 ref_nb_page = postSnapshot.child("nbrePage").getValue(String.class);
                                 ref_date_entree = postSnapshot.child("dateEntree").getValue(String.class);
-                                ref_editeur = postSnapshot.child("Editeur").getValue(String.class);
+                                ref_editeur = postSnapshot.child("editeur").getValue(String.class);
                                 ref_resume = postSnapshot.child("Resume").getValue(String.class);
                                 ref_possAchat = postSnapshot.child("PossAchat").getValue(String.class);
-                                b = (ref_qte.compareTo("2") >= 1);
+                                b = (ref_qte.compareTo(2) >= 1);
+                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+
+
 
                                 html_date = "<b>" + ref_date_parution;
                                 entryDate.setText(Html.fromHtml(html_date));
@@ -213,13 +237,14 @@ TextView messageView;
                                         "<b>Nombre Page: </b>" + ref_nb_page + "<br><br>" +
                                         "<b>Date Parution: </b>" + ref_date_parution + "<br><br>" +
                                         "<b>Date Importation: </b>" + ref_date_entree + "<br><br>" +
-                                        "<b>Editeur:</b>" + ref_editeur + "<br><br><b>Résumé: </b>" + ref_resume + "<br><br><b>Possibilité d'Achat: </b>" + ref_possAchat;
+                                        "<b>editeur:</b>" + ref_editeur + "<br><br><b>Résumé: </b>" + ref_resume + "<br><br><b>Possibilité d'Achat: </b>" + ref_possAchat;
 
-                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                                //alertDialog.setTitle();
+
+
+
                                 //alertDialog.setTitle();
                                 TextView messageView = new TextView(getContext());
-
-
                                 messageView.setText(Html.fromHtml(html2));
                                 ref_nom_doc = null;
                                 messageView.setTextIsSelectable(true);
@@ -227,7 +252,6 @@ TextView messageView;
                                 messageView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.subheadingText));
                                 messageView.setPadding(16, 0, 16, 0);
                                 float dpi = getContext().getResources().getDisplayMetrics().density;
-
                                 alertDialog.setView(messageView, (int) (19 * dpi), (int) (19 * dpi), (int) (14 * dpi), (int) (5 * dpi));
                                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                                         (dialog, which) -> dialog.dismiss());

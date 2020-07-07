@@ -3,26 +3,25 @@ package com.slensky.focussis.fragments;
 /**
  * Created by slensky on 4/2/17.
  */
-
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
-import com.slensky.focussis.R;
+
 import com.slensky.focussis.activities.MainActivity;
-import com.slensky.focussis.data.Portal;
 import com.slensky.focussis.util.GsonSingleton;
+import com.slensky.focussis.data.Portal;
 import com.slensky.focussis.util.RecyclerClickListener;
 import com.slensky.focussis.util.RecyclerTouchListener;
 import com.slensky.focussis.views.DividerItemDecoration;
 import com.slensky.focussis.views.adapters.PortalEventAdapter;
+import com.slensky.focussis.R;
 
 public class PortalEventsTabFragment extends Fragment {
     private static final String TAG = "PortalEventsTabFragment";
