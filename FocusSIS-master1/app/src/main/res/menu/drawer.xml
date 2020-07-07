@@ -4,55 +4,43 @@
     <group
         android:id="@+id/nav_group_focus"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24px"
-            android:title="@string/nav_home" />
+
         <item
             android:id="@+id/nav_absences"
             android:checked="true"
 
-            android:icon="@drawable/ic_airline_seat_individual_suite_black_24px"
-            android:title="@string/nav_absences" />
+            android:icon="@drawable/ic_home_black_24px"
+            android:title="@string/nav_absences" /><br/><br/><br/><br/>
         <item
             android:id="@+id/nav_referrals"
             android:icon="@drawable/ic_assignment_black_24px"
-            android:title="@string/nav_referrals" />
+            android:title="@string/nav_referrals" /><br/><br/><br/><br/>
 
         <item
             android:id="@+id/nav_schedule"
-            android:icon="@drawable/ic_schedule_black_24px"
-            android:title="Empruntes" />
-        <item
-            android:id="@+id/nav_calendar"
-            android:icon="@drawable/ic_date_range_black_24px"
-            android:title="@string/nav_calendar" />
+            android:icon="@drawable/ic_assignment_black_24px"
+            android:title="Empruntes" /><br/><br/><br/><br/>
+
         <item
             android:id="@+id/nav_address"
             android:icon="@drawable/ic_contacts_black_24px"
-            android:title="@string/nav_address" />
+            android:title="@string/nav_address" /><br/><br/><br/><br/>
 
-        <item
-            android:id="@+id/nav_demographic"
-            android:icon="@drawable/ic_person_black_24px"
-            android:title="@string/nav_demographic" />
 
-        <item
-            android:id="@+id/nav_final_grades"
-            android:icon="@drawable/ic_assessment_black_24px"
-            android:title="@string/nav_final_grades" />
+
+
 
     </group>
 
     <group
         android:id="@+id/nav_group_meta"
-        android:checkableBehavior="single">
+        android:checkableBehavior="single"><br/><br/><br/><br/>
         <item
             android:id="@+id/nav_settings"
             android:title="@string/nav_settings" />
         <item
             android:id="@+id/nav_about"
-            android:title="@string/nav_about" />
+            android:title="@string/nav_about" /><br/><br/><br/><br/>
     </group>
 
 

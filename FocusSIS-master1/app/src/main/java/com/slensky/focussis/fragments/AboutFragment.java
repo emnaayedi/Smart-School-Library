@@ -58,15 +58,12 @@ public class AboutFragment extends Fragment implements PageFragment {
 //        logo.setLayoutParams(lp);
 
         TextView version = (TextView) view.findViewById(R.id.text_version);
-        version.setText("Version " + this.version);
         //TextView copyright = (TextView) view.findViewById(R.id.text_copyright);
         //copyright.setText(String.format(getString(R.string.copyright), Calendar.getInstance().get(Calendar.YEAR)));
         //TextView license = (TextView) view.findViewById(R.id.text_license);
 
         ImageView mailIcon = (ImageView) view.findViewById(R.id.email_icon);
         mailIcon.setColorFilter(Color.argb(132, 0, 0, 0), PorterDuff.Mode.MULTIPLY);
-        ImageView githubIcon = (ImageView) view.findViewById(R.id.github_icon);
-        githubIcon.setColorFilter(Color.argb(132, 0, 0, 0), PorterDuff.Mode.MULTIPLY);
         ImageView licenseIcon = (ImageView) view.findViewById(R.id.version_icon);
         licenseIcon.setColorFilter(Color.argb(132, 0, 0, 0), PorterDuff.Mode.MULTIPLY);
 
@@ -88,15 +85,7 @@ public class AboutFragment extends Fragment implements PageFragment {
             }
         });
 
-        RelativeLayout githubLayout = (RelativeLayout) view.findViewById(R.id.github_layout);
-        githubLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(getString(R.string.about_github_link));
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+
 
         return view;
     }

@@ -334,8 +334,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
         if (savedInstanceState == null) {
-            currentFragment = new PortalFragment();
-            currentFragmentId = com.slensky.focussis.R.id.nav_home;
+            currentFragment = new AbsencesFragment();
+            currentFragmentId = com.slensky.focussis.R.id.nav_absences;
             switchFragment(currentFragment);
         }
         else {
@@ -682,7 +682,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void switchFragmentFromNav(int id) {
-        if (id == com.slensky.focussis.R.id.nav_home) {
+        if (id == R.id.nav_absences) {
             if (!(currentFragment instanceof PortalFragment)) {
                 currentFragment = new PortalFragment();
                 switchFragment(currentFragment);
@@ -692,7 +692,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = new ScheduleFragment();
                 switchFragment(currentFragment);
             }
-        } else if (id == com.slensky.focussis.R.id.nav_calendar) {
+        }/* else if (id == com.slensky.focussis.R.id.nav_calendar) {
             if (!(currentFragment instanceof CalendarFragment)) {
                 currentFragment = new CalendarFragment();
                 switchFragment(currentFragment);
@@ -702,7 +702,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = new DemographicFragment();
                 switchFragment(currentFragment);
             }
-        } else if (id == com.slensky.focussis.R.id.nav_address) {
+        } */else if (id == com.slensky.focussis.R.id.nav_address) {
             if (!(currentFragment instanceof AddressFragment)) {
                 currentFragment = new AddressFragment();
                 switchFragment(currentFragment);
@@ -717,12 +717,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentFragment = new AbsencesFragment();
                 switchFragment(currentFragment);
             }
-        } else if (id == com.slensky.focussis.R.id.nav_final_grades) {
+        }/* else if (id == com.slensky.focussis.R.id.nav_final_grades) {
             if (!(currentFragment instanceof FinalGradesFragment)) {
                 currentFragment = new FinalGradesFragment();
                 switchFragment(currentFragment);
             }
-        } else if (id == com.slensky.focussis.R.id.nav_settings) {
+        } */else if (id == com.slensky.focussis.R.id.nav_settings) {
             if (!(currentFragment instanceof SettingsFragment)) {
                 currentFragment = new SettingsFragment();
                 switchFragment(currentFragment);
