@@ -179,22 +179,6 @@ public class ScheduleCoursesTabFragment extends Fragment {
 
                                            }
                                        });
-                                       DatabaseReference avis = database.child("emprunte/" + b[j] + "/Avis");
-                                       avis.addListenerForSingleValueEvent(new ValueEventListener() {
-                                           @Override
-                                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                               nom6 = dataSnapshot.getValue().toString();
-                                               html15="<b>Avis: </b>" + nom6 + "<br><br>";
-
-
-
-                                           }
-
-                                           @Override
-                                           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                           }
-                                       });
 
                                        //  days.setText(c.getDays());
                                        TextView room = (TextView) courseRow.findViewById(R.id.text_course_room);
@@ -210,7 +194,7 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                                //alertDialog.setTitle();
                                                TextView messageView= new TextView(getContext());
 
-                                               messageView.setText(Html.fromHtml(html10+html11+html12+html13+html14+html15));
+                                               messageView.setText(Html.fromHtml(html10+html11+html12+html13));
 
                                                messageView.setTextIsSelectable(true);
                                                messageView.setTextColor(getResources().getColor(R.color.textPrimary));

@@ -17,9 +17,15 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.slensky.focussis.R;
 import com.slensky.focussis.activities.MainActivity;
 import com.slensky.focussis.network.FocusApi;
+import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.util.CardViewAnimationController;
 import com.slensky.focussis.util.SchoolSingleton;
 import com.slensky.focussis.views.IconWithTextView;
@@ -27,7 +33,6 @@ import com.slensky.focussis.views.IconWithTextView;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.slensky.focussis.data.Demographic;
-import com.slensky.focussis.network.FocusApiSingleton;
 import com.slensky.focussis.util.DateUtil;
 
 import java.util.List;
@@ -71,14 +76,67 @@ public class DemographicFragment extends NetworkTabAwareFragment {
     protected void onSuccess(Demographic demographic) {
         View view = getView();
         if (view != null) {
-            IconWithTextView name = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_name);
-            name.setText(demographic.getName());
-            IconWithTextView dob = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_dob);
-            if (demographic.getStudent().getBirthdate() != null) {
-                dob.setText(DateUtil.dateTimeToLongString(demographic.getStudent().getBirthdate()));
-            } else {
-                dob.setVisibility(View.GONE);
-            }
+            DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference ref_etud = database.child("etudiants");
+            ref_etud.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        IconWithTextView name = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_name);
+
+                        String nameT = ds.child("name").getValue(String.class);
+                        IconWithTextView dob = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_dob);
+                        String emailT = ds.child("email").getValue(String.class);
+                        String filT = ds.child("fil").getValue(String.class);
+                        String idT = ds.child("login").getValue(String.class);
+                        Integer telT = ds.child("nb_emp").getValue(int.class);
+                        Integer nbempT = ds.child("tel").getValue(int.class);
+
+                        IconWithTextView studentID = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_student_id);
+                        studentID.setText(idT);
+                        studentID.setText(filT);
+                        name.setText(nameT);
+                        dob.setText(emailT);
+                        LinearLayout llDetailed = view.findViewById(R.id.ll_detailed);
+
+
+                        View v2 = LayoutInflater.from(getContext()).inflate(R.layout.view_icon_with_text, llDetailed, false);
+                        ImageView ic2 = v2.findViewById(R.id.row_icon);
+                        TextView hint2 = v2.findViewById(R.id.text_hint);
+                        TextView main2 = v2.findViewById(R.id.text_main);
+                        hint2.setText(title);
+                        main2.setText(telT.toString());
+                        int drawableId2;
+                        drawableId2 = R.drawable.ic_phone_black_24px;
+                        Drawable d2 = getResources().getDrawable(drawableId2);
+                        ic2.setImageDrawable(d2);
+
+                        llDetailed.addView(v2);
+                        LinearLayout llDetailed3 = view.findViewById(R.id.ll_detailed);
+                        View v3 = LayoutInflater.from(getContext()).inflate(R.layout.view_icon_with_text, llDetailed, false);
+                        ImageView ic3 = v3.findViewById(R.id.row_icon);
+                        TextView hint3 = v3.findViewById(R.id.text_hint);
+                        TextView main3 = v3.findViewById(R.id.text_main);
+                        hint3.setText(title);
+                        main3.setText(nbempT.toString());
+                        int drawableId3;
+                        drawableId3 = R.drawable.ic_account_card_details_black_24px;
+                        Drawable d3 = getResources().getDrawable(drawableId3);
+                        ic3.setImageDrawable(d3);
+
+                        llDetailed3.addView(v3);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+
+            });
+
 
             // attempt to find email in custom fields
             String emailStr = null;
@@ -126,52 +184,8 @@ public class DemographicFragment extends NetworkTabAwareFragment {
                 grade.setText(ordinal(demographic.getStudent().getGrade()));
             }
 
-            IconWithTextView studentID = (IconWithTextView) view.findViewById(com.slensky.focussis.R.id.view_student_id);
-            studentID.setText(demographic.getStudent().getId());
 
 
-            LinearLayout llDetailed = view.findViewById(R.id.ll_detailed);
-            llDetailed.removeAllViews();
-            for (String title : demographic.getCustomFields().keySet()) {
-                View v = LayoutInflater.from(getContext()).inflate(R.layout.view_icon_with_text, llDetailed, false);
-                ImageView ic = v.findViewById(R.id.row_icon);
-                TextView hint = v.findViewById(R.id.text_hint);
-                TextView main = v.findViewById(R.id.text_main);
-                hint.setText(title);
-                main.setText(demographic.getCustomFields().get(title));
-                String t = title.toLowerCase();
-                int drawableId;
-                // custom fields can be anything, but we can try to set a nice icon based on their title
-                if (t.contains("locker")) {
-                    drawableId = R.drawable.ic_locker_multiple_black_24px;
-                } else if (t.contains("bus")) {
-                    drawableId = R.drawable.ic_directions_bus_black_24px;
-                } else if (t.contains("name")) {
-                    drawableId = R.drawable.ic_person_black_24px;
-                } else if (t.contains("medical") || t.contains("medicine")) {
-                    drawableId = R.drawable.ic_medical_bag_black_24px;
-                } else if (t.contains("file") || t.contains("form") || t.contains("document") || t.contains("documentation")) {
-                    drawableId = R.drawable.ic_clipboard_text_black_24px;
-                } else if (t.contains("birth")) {
-                    drawableId = R.drawable.ic_cake_variant_black_24px;
-                } else if (t.contains("picture") || t.contains("photo")) {
-                    drawableId = R.drawable.ic_camera_black_24px;
-                } else if (t.contains("gender") || t.contains("sex")) {
-                    drawableId = R.drawable.ic_gender_male_female_black_24px;
-                } else if (t.contains("phone") || t.contains("mobile") /* to catch "Student Mobile" field */) {
-                    drawableId = R.drawable.ic_phone_black_24px;
-                } else if (t.contains("account")) {
-                    drawableId = R.drawable.ic_account_card_details_black_24px;
-                } else if (t.contains("password")) {
-                    drawableId = R.drawable.ic_key_24px;
-                } else {
-                    drawableId = R.drawable.ic_information_outline_black_24px;
-                }
-                Drawable d = getResources().getDrawable(drawableId);
-                ic.setImageDrawable(d);
-
-                llDetailed.addView(v);
-            }
 
             CardViewAnimationController animationController = new CardViewAnimationController(getContext());
             CardView basic = view.findViewById(R.id.card_basic);
@@ -183,6 +197,8 @@ public class DemographicFragment extends NetworkTabAwareFragment {
 
         requestFinished = true;
     }
+
+
 
     @Override
     protected void makeRequest() {

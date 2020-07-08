@@ -134,7 +134,8 @@ public class ScheduleSchoolTabFragment extends Fragment {
                     TextView nomm = (TextView) courseRow.findViewById(R.id.text_course_name);
 
                     RatingBar ratingBar=new RatingBar(getContext());
-
+                    ratingBar.setStepSize((float) 0.5);
+                    ratingBar.setNumStars(5);
 
                       String x=b[j];
 
@@ -146,6 +147,7 @@ public class ScheduleSchoolTabFragment extends Fragment {
                             nom6 = dataSnapshot.getValue().toString();
                             html15="<b>Avis: </b>" + nom6 + "<br><br>";
                             RatingBar r=courseRow.findViewById(R.id.ratingBar);
+
                              r.setRating(Float.parseFloat(nom6));
 
 
@@ -164,26 +166,11 @@ public class ScheduleSchoolTabFragment extends Fragment {
                                     r.setRating(ratingBar.getRating());
                                     avis.setValue(ratingBar.getRating());
 
-                                    DatabaseReference avis_liv = database.child("stockage/"+ref_nom+"/Avis");
-                                    avis_liv.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            nom=dataSnapshot.getValue().toString();
 
-                                            avis_liv.setValue((Float.parseFloat(nom)+ratingBar.getRating()/2));
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
 
                                 }
                             });
-                            ratingBar.setStepSize((float) 0.5);
-                            ratingBar.setNumStars(5);
+
                             messageView.setText(Html.fromHtml(html15));
 
 

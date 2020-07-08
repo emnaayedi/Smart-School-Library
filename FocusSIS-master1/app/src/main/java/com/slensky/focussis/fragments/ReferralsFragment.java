@@ -66,7 +66,7 @@ public class ReferralsFragment extends NetworkTabAwareFragment {
     String ref_editeur;
     String ref_resume;
     String ref_possAchat;
-    String ref_avis;
+    Integer ref_avis;
     boolean b;
     TextView reporter, violation, entryDate;
     private ArrayList<String> mKeys = new ArrayList<>();
@@ -136,7 +136,7 @@ TextView messageView;
 
                                     ref_nom_domaine = postSnapshot.child("nomDomain").getValue(String.class);
                                     ref_date_parution = postSnapshot.child("dateParution").getValue(String.class);
-                                    ref_avis = postSnapshot.child("Avis").getValue(String.class);
+                                    ref_avis = postSnapshot.child("Avis").getValue(int.class);
                                     ref_qte = postSnapshot.child("Qte").getValue(int.class);
                                     ref_collection = postSnapshot.child("Collection").getValue(String.class);
                                     ref_nb_page = postSnapshot.child("nbrePage").getValue(String.class);
@@ -221,7 +221,6 @@ TextView messageView;
                                 ref_resume = postSnapshot.child("Resume").getValue(String.class);
                                 ref_possAchat = postSnapshot.child("PossAchat").getValue(String.class);
                                 b = (ref_qte.compareTo(2) >= 1);
-                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 
 
 
@@ -241,6 +240,7 @@ TextView messageView;
 
                                 //alertDialog.setTitle();
 
+                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
 
 
                                 //alertDialog.setTitle();

@@ -296,16 +296,64 @@
        <h4 class="modal-title" id="myModalLabel" >Editer un Livre</h4>
       </div>
       <div class="modal-body">
-       <label>id-Livre</label>
-       <input type="text"  id="idl" class="form-control"  />
-       <br /> 
-       <label>Quantité</label>
-       <input type="text" name="reference" id="qt" class="form-control"  />
+         <label>id-livre</label>
+       <input type="text" name="nom_doc" id="idl1" class="form-control"  />
        <br />
-       
-       <label>Prix</label>
-       <input type="text"  id="prix" class="form-control"  />
-       <br /> 
+        <label>Nom document</label>
+       <input type="text" name="nom_doc" id="nom_doc1" class="form-control"  />
+       <br />
+       <label>Domaine</label>
+       <input type="text" name="nom_domain" id="nom_domain1" class="form-control"  />
+        <br />
+          <label>Collection</label>
+       <input type="text" name="nom_doc" id="collection1" class="form-control"  />
+       <br />
+        <label>Prix</label>
+       <input type="number" name="prix" id="prix1" class="form-control" />
+       <br />
+         <label>Nb Pages</label>
+       <input type="number" name="prix" id="page1" class="form-control" />
+       <br />
+         <label>Possibilte d'Achat</label>
+       <select id="achat1" name="cars">
+  <option value="Oui">Oui</option>
+  <option value="Non">Non</option>
+</select>
+<br/>
+        <label>Date entree</label>
+          <fieldset >
+                          <div class="control-group">
+                            <div class="controls">
+                              <div class="col-md-11 xdisplay_inputx form-group row has-feedback">
+                                <input type="text" class="form-control has-feedback-left" id="single_cal31" placeholder="Date Entree" aria-describedby="inputSuccess2Status3">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+       <br />
+        <label>Date Parution</label>
+          <fieldset >
+                          <div class="control-group">
+                            <div class="controls">
+                              <div class="col-md-11 xdisplay_inputx form-group row has-feedback">
+                                <input type="text" class="form-control has-feedback-left" id="datePar1" placeholder="Date Parution" aria-describedby="inputSuccess2Status3">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+       <br />
+        <label>Quantite</label>
+       <input type="number" name="qte" id="qte1" class="form-control" />
+      <br />
+          <label>Editeur</label>
+       <input type="text" name="nom_doc" id="editeur1" class="form-control"  />
+       <br />
+          <label>Resume</label>
+       <input type="text" name="nom_doc" id="resume1" class="form-control"  /><br />
        
            
        
@@ -338,15 +386,40 @@
        <label>Domaine</label>
        <input type="text" name="nom_domain" id="nom_domain" class="form-control"  />
         <br />
-        <label>Prix</label>
-       <input type="number" name="prix" id="id_prix" class="form-control" />
+          <label>Collection</label>
+       <input type="text" name="nom_doc" id="collection" class="form-control"  />
        <br />
+        <label>Prix</label>
+       <input type="number" name="prix" id="prix" class="form-control" />
+       <br />
+         <label>Nb Pages</label>
+       <input type="number" name="prix" id="page" class="form-control" />
+       <br />
+         <label>Possibilte d'Achat</label>
+       <select id="achat" name="cars">
+  <option value="Oui">Oui</option>
+  <option value="Non">Non</option>
+</select>
+<br/>
         <label>Date entree</label>
           <fieldset >
                           <div class="control-group">
                             <div class="controls">
                               <div class="col-md-11 xdisplay_inputx form-group row has-feedback">
-                                <input type="text" class="form-control has-feedback-left" id="single_cal3" placeholder="First Name" aria-describedby="inputSuccess2Status3">
+                                <input type="text" class="form-control has-feedback-left" id="single_cal3" placeholder="Date Entree" aria-describedby="inputSuccess2Status3">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+       <br />
+        <label>Date Parution</label>
+          <fieldset >
+                          <div class="control-group">
+                            <div class="controls">
+                              <div class="col-md-11 xdisplay_inputx form-group row has-feedback">
+                                <input type="text" class="form-control has-feedback-left" id="datePar" placeholder="Date Parution" aria-describedby="inputSuccess2Status3">
                                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                 <span id="inputSuccess2Status3" class="sr-only">(success)</span>
                               </div>
@@ -356,7 +429,13 @@
        <br />
         <label>Quantite</label>
        <input type="number" name="qte" id="qte" class="form-control" />
-      
+      <br />
+          <label>Editeur</label>
+       <input type="text" name="nom_doc" id="editeur" class="form-control"  />
+       <br />
+          <label>Resume</label>
+       <input type="text" name="nom_doc" id="resume" class="form-control"  /><br />
+         
        </div>
        
        
@@ -381,9 +460,16 @@
                           <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 80px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Nom document</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Domaine</th>
                           
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 25px;" aria-label="Age: activate to sort column ascending">Quantite Disponible</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Collection</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Prix</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">NBpages</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 25px;" aria-label="Age: activate to sort column ascending">Possibilite d'Achat</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Date entree</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 48px;" aria-label="Salary: activate to sort column ascending">Prix</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 48px;" aria-label="Salary: activate to sort column ascending">Date Parution</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Qte_disponible</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Editeur</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Resume</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Avis</th>
                         </tr>
                       </thead>
                       <tbody id="table_body">
