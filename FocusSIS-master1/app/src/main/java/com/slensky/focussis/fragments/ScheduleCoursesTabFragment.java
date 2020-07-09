@@ -184,6 +184,7 @@ public class ScheduleCoursesTabFragment extends Fragment {
                                        TextView room = (TextView) courseRow.findViewById(R.id.text_course_room);
 
                                        DatabaseReference ref_etat = database.child("emprunte/" + b[j] + "/etat");
+
                                        ref_etat.addListenerForSingleValueEvent(new ValueEventListener() {
                                            @Override
                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

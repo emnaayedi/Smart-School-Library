@@ -76,7 +76,6 @@ public class ScheduleSchoolTabFragment extends Fragment {
     }
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ref_emp = database.child("emprunte");
-    DatabaseReference ref_livre = database.child("stockage");
 
 
     @Nullable
@@ -137,9 +136,19 @@ public class ScheduleSchoolTabFragment extends Fragment {
                     ratingBar.setStepSize((float) 0.5);
                     ratingBar.setNumStars(5);
 
-                      String x=b[j];
+
 
                     DatabaseReference avis = database.child("emprunte/" + b[j] + "/Avis");
+                    DatabaseReference ref_id1 = database.child("emprunte/" + b[j] );
+ ref_id1.child("id_livre").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String s= dataSnapshot.getValue().toString();
+
+
+
+                    DatabaseReference ref_livre = database.child("stockage/"+s);
+
                     avis.addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
@@ -165,13 +174,18 @@ public class ScheduleSchoolTabFragment extends Fragment {
 
                                     r.setRating(ratingBar.getRating());
                                     avis.setValue(ratingBar.getRating());
+                                    ref_livre.child("Avis").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String s1= dataSnapshot.getValue().toString();
 
+                                    ref_livre.child("Avis").setValue((Float.parseFloat(s1)+ratingBar.getRating())/2);}
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-                                }
-                            });
-
-                            messageView.setText(Html.fromHtml(html15));
+                                        }
+                                    });
+                                    messageView.setText(Html.fromHtml(html15));
+                                }});
 
 
                             ratingBar.setPadding(16, 16, 16, 16);
@@ -190,13 +204,19 @@ public class ScheduleSchoolTabFragment extends Fragment {
                                     alertDialog.show();
                                 }
                             });
-                        }
+                       }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
                         }
-                    });
+                    });}
+
+     @Override
+     public void onCancelled(@NonNull DatabaseError databaseError) {
+
+     }
+ });
 
 
                     // room.setText(c.getRoom().split(" ")[0]); // changes jr/sr area into just jr/sr for brevity
