@@ -1,15 +1,12 @@
+<?php 
+session_start();
 
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Login Library</title>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
 </head>
 <body>
 
@@ -51,7 +48,7 @@
           </div>
 
           <div class="container-login100-form-btn">
-        <button  class="login100-form-btn" type="button" onclick="loginUser();" >
+            <button  class="login100-form-btn" type="button" onclick="loginUser();" >
               Login
             </button>
 
@@ -103,7 +100,7 @@
 <!--===============================================================================================-->
   <script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-  <script src="js/login11.js"></script>
+  <script src="js/login1.js"></script>
 
 </body>
 </html>

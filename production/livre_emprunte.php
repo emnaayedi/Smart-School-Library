@@ -90,8 +90,8 @@
                     <ul class="nav child_menu">
                       <li><a><strong>Salle de Lecture</strong> <i class="fa fa-plus"></i></a>
                       <ul id="fct" class="nav child_menu">
-                      <li><a href="index.php">Etat</a></li>
-                      <li><a href="index.php">Regles</a></li>
+                      <li><a href="#etat">Etat</a></li>
+                      <li><a href="#calendrier">Regles</a></li>
 
                     </ul>
                   </li>
@@ -463,20 +463,21 @@
              var j_emp=test.getDate(); var m_emp=test.getMonth()+1; var y_emp=test.getFullYear();
              var etat=snap.child("etat").val();
              var d=new Date();
-            var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
-            if ((((j_emp<j)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
+            // var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
+       var j=1;var m=6;var y=2020;
+            if ((((j_emp<d)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
                   nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
 
  }
- else if((j_emp==31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&((j>=1))&&(m>m_emp)&&(etat=="notReturned")){
+ else if((j_emp==31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
 
  }
- else if((j_emp>=20)&&(j_emp<=30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j>=1)&&(m>m_emp)&&(etat=="notReturned")){
+ else if((j_emp==30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
@@ -508,7 +509,7 @@
                 if (m < 10) { 
                  m = "0" + m; 
                   } 
-             var date_emp = m+'/'+j+'/'+d.getFullYear();
+             var date_emp = j+'/'+m+'/'+d.getFullYear();
 
            var jj=d2.getDate(); var mm=d2.getMonth()+1; 
              if (jj < 10) { 
@@ -517,7 +518,7 @@
                 if (mm < 10) { 
                  mm = "0" + mm; 
                   } 
-           var date_ret = mm+'/'+jj+'/'+d2.getFullYear();
+           var date_ret = jj+'/'+mm+'/'+d2.getFullYear();
 
 
   var id_livre= document.getElementById('id_liv').value;
@@ -557,7 +558,7 @@ test.once('value', function(snapshot) {
             Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "id-Emprunteur et id-Livre sont vides",
+                    text: "id-Emprunteur et id-Livre sont incorrects",
                         });
             }
     else if(b==false){
@@ -590,7 +591,7 @@ test.once('value', function(snapshot) {
                    Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: "le nombre de possibilites etudiants egale 0",
+                    text: "le nombre de possibilite etudiants egale 0",
                         });}
             else if((b==1)||(b==2)){
                 b=b-1;
@@ -599,7 +600,7 @@ test.once('value', function(snapshot) {
             
 
       if(ok==true){
- stockage.orderByKey().equalTo(id_livre).on('child_added', function(snap) {
+ stockage.orderByChild('id').equalTo(id_livre).on('child_added', function(snap) {
           var ref=firebase.database().ref('stockage/' + id_livre).child("Qte");
           var ref1=firebase.database().ref('stockage/' + id_livre).child("nomDoc");
           var a;
@@ -634,7 +635,6 @@ test.once('value', function(snapshot) {
             date_emp:date_emp,
             date_retour:date_ret,
             nom_livre:nom,
-            Avis: 0,
             etat:"notReturned"  }
    
                 var updatess = {};
@@ -653,14 +653,10 @@ test.once('value', function(snapshot) {
 
             var datanew = { nb_emp: b }
                   path='etudiants/'+ id_etudiant;
-               firebase.database().ref(path).update(datanew);
-               window.location.reload();     
-
-             }
-
+               firebase.database().ref(path).update(datanew);}
            });
   }
-//
+
 
   });
            }
@@ -673,20 +669,11 @@ test.once('value', function(snapshot) {
 }
 
 
-   function signout(){
-    firebase.auth().signOut().then(function() {
-  // Sign-out successful. 
-    window.location="login.php";
-
-
-   }).catch(function(error) {
-  // An error happened.
-});
-  }    
+      
 </script>
 
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="js/empfinal2.js"></script>
+  <script src="js/empfinal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
