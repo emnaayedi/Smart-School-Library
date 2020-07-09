@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
     public void addNotification(String nom) {
         Intent notifyIntent = new Intent(this, ScheduleCoursesTabFragment.class) ;
         Random r = new Random();
-        int valeur = 3* r.nextInt(2);
+
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
         );
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(valeur,builder.build());
+        notificationManager.notify(15,builder.build());
     }
 
     public void notif_place() {
@@ -177,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
     public void notif_retard(String nom) {
         Intent notifyIntent = new Intent(this,ScheduleCoursesTabFragment.class) ;
         Random r = new Random();
-        int valeur =  2*r.nextInt(2);
 
         PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                 this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
@@ -192,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setContentIntent(notifyPendingIntent);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(valeur,builder.build());
+        notificationManager.notify(16,builder.build());
     }
 
 
@@ -291,7 +290,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Boolean saveLogin = loginPrefs.getBoolean(getString(R.string.login_prefs_save_login), false);
-       if (saveLogin) {
+        if (saveLogin) {
             _usernameText.setText(loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_username), ""));
             _passwordText.setText(loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_password), ""));
             _saveLoginCheckBox.setChecked(true);
@@ -332,7 +331,7 @@ public class LoginActivity extends AppCompatActivity {
                 .create();
 
         defaultSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-       if (saveLogin && defaultSharedPrefs.getBoolean("automatic_login", false)
+        if (saveLogin && defaultSharedPrefs.getBoolean("automatic_login", false)
                 && !intent.getBooleanExtra(getString(com.slensky.focussis.R.string.EXTRA_DISABLE_AUTO_SIGN_IN), false)
                 && loginPrefs.getString(getString(com.slensky.focussis.R.string.login_prefs_password), null) != null) { // occurs after password change
             login();
@@ -358,28 +357,28 @@ public class LoginActivity extends AppCompatActivity {
 
         ref_etud.addValueEventListener(new ValueEventListener() {
 
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                            // Check if key 'title' exists and if title value is equal to value to save (title_val)
-                            if (ds.hasChild("login") && (username.equals(ds.child("login").getValue()))) {
-                                if (ds.hasChild( "passwd") && (password.equals(ds.child("passwd").getValue()))) {
-                                    Log.d(TAG, "Using debug API");
-                                    FocusApplication.USE_DEBUG_API = true;
-                                    FocusApplication.loginn = username;
+                    // Check if key 'title' exists and if title value is equal to value to save (title_val)
+                    if (ds.hasChild("login") && (username.equals(ds.child("login").getValue()))) {
+                        if (ds.hasChild( "passwd") && (password.equals(ds.child("passwd").getValue()))) {
+                            Log.d(TAG, "Using debug API");
+                            FocusApplication.USE_DEBUG_API = true;
+                            FocusApplication.loginn = username;
 
-                                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                                    editor.putInt("2", 1109695);
-                                    editor.apply();
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putInt("2", 1109695);
+                            editor.apply();
 
-                                }
+                        }
 
-                                else {
-                                    FocusApplication.USE_DEBUG_API = false;
-                                }
+                        else {
+                            FocusApplication.USE_DEBUG_API = false;
+                        }
 
-                            }
+                    }
                             /*else {
                             if (ds.hasChild("login") && (! username.equals(ds.child("login").getValue())) &&
                                     !(password.equals(ds.child("passwd").getValue()))) {
@@ -387,251 +386,251 @@ public class LoginActivity extends AppCompatActivity {
 
                             }}*/
 
-                                boolean attemptLogin = true;
-                            if (username.isEmpty()) {
-                                _usernameLayout.setError(getString(R.string.login_blank_username_error));
-                                attemptLogin = false;
-                            } else {
-                                _usernameLayout.setErrorEnabled(false);
-                            }
-                            if (password.isEmpty()) {
-                                _passwordLayout.setError(getString(R.string.login_blank_password_error));
-                                attemptLogin = false;
-                            } else {
-                                _passwordLayout.setErrorEnabled(false);
-                            }
+                    boolean attemptLogin = true;
+                    if (username.isEmpty()) {
+                        _usernameLayout.setError(getString(R.string.login_blank_username_error));
+                        attemptLogin = false;
+                    } else {
+                        _usernameLayout.setErrorEnabled(false);
+                    }
+                    if (password.isEmpty()) {
+                        _passwordLayout.setError(getString(R.string.login_blank_password_error));
+                        attemptLogin = false;
+                    } else {
+                        _passwordLayout.setErrorEnabled(false);
+                    }
 
-                            if (!attemptLogin) {
-                                _loginButton.setEnabled(true);
-                                return;
-                            }
+                    if (!attemptLogin) {
+                        _loginButton.setEnabled(true);
+                        return;
+                    }
 
-                            final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(R.string.auth_progress_dialog), true);
-                            DatabaseReference ref_emp = database.child("emprunte");
-                            if (FocusApplication.USE_DEBUG_API) {
-                                api = new FocusDebugApi(username, password, getApplicationContext());
-                                ref_emp.orderByChild("id_emprunteur").equalTo(FocusApplication.loginn).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        int i = 0;
-                                        String[] b=new String[(int) dataSnapshot.getChildrenCount()];
+                    final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, null, getString(R.string.auth_progress_dialog), true);
+                    DatabaseReference ref_emp = database.child("emprunte");
+                    if (FocusApplication.USE_DEBUG_API) {
+                        api = new FocusDebugApi(username, password, getApplicationContext());
+                        ref_emp.orderByChild("id_emprunteur").equalTo(FocusApplication.loginn).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                int i = 0;
+                                String[] b=new String[(int) dataSnapshot.getChildrenCount()];
 
-                                        if (dataSnapshot.exists()) {
-                                            for (DataSnapshot d : dataSnapshot.getChildren()) {
-                                                b[i] = d.getKey();
-                                                i++;
-                                            }}
+                                if (dataSnapshot.exists()) {
+                                    for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                        b[i] = d.getKey();
+                                        i++;
+                                    }}
 
-                                        for (int j = 0; j < i; j++) {
+                                for (int j = 0; j < i; j++) {
 
-                                            DatabaseReference ref_nom = database.child("emprunte/" + b[j] + "/nom_livre");
-                                            ref_nom.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    String nom = dataSnapshot.getValue().toString();
-                                                    livre=nom;
-                                                    System.out.println(nom);
+                                    DatabaseReference ref_nom = database.child("emprunte/" + b[j] + "/nom_livre");
+                                    ref_nom.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String nom = dataSnapshot.getValue().toString();
+                                            livre=nom;
+                                            System.out.println(nom);
 
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
-                                            DatabaseReference ref_etat = database.child("emprunte/" + b[j] + "/etat");
-                                            ref_etat.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    String nom = dataSnapshot.getValue().toString();
-                                                    etat=nom;
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
-
-                                            DatabaseReference ref_retour = database.child("emprunte/" + b[j] + "/date_retour");
-                                            ref_retour.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                    String nom = dataSnapshot.getValue().toString();
-                                                    String d=nom.substring(0,2); int d1 = Integer.valueOf(d);
-                                                    String m=nom.substring(3,5); int m1 = Integer.valueOf(m);
-                                                    String y=nom.substring(6,10); int y1 = Integer.valueOf(y);
-                                                    if (((m1==getDay()+1)||(m1==getDay()))&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
-                                                        addNotification(livre);
-                                                    }//avec retard
-                                                    if ((((m1==30)&&((d1==4)||(d1==6)||(d1==9)|(d1==11)))||
-                                                            ((m1==31)&&((d1==3)||(d1==5)||(d1==7)||(d1==8)||(d1==10)))||((m1==28)&&(d1==2))||
-                                                            ((m1==29)&&(d1==2)))&&
-                                                            (getDay()==1)&&
-                                                            (d1==getMonth()-1)&&(y1==getYear())&&(etat.equals(e))){
-                                                        addNotification(livre);
-                                                    }
-
-                                                    if ((m1<getDay())&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
-                                                        notif_retard(livre);
-                                                    }
-
-
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
-
-                                            ref_place.addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange (DataSnapshot dataSnapshot1){
-
-                                                    ref_etud_existe.addValueEventListener(new ValueEventListener() {
-                                                        int dispo=0;
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot data) {
-                                                            int etud = data.getValue(int.class);
-                                                            int place = dataSnapshot1.getValue(int.class);
-                                                            dispo=place-etud;
-                                                                if (dispo==1){
-                                                                    notif_place();
-                                                                }
-
-                                                         }
-                                           @Override
-                                          public void onCancelled (@NonNull DatabaseError databaseError){
-
-                                                      }
-                                                                                           });
-
-
-
-
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
-
-                                        }//for
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {}
-
-                                });
-                            }
-                                else {
-                                api = new FocusApi(username, password, getApplicationContext());
-                            }
-                            api.login(new FocusApi.Listener<Boolean>() {
-                                @Override
-                                public void onResponse(Boolean response) {
-                                    if (response) {
-                                        Log.d(TAG, "Login successful");
-                                        final SharedPreferences.Editor loginPrefsEditor = loginPrefs.edit();
-                                         if (_saveLoginCheckBox.isChecked()) {
-                                            Log.d(TAG, "Remembering user " + username);
-                                            loginPrefsEditor.putBoolean(getString(R.string.login_prefs_save_login), true);
-                                            loginPrefsEditor.putString(getString(R.string.login_prefs_username), username);
-                                            loginPrefsEditor.putString(getString(R.string.login_prefs_password), password);
-                                            loginPrefsEditor.apply();
-                                        } else {
-                                            loginPrefsEditor.putBoolean(getString(R.string.login_prefs_save_login), false);
-                                            loginPrefsEditor.putString(getString(R.string.login_prefs_username), "");
-                                            loginPrefsEditor.putString(getString(R.string.login_prefs_password), "");
-                                            loginPrefsEditor.apply();
                                         }
-                                       loginPrefsEditor.apply();
 
-                                        if (defaultSharedPrefs.getBoolean("always_check_preferences", true)) {
-                                            api.getPreferences(new FocusApi.Listener<FocusPreferences>() {
-                                                @Override
-                                                public void onResponse(FocusPreferences response) {
-                                                    focusPreferences = response;
-                                                    if (focusPreferences.isEnglishLanguage()) {
-                                                        progressDialog.hide();
-                                                        progressDialog.dismiss();
-                                                        FocusApiSingleton.setApi(api);
-                                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                        intent.putExtra(getString(R.string.EXTRA_USERNAME), username);
-                                                        intent.putExtra(getString(R.string.EXTRA_PASSWORD), password);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    } else {
-                                                        progressDialog.hide();
-                                                        progressDialog.dismiss();
-                                                        _loginButton.setEnabled(true);
-                                                        languageErrorDialog.show();
-                                                    }
-                                                }
-                                            }, new Response.ErrorListener() {
-                                                @Override
-                                                public void onErrorResponse(VolleyError error) {
-                                                    progressDialog.hide();
-                                                    Log.d(TAG, "Getting preferences failed");
-                                                    if (error.networkResponse != null) {
-                                                        if (error.networkResponse.statusCode == 500) {
-                                                            onLoginFailed(getString(R.string.network_error_server));
-                                                        } else {
-                                                            onLoginFailed(getString(R.string.network_error_timeout));
-                                                        }
-                                                    } else {
-                                                        onLoginFailed(getString(R.string.network_error_timeout));
-                                                    }
-                                                }
-                                            });
-                                        } else {
-                                            progressDialog.hide();
-                                            try {
-                                                progressDialog.dismiss();
-                                            } catch (IllegalArgumentException e) {
-                                                Log.e(TAG, "Not attached to window manager, could not dismiss dialog");
-                                                e.printStackTrace();
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                    DatabaseReference ref_etat = database.child("emprunte/" + b[j] + "/etat");
+                                    ref_etat.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String nom = dataSnapshot.getValue().toString();
+                                            etat=nom;
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                    DatabaseReference ref_retour = database.child("emprunte/" + b[j] + "/date_retour");
+                                    ref_retour.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String nom = dataSnapshot.getValue().toString();
+                                            String d=nom.substring(0,2); int d1 = Integer.valueOf(d);
+                                            String m=nom.substring(3,5); int m1 = Integer.valueOf(m);
+                                            String y=nom.substring(6,10); int y1 = Integer.valueOf(y);
+                                            if (((m1==getDay()+1)||(m1==getDay()))&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                addNotification(livre);
+                                            }//avec retard
+                                            if ((((m1==30)&&((d1==4)||(d1==6)||(d1==9)|(d1==11)))||
+                                                    ((m1==31)&&((d1==3)||(d1==5)||(d1==7)||(d1==8)||(d1==10)))||((m1==28)&&(d1==2))||
+                                                    ((m1==29)&&(d1==2)))&&
+                                                    (getDay()==1)&&
+                                                    (d1==getMonth()-1)&&(y1==getYear())&&(etat.equals(e))){
+                                                addNotification(livre);
                                             }
-                                            FocusApiSingleton.setApi(api);
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            intent.putExtra(getString(R.string.EXTRA_USERNAME), username);
-                                            intent.putExtra(getString(R.string.EXTRA_PASSWORD), password);
-                                            startActivity(intent);
-                                            finish();
+
+                                            if ((m1<getDay())&&(d1==getMonth())&&(y1==getYear())&&(etat.equals(e))){
+                                                notif_retard(livre);
+                                            }
+
+
                                         }
-                                    } else {
-                                        progressDialog.hide();
-                                        Log.d(TAG, "Login unsuccessful");
-                                        onLoginFailed(getString(R.string.network_error_auth));
-                                        _passwordText.setText("");
-                                    }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                    ref_place.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange (DataSnapshot dataSnapshot1){
+
+                                            ref_etud_existe.addValueEventListener(new ValueEventListener() {
+                                                int dispo=0;
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot data) {
+                                                    int etud = data.getValue(int.class);
+                                                    int place = dataSnapshot1.getValue(int.class);
+                                                    dispo=place-etud;
+                                                    if (dispo==1){
+                                                        notif_place();
+                                                    }
+
+                                                }
+                                                @Override
+                                                public void onCancelled (@NonNull DatabaseError databaseError){
+
+                                                }
+                                            });
+
+
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                                }//for
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {}
+
+                        });
+                    }
+                    else {
+                        api = new FocusApi(username, password, getApplicationContext());
+                    }
+                    api.login(new FocusApi.Listener<Boolean>() {
+                        @Override
+                        public void onResponse(Boolean response) {
+                            if (response) {
+                                Log.d(TAG, "Login successful");
+                                final SharedPreferences.Editor loginPrefsEditor = loginPrefs.edit();
+                                if (_saveLoginCheckBox.isChecked()) {
+                                    Log.d(TAG, "Remembering user " + username);
+                                    loginPrefsEditor.putBoolean(getString(R.string.login_prefs_save_login), true);
+                                    loginPrefsEditor.putString(getString(R.string.login_prefs_username), username);
+                                    loginPrefsEditor.putString(getString(R.string.login_prefs_password), password);
+                                    loginPrefsEditor.apply();
+                                } else {
+                                    loginPrefsEditor.putBoolean(getString(R.string.login_prefs_save_login), false);
+                                    loginPrefsEditor.putString(getString(R.string.login_prefs_username), "");
+                                    loginPrefsEditor.putString(getString(R.string.login_prefs_password), "");
+                                    loginPrefsEditor.apply();
                                 }
-                            }, new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
+                                loginPrefsEditor.apply();
+
+                                if (defaultSharedPrefs.getBoolean("always_check_preferences", true)) {
+                                    api.getPreferences(new FocusApi.Listener<FocusPreferences>() {
+                                        @Override
+                                        public void onResponse(FocusPreferences response) {
+                                            focusPreferences = response;
+                                            if (focusPreferences.isEnglishLanguage()) {
+                                                progressDialog.hide();
+                                                progressDialog.dismiss();
+                                                FocusApiSingleton.setApi(api);
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                intent.putExtra(getString(R.string.EXTRA_USERNAME), username);
+                                                intent.putExtra(getString(R.string.EXTRA_PASSWORD), password);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                progressDialog.hide();
+                                                progressDialog.dismiss();
+                                                _loginButton.setEnabled(true);
+                                                languageErrorDialog.show();
+                                            }
+                                        }
+                                    }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            progressDialog.hide();
+                                            Log.d(TAG, "Getting preferences failed");
+                                            if (error.networkResponse != null) {
+                                                if (error.networkResponse.statusCode == 500) {
+                                                    onLoginFailed(getString(R.string.network_error_server));
+                                                } else {
+                                                    onLoginFailed(getString(R.string.network_error_timeout));
+                                                }
+                                            } else {
+                                                onLoginFailed(getString(R.string.network_error_timeout));
+                                            }
+                                        }
+                                    });
+                                } else {
                                     progressDialog.hide();
-                                    Log.d(TAG, "Login failed");
-                                    if (error.networkResponse != null) {
-                                        if (error.networkResponse.statusCode == 500) {
-                                            onLoginFailed(getString(R.string.network_error_server));
-                                        } else {
-                                            onLoginFailed(getString(R.string.network_error_timeout));
-                                        }
-                                    } else {
-                                        onLoginFailed(getString(R.string.network_error_timeout));
+                                    try {
+                                        progressDialog.dismiss();
+                                    } catch (IllegalArgumentException e) {
+                                        Log.e(TAG, "Not attached to window manager, could not dismiss dialog");
+                                        e.printStackTrace();
                                     }
+                                    FocusApiSingleton.setApi(api);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.putExtra(getString(R.string.EXTRA_USERNAME), username);
+                                    intent.putExtra(getString(R.string.EXTRA_PASSWORD), password);
+                                    startActivity(intent);
+                                    finish();
                                 }
-                            });
-                            }//for
+                            } else {
+                                progressDialog.hide();
+                                Log.d(TAG, "Login unsuccessful");
+                                onLoginFailed(getString(R.string.network_error_auth));
+                                _passwordText.setText("");
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progressDialog.hide();
+                            Log.d(TAG, "Login failed");
+                            if (error.networkResponse != null) {
+                                if (error.networkResponse.statusCode == 500) {
+                                    onLoginFailed(getString(R.string.network_error_server));
+                                } else {
+                                    onLoginFailed(getString(R.string.network_error_timeout));
+                                }
+                            } else {
+                                onLoginFailed(getString(R.string.network_error_timeout));
+                            }
+                        }
+                    });
+                }//for
 
 
-                    }//ondatachange mté3 username
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) { }
-                });//ref mté3 username
+            }//ondatachange mté3 username
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });//ref mté3 username
 
     }//login
 
@@ -662,4 +661,4 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    }
+}
