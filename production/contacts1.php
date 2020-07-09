@@ -192,7 +192,7 @@
                           <span>Settings</span>
                         </a>
                     <a class="dropdown-item"  href="javascript:;">Help</a>
-                      <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                      <a class="dropdown-item"  onclick="signout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
                   </li>
   
@@ -330,6 +330,17 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+
+        function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful. 
+    window.location="login.php";
+
+
+   }).catch(function(error) {
+  // An error happened.
+});
+  }
       </script>
           <script src="js/contacts1.js"></script>
 

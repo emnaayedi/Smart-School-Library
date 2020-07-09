@@ -91,11 +91,11 @@
                   <li ><a href="index.php" ><i class="fa fa-home"></i> Home </a>
                     
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Bibliotheque <span class="fa fa-chevron-down"></span></a>
+    <li><a><i class="fa fa-edit"></i> Bibliotheque <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a><strong>Salle de Lecture</strong> <i class="fa fa-plus"></i></a>
                       <ul id="fct" class="nav child_menu">
-                      <li><a href="#etat">Etat</a></li>
+                      <li><a href="index.php">Etat</a></li>
                       <li><a href="#calendrier">Regles</a></li>
 
                     </ul>
@@ -207,7 +207,7 @@
                     <img src="images/logo1.jpg" alt="">Log Out
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item"  href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                 <a class="dropdown-item" onclick="signout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
 
@@ -462,14 +462,18 @@
                           
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Collection</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Prix</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">NBpages</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 25px;" aria-label="Age: activate to sort column ascending">Possibilite d'Achat</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 52px;" aria-label="Start date: activate to sort column ascending">Date entree</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 48px;" aria-label="Salary: activate to sort column ascending">Date Parution</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Qte_disponible</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 30px;" aria-label="Position: activate to sort column ascending">Qte_disponible</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Editeur</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Action</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">NBpages</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Resume</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 65px;" aria-label="Position: activate to sort column ascending">Avis</th>
+
+
                         </tr>
                       </thead>
                       <tbody id="table_body">
@@ -554,15 +558,14 @@
              var j_emp=test.getDate(); var m_emp=test.getMonth()+1; var y_emp=test.getFullYear();
              var etat=snap.child("etat").val();
              var d=new Date();
-            // var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
-       var j=1;var m=6;var y=2020;
+             var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
             if ((((j_emp<d)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
                   nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
 
  }
- else if((j_emp==31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
+ else if((j_emp>=20)&&(j_emp<=31)&&((m_emp==1)||(m_emp==3)||(m_emp==5)||(m_emp==7)||(m_emp==8)||(m_emp==10)||(m_emp==12))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
@@ -585,12 +588,21 @@
 
 });
       
-             
+          function signout(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful. 
+    window.location="login.php";
+
+
+   }).catch(function(error) {
+  // An error happened.
+});
+  }   
           </script>
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-  <script src="js/do.js"></script>
+  <script src="js/do1.js"></script>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

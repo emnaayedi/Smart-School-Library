@@ -67,7 +67,7 @@
         <div class="col-md-3 left_col menu_fixed mCustomScrollbar _mCS_1 mCS-autoHide" style="overflow: visible;">
           <div class="left_col">
             <div class="navbar nav_title" style="border: 0;">
-              <a href=" php" class="site_title"><i class="fa fa-paw"></i> <span>Smart Libray </span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-paw"></i> <span>Smart Libray </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -77,9 +77,9 @@
               <div class="profile_pic">
                 <img src="images/logo1.jpg"  class="img-circle profile_img">
               </div>
-              <div class="profile_info">
+              <div id="user_div"  class="profile_info">
                 <br>
-                <span><h4>Welcome</h4></span>
+                <span ><h4>Welcome</h4></span>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -451,8 +451,8 @@ function addh() {
              var j_emp=test.getDate(); var m_emp=test.getMonth()+1; var y_emp=test.getFullYear();
              var etat=snap.child("etat").val();
              var d=new Date();
-            // var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
-       var j=1;var m=6;var y=2020;
+            var j=d.getDate(); var m=d.getMonth()+1; var y=d.getFullYear();
+       //var j=1;var m=6;var y=2020;
             if ((((j_emp<d)&&((m==m_emp)||(m_emp<m))&&(y==y_emp)))&&(etat=="notReturned")) {
                   nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
@@ -465,7 +465,7 @@ function addh() {
                      console.log(date);
 
  }
- else if((j_emp==30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
+ else if((j_emp>=20)&&(j_emp<=30)&&((m_emp==4)||(m_emp==6)||(m_emp==9)||(m_emp==11))&&(y_emp==y)&&(j==1)&&(m>m_emp)&&(etat=="notReturned")){
    nb=nb+1;
         $("#ida").append("<li class=\"nav-item\"><a class=\"dropdown-item\"> <span class=\"image\"><img src=\"images/img.jpg\" alt=\"Profile Image\" /></span><span>John Smith</span><span class=\"message\" >L'emprunte d'ID :  "+ id_emprunte +  "  a dépassé la date de retour</span></a></li>");
                      console.log(date);
