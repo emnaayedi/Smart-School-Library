@@ -110,8 +110,9 @@ Let us know if you have done integration for this admin template on other platfo
 * jQuery Smart Wizard
 
 ## People Counter Output
-https://github.com/emnaayedi/library-master/blob/2d88b7eb76b90c4dfc1468ca6f8eb6504bb1eec9/docs/fonts/images/output_01%20-%20Copy.avi
-![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/2d88b7eb76b90c4dfc1468ca6f8eb6504bb1eec9/docs/fonts/images/output_01%20-%20Copy.avi?row=true) - List of the best Free Bootstrap admin dashboard templates that are available for free for personal and commercial use.
+![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/added.png?row=true)
+![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/entering.png?row=true)
+
 
 ## License information
 Gentelella is licensed under The MIT License (MIT). Which means that you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software. But you always need to state that Colorlib is the original author of this template.
