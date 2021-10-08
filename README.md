@@ -14,7 +14,7 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 
 ## Documentation
 
-**[Documentation](https://colorlibhq.github.io/gentelella/)**
+**[Documentation](https://github.com/emnaayedi/library-master/blob/b0a04ce4263c0409e76356e6fc28b36f429881a4/review.jpg)**
 
 ## Installation via Package Manager
 
