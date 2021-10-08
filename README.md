@@ -6,9 +6,8 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 
 
 
-## Theme Demo
-![Gentelella Bootstrap Admin Template](https://cdn.colorlib.com/wp/wp-content/uploads/sites/2/gentelella-admin-template-preview.jpg 
-"Gentelella Theme Browser Preview")
+## Librarian Dashboard
+![Gentelella Bootstrap Admin Template](https://github.com/emnaayedi/library-master/blob/f24ee2a742b1397e7a8e7305b470ca5c25bbbff8/Librarian_Dashboard.jpg?raw=true)
 
 **[Template Demo](https://colorlib.com/polygon/gentelella/index.html)**
 
