@@ -7,7 +7,7 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 
 
 ## Librarian Dashboard
-![Gentelella Bootstrap Admin Template](https://github.com/emnaayedi/library-master/blob/f24ee2a742b1397e7a8e7305b470ca5c25bbbff8/Librarian_Dashboard.jpg?raw=true)
+![Gentelella Bootstrap Admin Template](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true)
 
 **[Template Demo](https://colorlib.com/polygon/gentelella/index.html)**
 
