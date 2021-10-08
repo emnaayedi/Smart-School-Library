@@ -110,8 +110,8 @@ Let us know if you have done integration for this admin template on other platfo
 * jQuery Smart Wizard
 
 ## People Counter Output
-![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/added.png?row=true)
 ![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/entering.png?row=true)
+![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/added.png?row=true)
 
 
 ## License information
