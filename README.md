@@ -15,11 +15,13 @@ A web-based solution to manage school librarians' operations and a mobile applic
 
 
 ## Students' Mobile Application
-**Login Page** </br></br>
-![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true) </br>
-**Home page**                **Menu**                           **Real Time Notification**
-![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)
+**Login Page**
+![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)
+**Home page**                                         
+![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br></br>
+**Menu** 
 ![Menu Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Menu.jpg?raw=true)
+ **Real Time Notification**
 ![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br>
 **Borrowed Book List and details** </br></br>
 ![Emprunt Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunt_list.jpg?raw=true)
