@@ -11,7 +11,7 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 ![Librarian Home page](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true) 
 **Documents page** </br></br>
 ![Documents page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/Documents.jpg?raw=true)
-![Add Document page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/add_docuemnt.jpg?raw=true) </br>
+![Add Document page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/add_docuemnt.jpg?raw=true)
 **Borrow Page** </br></br>
 ![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
 
