@@ -8,12 +8,23 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 
 ## Librarian Dashboard
 ![Gentelella Bootstrap Admin Template](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true)
+![Documents page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Documents.jpg?raw=true)
+![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
+
 
 **[Template Demo](https://colorlib.com/polygon/gentelella/index.html)**
 
-## Documentation
+## Students' Mobile Application
 
-![ddddd](https://github.com/emnaayedi/library-master/blob/b0a04ce4263c0409e76356e6fc28b36f429881a4/review.jpg?raw=true)
+![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)
+![Menu Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Menu.jpg?raw=true)
+![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_page.jpg?raw=true)
+![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)
+![Emprunt Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunt_list.jpg?raw=true)
+![Emprunt Detail page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/emprunt_details.jpg?raw=true)
+![Reviews List Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/reviews_list.jpg?raw=true)
+![Review Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/review.jpg?raw=true)
+![Complaint Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/complaint.jpg?raw=true)
 
 ## Installation via Package Manager
 
