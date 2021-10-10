@@ -8,8 +8,8 @@ Theme uses several libraries for charts, calendar, form validation, wizard style
 
 ## Librarian Dashboard
 ![Gentelella Bootstrap Admin Template](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true)
-![Documents page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Documents.jpg?raw=true)
-![Add Document page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/add_docuemnt.jpg?raw=true)
+![Documents page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/Documents.jpg?raw=true)
+![Add Document page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/add_docuemnt.jpg?raw=true)
 ![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
 
 
