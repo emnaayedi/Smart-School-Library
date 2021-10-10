@@ -2,19 +2,6 @@
 
 A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library's updates
 
-The main features that will be taken into account in our solution are as follows:
-• Relieve the librarian of heavy and delicate tasks for better administrative management.
-• Provide administrators with quick and confidential access to information.
-• Facilitate the management of borrowing books.
-• Guarantee the librarian to properly manage the borrowing of books and returns .
-• Warn users in the event of a delay.
-• Have the possibility of consulting in real time the number of chairs and tables available in the library.
-• Receive and process complaints sent by students.
-• Allow the student to get an idea of availbale places in the library.
-• Obtain statistics on student access to the library (year, month, day) and on the rate of use of the application.
-
-
-
 ## Librarian Web Application
 **Login Page**</br>
 ![Login Page](https://github.com/emnaayedi/library-master/blob/94be418cc3db70e809f929647688f18d002cb42b/docs/fonts/images/Login_lib.jpg?raw=true)</br>
@@ -50,7 +37,15 @@ The main features that will be taken into account in our solution are as follows
 ![Free Bootstrap Admin Templates](https://github.com/emnaayedi/library-master/blob/d0e7be74a2114b437b7f491c8a2f0f909b7795d0/added.png?row=true)
 
 
-## License information
-Gentelella is licensed under The MIT License (MIT). Which means that you can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software. But you always need to state that Colorlib is the original author of this template.
+## Application Features
+• Relieve the librarian of heavy and delicate tasks for better administrative management. </br>
+• Provide administrators with quick and confidential access to information.  </br>
+• Facilitate the management of borrowing books. </br>
+• Guarantee the librarian to properly manage the borrowing of books and returns . </br>
+• Warn users in the event of a delay. </br>
+• Have the possibility of consulting in real time the number of chairs and tables available in the library. </br>
+• Receive and process complaints sent by students. </br>
+• Allow the student to get an idea of availbale places in the library. </br>
+• Obtain statistics on student access to the library (year, month, day) and on the rate of use of the application.
 
-Project is developed and maintained by [Colorlib](https://colorlib.com/ "Colorlib - Make Your First Blog") and Aigars Silkalns
+
