@@ -2,7 +2,16 @@
 
 A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library's updates
 
-Theme uses several libraries for charts, calendar, form validation, wizard style interface, off-canvas navigation menu, text forms, date range, upload area, form autocomplete, range slider, progress bars, notifications and much more.
+The main features that will be taken into account in our solution are as follows:
+• Relieve the librarian of heavy and delicate tasks for better administrative management.
+• Provide administrators with quick and confidential access to information.
+• Facilitate the management of borrowing books.
+• Guarantee the librarian to properly manage the borrowing of books and returns .
+• Warn users in the event of a delay.
+• Have the possibility of consulting in real time the number of chairs and tables available in the library.
+• Receive and process complaints sent by students.
+• Allow the student to get an idea of availbale places in the library.
+• Obtain statistics on student access to the library (year, month, day) and on the rate of use of the application.
 
 
 
