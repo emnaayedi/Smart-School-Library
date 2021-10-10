@@ -18,8 +18,8 @@ A web-based solution to manage school librarians' operations and a mobile applic
 **Login Page** </br></br>
 ![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true) </br>
 **Home page** </br></br>
-<div style="float: right">![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</div>
-This page is mainly designed to view the number of places available in the room, its climatic conditions (temperature and activation / deactivation of air conditioning) and the update of its schedules.</br>
+![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)
+<p>This page is mainly designed to view the number of places available in the room, its climatic conditions (temperature and activation / deactivation of air conditioning) and the update of its schedules.</p></br>
 **Menu** </br></br>
 ![Menu Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Menu.jpg?raw=true)</br>
 **Real Time Notification** </br></br>
