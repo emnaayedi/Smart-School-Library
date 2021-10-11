@@ -14,7 +14,7 @@ A web-based solution to manage school librarians' operations and a mobile applic
 ![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
 </br>
 
-## Students' Mobile Application
+## Students Mobile Application
 **Login Page** </br>
 ![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)</br></br>
 **Home page** </br>                                  
