@@ -1,6 +1,6 @@
 # Smart School Library
 
-A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library updates
+A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library updates</br>
 ![architecture](https://github.com/emnaayedi/Smart-School-Library/blob/675caaa3c51d785128b3193183afa2fe1b24ebf1/docs/fonts/images/architecture.jpg?row=true)</br>
 
 ## Librarian Web Application
