@@ -1,6 +1,6 @@
 # Smart School Library
 
-A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library's updates
+A web-based solution to manage school librarians' operations and a mobile application for students that enables them to follow school library updates
 
 ## Librarian Web Application
 **Login Page**</br>
