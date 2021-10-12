@@ -4,26 +4,22 @@ A web-based solution to manage school librarians' operations and a mobile applic
 ![architecture](https://github.com/emnaayedi/Smart-School-Library/blob/675caaa3c51d785128b3193183afa2fe1b24ebf1/docs/fonts/images/architecture.jpg?row=true)</br>
 
 ## Librarian Web Application
-**Login Page**</br>
-![Login Page](https://github.com/emnaayedi/library-master/blob/94be418cc3db70e809f929647688f18d002cb42b/docs/fonts/images/Login_lib.jpg?raw=true)</br></br>
 **Dashboard** </br>
 ![Librarian Home page](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true)</br></br>
-**Documents page** </br>
-![Documents page](https://github.com/emnaayedi/library-master/blob/12938f19b27f21ccc1f22963d06ae233fa3921aa/docs/fonts/images/Documents.jpg?raw=true)
 **Borrow Page** </br>
 ![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
 </br>
 
 ## Students Mobile Application
-**Login Page** </br>
-![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)</br></br>
+**Login Page** 
+![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)</br>
 **Home page** </br>                                  
-![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br></br>
- **Real Time Notification** </br>
-![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br></br>
-**Borrowed Book List and details** </br>
+![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br>
+ **Real Time Notification** 
+![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br>
+**Borrowed Book List and details** 
 ![Emprunt Detail page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/emprunt_details.jpg?raw=true)</br>
-**Reviews** </br>
+**Reviews** 
 ![Review Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/review.jpg?raw=true)
 ![Complaint Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/complaint.jpg?raw=true)
 </br>
