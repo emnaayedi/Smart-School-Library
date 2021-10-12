@@ -1,0 +1,246 @@
+{
+  "admins" : {
+    "77" : {
+      "admin" : "aaaaaaa",
+      "id" : 77
+    },
+    "-M2onc5B6CpgKmXtZxiq" : {
+      "admin" : "chaima",
+      "id" : "-M2onc5B6CpgKmXtZxiq"
+    },
+    "-M2onfPdaqWft0d95klW" : {
+      "admin" : "sirine",
+      "id" : "-M2onfPdaqWft0d95klW"
+    }
+  },
+  "biblio" : {
+    "document" : 500,
+    "nb_chaise" : "205",
+    "nb_etud" : 2500,
+    "nb_etud_existe" : 104,
+    "place_total" : 200,
+    "temp" : 26,
+    "temps" : "16:02:04"
+  },
+  "climatiseur" : [ null, {
+    "emplace" : "",
+    "etat" : true,
+    "id_clim" : "1",
+    "marque" : "",
+    "mode" : "",
+    "temp" : ""
+  }, {
+    "emplace" : "",
+    "etat" : true,
+    "id_clim" : "2",
+    "marque" : "",
+    "mode" : "",
+    "temp" : ""
+  }, {
+    "emplace" : "",
+    "id_clim" : "3",
+    "marque" : "",
+    "mode" : "",
+    "temp" : ""
+  }, {
+    "emplace" : "droite2",
+    "etat" : false,
+    "id_clim" : "4",
+    "marque" : "LG",
+    "mode" : "XC",
+    "temp" : "24"
+  }, null, {
+    "emplace" : "enface2",
+    "etat" : true,
+    "id_clim" : "6",
+    "marque" : "LG",
+    "mode" : "ventialetur",
+    "temp" : "23"
+  }, {
+    "emplace" : "droite3",
+    "etat" : true,
+    "id_clim" : "7",
+    "marque" : "LG",
+    "mode" : "ventil",
+    "temp" : "20"
+  } ],
+  "emprunte" : {
+    "-MBjsnSbewt7fAFzg5jE" : {
+      "Avis" : 0,
+      "date_emp" : "06/22/2020",
+      "date_retour" : "07/06/2020",
+      "emp_id" : "-MBjsnSbewt7fAFzg5jE",
+      "etat" : "notReturned",
+      "id_emprunteur" : "1238574",
+      "id_livre" : "1",
+      "nom_livre" : "Python"
+    },
+    "-MBnvOw3XQy-Mz-487FO" : {
+      "Avis" : 5,
+      "date_emp" : "07/09/2020",
+      "date_retour" : "07/23/2020",
+      "emp_id" : "-MBnvOw3XQy-Mz-487FO",
+      "etat" : "notReturned",
+      "id_emprunteur" : "445566",
+      "id_livre" : "3",
+      "nom_livre" : "ejb"
+    },
+    "-MBnw7U5k_0QI9bcfXSO" : {
+      "Avis" : 2,
+      "date_emp" : "07/09/2020",
+      "date_retour" : "07/23/2020",
+      "emp_id" : "-MBnw7U5k_0QI9bcfXSO",
+      "etat" : "notReturned",
+      "id_emprunteur" : "1109654",
+      "id_livre" : "5",
+      "nom_livre" : "SQL2"
+    }
+  },
+  "etudiants" : {
+    "124578" : {
+      "Existe_Bib" : "non",
+      "email" : "aaaaa@stud.enis.tn",
+      "fil" : "Biologie",
+      "login" : "124578",
+      "name" : "aaaaa bbbbb",
+      "nb_emp" : 2,
+      "passwd" : 123,
+      "tel" : 52461620
+    },
+    "445566" : {
+      "Existe_Bib" : "oui",
+      "email" : "emna.ayedi@stud.enis.tn",
+      "fil" : "Informatique",
+      "login" : "445566",
+      "name" : "Ayedi Emna",
+      "nb_emp" : 1,
+      "passwd" : "4455",
+      "tel" : 44569123
+    },
+    "1109654" : {
+      "email" : "chaima.gharbi@stud.enis.tn",
+      "fil" : "informatique",
+      "login" : "1109654",
+      "name" : "chaima Gharbi",
+      "nb_emp" : 0,
+      "passwd" : "chaima123",
+      "tel" : 21461620
+    },
+    "1238574" : {
+      "Existe_Bib" : "oui",
+      "email" : "yessine.benfoulen@enis.tn",
+      "fil" : "mecanique",
+      "login" : "1238574",
+      "name" : "Yessine BenFoulen",
+      "nb_emp" : 1,
+      "passwd" : "123123",
+      "tel" : 22656987
+    }
+  },
+  "horaires" : {
+    "dimanche" : {
+      "date" : "02/02/2020",
+      "debut" : "08:00",
+      "fin" : "16:00",
+      "id" : 7,
+      "jour" : "Dimanche"
+    },
+    "jeudi" : {
+      "debut" : "08:00",
+      "fin" : "20:00",
+      "id" : 4,
+      "jour" : "Jeudi"
+    },
+    "lundi" : {
+      "debut" : "08:00",
+      "fin" : "20:00",
+      "id" : 1,
+      "jour" : "Lundi"
+    },
+    "mardi" : {
+      "debut" : "8:00",
+      "fin" : "20:00",
+      "id" : 2,
+      "jour" : "Mardi"
+    },
+    "mercredi" : {
+      "debut" : "08:00",
+      "fin" : "20:00",
+      "id" : 3,
+      "jour" : "Mercredi"
+    },
+    "samedi" : {
+      "debut" : "08:00",
+      "fin" : "18:00",
+      "id" : 6,
+      "jour" : "Samedi"
+    },
+    "vendredi" : {
+      "debut" : "08:00",
+      "fin" : "20:00",
+      "id" : 5,
+      "jour" : "Vendredi"
+    }
+  },
+  "reclamation" : {
+    "-MAMhULJQggxRhxQ6VN2" : {
+      "msg" : "chaijfjf kfkfjd fjfjf jfjdjd kdjdvf kfjfhf "
+    },
+    "-MAMhhWJKdxDN0PFgERH" : {
+      "msg" : "gdjfyf\njdjfudj fjfufu fjfuxyf jxuxufuf xjxjfufuf fjfjfuf jgydhk hfhjtg bjfcjut jygvjuy jutvktg jutvky kygvku bigjitg kughkyf jygvkyf jtfvjyg nfjfjfuf fjxhixjfbxkxjfu xkxuxufbjxjfuf fixhxuf jxufhdnid kfjfufjix kfufufbbifjfuf jfufhfkuf jfufjfiuf "
+    },
+    "-MAR0bAiCQ29mZuE83b9" : {
+      "msg" : "thdjfkfknfkfkkfjfjjejdjfjfbjf\n"
+    },
+    "-MBF2Ac0ZO6loQ2iXlxf" : {
+      "msg" : "thanks JJ JJ jjjj GT gdcl yfjvdv idjksjfksnf ksjfkdnkn ifhdh jhfhfd hsfshfu shfihfisf sfhishfsh his fhsihf ifhhf fidh hfihdf"
+    },
+    "-MBG4WU1nAAuE-nId_V4" : {
+      "msg" : "xnscsc xnaj hxajcj uhaugscg. thanks JJ and thanks for your help with this for me and I have to be at my house by"
+    },
+    "-MBdow6qBweMI7a3YZZN" : {
+      "msg" : "jdidud kxifif fkgogif gkgofirvr rkfifjf fkfifhr gkgirv \n"
+    },
+    "-MBfN5xr7X8yM36WZx8d" : {
+      "msg" : "bonsoir monsieur le bibliothécaire,\nje remarque souvent qu'il y a beaucoup de bruit à la salle de lecture. "
+    },
+    "-MMR1ZgnrTy4SnVWTIG9" : {
+      "msg" : "hdjdid kejdcfjr jfbfbf "
+    },
+    "-MRzWAcJwV3kROlbMTNf" : {
+      "msg" : "kfkkdidbdjjfbfidbi difjdivdv"
+    }
+  },
+  "stockage" : {
+    "3" : {
+      "Avis" : 3.9375,
+      "Collection" : "version2",
+      "PossAchat" : "Oui",
+      "Prix" : "25",
+      "Qte" : 7,
+      "Resume" : "c'est un livre ejb",
+      "dateEntree" : "07/09/2020",
+      "dateParution" : "8/3/2016",
+      "editeur" : "D.Riadh",
+      "id" : 3,
+      "nbrePage" : "100",
+      "nomDoc" : "ejb",
+      "nomDomain" : "informatique"
+    },
+    "6" : {
+      "Avis" : 0,
+      "Collection" : "versuin2",
+      "PossAchat" : "Oui",
+      "Prix" : "50",
+      "Qte" : "9",
+      "Resume" : "c'est un livre sql",
+      "dateEntree" : "07/09/2020",
+      "dateParution" : "1/3/2015",
+      "editeur" : "D.Thoraya",
+      "id" : 6,
+      "nbrePage" : "200",
+      "nomDoc" : "SQL2",
+      "nomDomain" : "informatique"
+    }
+  }
+}
