@@ -12,8 +12,8 @@ A web-based solution to manage school librarians' operations and a mobile applic
 
 ## Students Mobile Application
 **Login Page** 
-![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)
-**Home page**                                  
+![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)</br>
+**Home page** </br>                                  
 ![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br>
  **Real Time Notification** 
 ![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br>
