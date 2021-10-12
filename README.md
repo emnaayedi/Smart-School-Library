@@ -12,13 +12,13 @@ A web-based solution to manage school librarians' operations and a mobile applic
 
 ## Students Mobile Application
 **Login Page** </br>
-![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)</br></br>
+![Login page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Untitled.jpg?raw=true)
 **Home page** </br>                                  
-![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br></br>
+![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)
  **Real Time Notification** </br>
-![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br></br>
+![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)
 **Borrowed Book List and details** </br>
-![Emprunt Detail page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/emprunt_details.jpg?raw=true)</br>
+![Emprunt Detail page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/emprunt_details.jpg?raw=true)
 **Reviews** </br>
 ![Review Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/review.jpg?raw=true)
 ![Complaint Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/complaint.jpg?raw=true)
