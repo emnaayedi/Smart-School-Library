@@ -19,9 +19,9 @@ A web-based solution to manage school librarians' operations and a mobile applic
 ![Home Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Mobile_app_home.jpg?raw=true)</br>
  **Real Time Notification** 
 ![Notification](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Real_time_notif.jpg?raw=true)</br>
-**Borrowed Book List and details** 
+**Borrowed Book list and details** 
 ![Emprunt Detail page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/emprunt_details.jpg?raw=true)</br>
-**Reviews** 
+**Reviews Space** 
 ![Review Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/review.jpg?raw=true)
 ![Complaint Page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/complaint.jpg?raw=true)
 </br>
