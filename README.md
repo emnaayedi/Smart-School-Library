@@ -8,7 +8,7 @@ A web-based solution to manage school librarians' operations and a mobile applic
 ![Librarian Home page](https://github.com/emnaayedi/library-master/blob/983d8443bd57d1c46a162b846caa3d8cda37c8b3/docs/fonts/images/home.jpg?raw=true)</br></br>
 **Actualities**</br>
 ![dash](https://github.com/emnaayedi/Smart-School-Library/blob/5f0734a3406f2006e9d930817abb5d785dac6e88/web%20application/docs/fonts/images/numbers.png?raw=true)</br></br>
-**Ergonomic Website** </br>
+**Ergonomic Website** </br></br>
 ![Emprunts page](https://github.com/emnaayedi/library-master/blob/6943a93c478a0e90ade76585d991048390b08e19/docs/fonts/images/Emprunts.jpg?raw=true)
 </br>
 
