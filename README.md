@@ -41,8 +41,10 @@ A web-based solution to manage school librarians' operations and a mobile applic
 • Receive and process complaints sent by students. </br>
 • Allow the student to get an idea of availbale places in the library. 
 ## Project requirements
-Create a firebase real time database project.</br>
-Import database from ![Here](https://github.com/emnaayedi/Smart-School-Library/blob/405ed407da89119b0afb1d5760af9cf096269ffa/Database/smart-library1-export.json)
+1)Create a firebase real time database project.</br>
+2)Import database from ![Here](https://github.com/emnaayedi/Smart-School-Library/blob/405ed407da89119b0afb1d5760af9cf096269ffa/Database/smart-library1-export.json). </br>
+3)Use puthon 3.6 to run people counter program.</br>
+4)Use a mibile based on Android OS to run Mobile application.
 
 
 
